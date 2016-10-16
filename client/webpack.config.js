@@ -6,7 +6,7 @@ var extractCSS = new ExtractTextPlugin('[name].css');
 module.exports = [
   {
     entry: {
-      app: './js/index.js',
+      app: './js/index.jsx',
       vendor: ['whatwg-fetch']
     },
     output: {

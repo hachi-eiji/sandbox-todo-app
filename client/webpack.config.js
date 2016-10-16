@@ -1,3 +1,8 @@
+var path = require('path');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+// multiple extract instances
+var extractCSS = new ExtractTextPlugin('[name].css');
 module.exports = [
   {
     entry: {
@@ -5,7 +10,7 @@ module.exports = [
       vendor: ['whatwg-fetch']
     },
     output: {
-      path: '../app/assets/javascripts/webpack'
+      path: '../app/assets/javascripts/webpack',
       filename: '[name].js'
     },
     module: {
@@ -33,10 +38,10 @@ module.exports = [
   },
   {
     entry: {
-      app: './css/index.css'
-    }
+      app: './css/index.scss'
+    },
     output: {
-      path: '../app/assets/stylesheets/webpack'
+      path: '../app/assets/stylesheets/webpack',
       filename: '[name].css'
     },
     module: {

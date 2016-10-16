@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20161016144351) do
 
   create_table "projects", force: :cascade do |t|
     t.integer  "user_id",    limit: 4,   null: false
-    t.string   "name",       limit: 255, null: false
+    t.string   "name",       limit: 255, null: false, comment: "プロジェクト名"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20161016144351) do
   create_table "task_notes", force: :cascade do |t|
     t.integer  "task_id",    limit: 4,   null: false
     t.integer  "user_id",    limit: 4,   null: false
-    t.string   "note",       limit: 255, null: false
+    t.string   "note",       limit: 255, null: false, comment: "ノート欄"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -55,10 +55,10 @@ ActiveRecord::Schema.define(version: 20161016144351) do
 
   create_table "tasks", force: :cascade do |t|
     t.integer  "project_id",  limit: 4,     null: false
-    t.string   "title",       limit: 255,   null: false
-    t.text     "description", limit: 65535
-    t.integer  "creator_id",  limit: 4,     null: false
-    t.integer  "updater_id",  limit: 4,     null: false
+    t.string   "title",       limit: 255,   null: false, comment: "タイトル"
+    t.text     "description", limit: 65535,              comment: "詳細"
+    t.integer  "creator_id",  limit: 4,     null: false, comment: "タスク作成者"
+    t.integer  "updater_id",  limit: 4,     null: false, comment: "タスク更新者"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
   end
@@ -73,6 +73,8 @@ ActiveRecord::Schema.define(version: 20161016144351) do
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   add_foreign_key "project_members", "projects"
   add_foreign_key "project_members", "users"

@@ -30,7 +30,8 @@
     "webpack-dev-server": "^1.16.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "webpack-watch": "webpack -w",
+    "webpack-build": "webpack -p"
   },
   "author": "",
   "license": "MIT"

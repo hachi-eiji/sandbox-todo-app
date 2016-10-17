@@ -30,6 +30,10 @@ GEM
       activemodel (= 4.2.7.1)
       activesupport (= 4.2.7.1)
       arel (~> 6.0)
+    activerecord-mysql-awesome (0.0.9)
+      activerecord (~> 4.0)
+      activesupport (~> 4.0)
+      mysql2 (>= 0.3.18)
     activesupport (4.2.7.1)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -47,6 +51,13 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.7.0)
+    factory_girl (4.7.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
+      railties (>= 3.0.0)
+    faker (1.6.6)
+      i18n (~> 0.5)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -99,6 +110,8 @@ GEM
     rake (11.3.0)
     rdoc (4.2.2)
       json (~> 1.4)
+    ridgepole (0.6.4)
+      activerecord (~> 4.2.1)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -152,12 +165,17 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord-mysql-awesome
   bcrypt (~> 3.1.7)
   byebug
+  factory_girl
+  factory_girl_rails
+  faker
   jbuilder (~> 2.0)
   migration_comments
   mysql2 (>= 0.3.13, < 0.5)
   rails (= 4.2.7.1)
+  ridgepole
   rspec-rails (= 3.5)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

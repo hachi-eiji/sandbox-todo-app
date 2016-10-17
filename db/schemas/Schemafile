@@ -1,0 +1,6 @@
+require 'project_members.schema'
+require 'projects.schema'
+require 'task_assigns.schema'
+require 'task_notes.schema'
+require 'tasks.schema'
+require 'users.schema'

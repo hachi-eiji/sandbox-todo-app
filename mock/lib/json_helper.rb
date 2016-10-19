@@ -1,4 +1,5 @@
 require 'json'
+require 'erb'
 
 class JsonHelper
   def initialize(app)
@@ -11,13 +12,15 @@ class JsonHelper
       return @app.call(env)
     end
 
-    path = "./data/#{match[1]}.json"
+    path = "./data/#{match[1]}.json.erb"
     unless File.exist?(path)
       puts "#{path} not found"
-      return [404, { 'Content-Type' => 'application/json' }, [{}.to_json]]
+      return [404, { 'Content-Type' => 'application/json;charset=UTF-8' }, [{}.to_json]]
     end
     File.open(path) do |file|
-      [200, { 'Content-Type' => 'application/json' }, [JSON.load(file).to_json]]
+      erb = ERB.new(File.read(path))
+      erb.filename = path
+      [200, { 'Content-Type' => 'application/json;charset=UTF-8' }, [erb.result(binding)]]
     end
   end
 end

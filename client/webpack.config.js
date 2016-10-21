@@ -62,4 +62,4 @@ module.exports = [
       extensions: ['', '.css', '.scss']
     }
   }
-]
+];

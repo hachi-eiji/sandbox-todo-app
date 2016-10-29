@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {binds} from '../common/util';
 
 class TaskList extends React.Component {
@@ -25,7 +24,4 @@ class TaskList extends React.Component {
   }
 }
 
-ReactDOM.render(
-  <TaskList/>,
-  document.getElementById('container')
-);
+export default TaskList

@@ -11,6 +11,7 @@
     "react": "^15.3.2",
     "react-addons": "^0.9.1-deprecated",
     "react-dom": "^15.3.2",
+    "react-router": "^2.0.0",
     "remarkable": "^1.6.2",
     "whatwg-fetch": "^1.0.0"
   },
@@ -33,7 +34,7 @@
   "scripts": {
     "webpack-watch": "webpack -w",
     "webpack-build": "webpack -p",
-    "start-mock-server": "webpack-dev-server"
+    "start-mock-server": "webpack-dev-server --history-api-fallback"
   },
   "author": "",
   "license": "MIT"

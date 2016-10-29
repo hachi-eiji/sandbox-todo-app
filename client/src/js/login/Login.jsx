@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {binds, postJSON} from '../common/util';
 import Alert from '../component/Alert';
+import {browserHistory} from 'react-router';
 
-class Index extends React.Component {
+class Login extends React.Component {
   constructor() {
     super();
     binds(this, 'handleLogin', 'handleLoginId', 'handlePassword');
@@ -23,7 +23,7 @@ class Index extends React.Component {
     }
     postJSON('/login', {loginId: loginId, password: password})
       .then(res => {
-        console.log('あるよ')
+        browserHistory.push('/tasks');
       })
       .catch(e => {
         this.setState({message: e.body.message});
@@ -68,8 +68,4 @@ class Index extends React.Component {
     );
   }
 }
-
-ReactDOM.render(
-  <Index/>,
-  document.getElementById('container')
-);
+export default Login;

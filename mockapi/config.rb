@@ -11,10 +11,6 @@ page '/*.txt', layout: false
 
 page '/api/*', layout: false
 
-# /apiにアクセスするときのレスポンスヘッダをかきかえ
-require 'lib/json_helper'
-use JsonHelper
-
 # With alternative layout
 # page "/path/to/file.html", layout: :otherlayout
 
@@ -29,6 +25,10 @@ activate :directory_indexes
 configure :development do
   activate :livereload
 end
+
+# /apiにアクセスするときのレスポンスヘッダをかきかえ
+require 'lib/json_helper'
+use JsonHelper
 
 ###
 # Helpers

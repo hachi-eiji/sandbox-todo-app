@@ -1,45 +1,90 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const glob = require('glob');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // multiple extract instances
-var extractCSS = new ExtractTextPlugin('[name].css');
+const extractCSS = new ExtractTextPlugin('[name].css');
+
+function entryJs() {
+  let entry = {
+    'vendor': ['whatwg-fetch', 'promise']
+  };
+  const excludePaths = [];
+  glob.sync('./src/js/**/*.jsx').forEach((path) => {
+    const isExclude = excludePaths.find((p) => {
+      return path.indexOf(p) !== -1;
+    });
+    if (isExclude) {
+      return;
+    }
+    // 深いネストは考慮しない
+    const split = path.split('/');
+    // 拡張子は外す
+    const point = path.replace('./src/js/', '').split('.')[0];
+    // componentは[]を囲まないと読み込めないが面倒なので全部[]
+    // refs. https://github.com/webpack/webpack/issues/300
+    entry[`js/${point}`] = [path];
+  });
+  return entry;
+}
+
+function entryCss() {
+  let entry = {};
+  const excludePaths = [];
+  glob.sync('./src/css/**/*.scss').forEach((path) => {
+    const isExclude = excludePaths.find((p) => {
+      return path.indexOf(p) !== -1;
+    });
+    if (isExclude) {
+      return;
+    }
+    // 深いネストは考慮しない
+    const split = path.split('/');
+    // 拡張子は外す
+    const point = path.replace('./src/css/', '').split('.')[0];
+    entry[`css/${point}`] = path;
+  });
+  return entry;
+}
+
 module.exports = [
   {
-    entry: {
-      app: './js/index.jsx',
-      vendor: ['whatwg-fetch']
-    },
+    entry: entryJs(),
     output: {
       path: '../app/assets/javascripts/webpack',
       filename: '[name].js'
     },
     module: {
-      loaders: [{
-        test: /\.(jsx|js)$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015', 'react', 'stage-2']
+      loaders: [
+        {
+          test: /\.(jsx|js)$/,
+          exclude: /node_modules/,
+          loader: 'babel-loader',
+          query: {
+            presets: ['es2015', 'react', 'stage-2']
+          }
         }
-      }]
+      ]
     },
-    plugins:[
+    loader: {
+      configEnvironment: process.env.NODE_ENV || 'local'
+    },
+    plugins: [
       // vendor.bundle.jsを入れてないものはエラーになる
-      new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js"),
+      new webpack.optimize.CommonsChunkPlugin("vendor", "js/vendor.bundle.js"),
     ],
     resolve: {
       extensions: ['', '.js', '.jsx']
     },
+    devtool: 'source-map',
     devServer: {
       // dev-serverのcontext root
-      contentBase: 'public',
-      port: 3001
+      contentBase: './src/html',
+      port: 3001,
     }
   },
   {
-    entry: {
-      app: './css/index.scss'
-    },
+    entry: entryCss(),
     output: {
       path: '../app/assets/stylesheets/webpack',
       filename: '[name].css'
@@ -49,13 +94,13 @@ module.exports = [
         {
           test: /\.css$/,
           loader: extractCSS.extract(['css'])
-        },{
+        }, {
           test: /\.scss$/,
-          loader: extractCSS.extract(['css','sass'])
-        }
+          loader: extractCSS.extract(['css', 'sass'])
+        },
       ]
     },
-    plugins:[
+    plugins: [
       extractCSS
     ],
     resolve: {

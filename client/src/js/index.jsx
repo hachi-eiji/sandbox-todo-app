@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Router, Route, browserHistory, hashHistory} from 'react-router';
+import {Router, Route, browserHistory} from 'react-router';
 import Login from './login/Login';
 import TaskList from './task/TaskList';
 

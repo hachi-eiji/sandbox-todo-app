@@ -1,26 +1,43 @@
 import React from 'react';
-import {binds} from '../common/util';
+import {get} from '../common/util';
+import Task from './Task';
 
 class TaskList extends React.Component {
   constructor(props) {
     super(props);
-    binds(this, 'handleClick');
     this.state = {
-      counter: 0
+      tasks: []
     }
   }
 
-  handleClick() {
-    this.setState({counter: this.state.counter + 1});
+  componentDidMount() {
+    get('/tasks')
+      .then(res => {
+        this.setState({tasks: res.data});
+      })
+      .catch(e => {
+        console.log(e)
+      })
   }
 
   render() {
+    const tasks = this.state.tasks.map(task => {
+      return <Task key={task.id} {...task}/>
+    });
     return (
-      <div>
-        click count {this.state.counter}<br/>
-        <button type="button" onClick={this.handleClick}>test</button>
-      </div>
-    )
+      <table className="table table-hover">
+        <thead>
+        <tr>
+          <th>id</th>
+          <th>タイトル</th>
+          <th>説明</th>
+        </tr>
+        </thead>
+        <tbody>
+        {tasks}
+        </tbody>
+      </table>
+    );
   }
 }
 

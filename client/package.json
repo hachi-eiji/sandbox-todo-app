@@ -34,7 +34,7 @@
   "scripts": {
     "webpack-watch": "webpack -w",
     "webpack-build": "webpack -p",
-    "start-mock-server": "webpack-dev-server --history-api-fallback"
+    "start-mock-server": "export NODE_ENV=mock; webpack-dev-server --history-api-fallback"
   },
   "author": "",
   "license": "MIT"

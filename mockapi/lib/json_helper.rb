@@ -17,17 +17,19 @@ class JsonHelper
       'Content-Type'                     => 'application/json;charset=UTF-8',
       'Access-Control-Allow-Origin'      => 'http://localhost:3001',
       'Access-Control-Allow-Credentials' => 'true',
-      'Access-Control-Allow-Headers'     => 'X-PINGOTHER, Content-Type'
+      'Access-Control-Allow-Headers'     => 'X-PINGOTHER, Content-Type',
+      'Access-Control-Allow-Methods'     => 'GET, POST, DELETE, OPTIONS, PUT'
     }
 
-    if env['REQUEST_METHOD'] == 'GET'
+    method = env['REQUEST_METHOD']
+    if method == 'GET'
       path = "./data/#{match[1]}.json.erb"
 
       # CROSの場合は最初に確認通信が来るので返す
-    elsif env['REQUEST_METHOD'] == 'OPTIONS'
+    elsif method == 'OPTIONS'
       return [200, header, [{}.to_json]]
     else
-      path = "./data/#{match[1]}_post.json.erb"
+      path = "./data/#{match[1]}_#{method.downcase}.json.erb"
     end
 
     unless File.exist?(path)

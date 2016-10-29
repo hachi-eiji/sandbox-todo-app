@@ -13,22 +13,25 @@ function binds(obj, ...methods) {
  *
  * @param {string} endPoint API end point
  * @param {Object} [data] post data
+ * @param {Object} [option] http option
  * @return {Promise} Promise object
  */
-function postJSON(endPoint, data) {
+function postJSON(endPoint, data, option) {
   return new Promise((resolve, reject) => {
     const headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
     const body = data ? JSON.stringify(data) : '';
-    fetch(Config.api.url + endPoint, {
+    let _option = {
+      method: 'POST',
       model: 'cors',
       credentials: 'include',
-      method: 'POST',
       headers: headers,
       body: body
-    }).then(res => {
+    };
+    Object.assign(_option, option);
+    fetch(Config.api.url + endPoint, _option).then(res => {
       // 300番台は想定しない
       if (res.ok) {
         return res.json();

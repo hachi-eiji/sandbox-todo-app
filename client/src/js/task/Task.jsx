@@ -11,6 +11,7 @@ class Task extends React.Component {
         <td>{this.props.id}</td>
         <td>{this.props.title}</td>
         <td>{this.props.description}</td>
+        <td>{this.props.due_date}</td>
       </tr>
     );
   }
@@ -18,6 +19,7 @@ class Task extends React.Component {
 Task.propTypes = {
   id: React.PropTypes.number.isRequired,
   title: React.PropTypes.string.isRequired,
-  description: React.PropTypes.string
+  description: React.PropTypes.string,
+  due_date: React.PropTypes.string
 };
 export default Task

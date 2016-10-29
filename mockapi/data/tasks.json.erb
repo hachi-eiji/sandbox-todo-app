@@ -5,13 +5,15 @@
     {
       "id": <%= n %>,
       "title": "<%= "タイトル#{n}" %>",
-      "description": "<%= "説明#{n}" %>"
+      "description": "<%= "説明#{n}" %>",
+      "due_date": "<%= Time.now.strftime('%Y/%m/%d %H:%M')%>"
     },
     <% end %>
     {
       "id": 10,
       "title": "タイトル10",
-      "description": "説明10"
+      "description": "説明10",
+      "due_date": null
     }
   ]
 }

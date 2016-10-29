@@ -31,6 +31,8 @@ class TaskList extends React.Component {
           <th>id</th>
           <th>タイトル</th>
           <th>説明</th>
+          <th>期日</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>

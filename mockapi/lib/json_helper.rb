@@ -12,8 +12,7 @@ class JsonHelper
       return @app.call(env)
     end
 
-
-    if env['REQUEST_PATH'] == 'GET'
+    if env['REQUEST_METHOD'] == 'GET'
       path = "./data/#{match[1]}.json.erb"
     else
       path = "./data/#{match[1]}_post.json.erb"
@@ -33,7 +32,9 @@ class JsonHelper
     File.open(path) do |file|
       erb          = ERB.new(File.read(path))
       erb.filename = path
-      [200, header, [erb.result(binding)]]
+      body         = erb.result(binding)
+      obj          = JSON.parse(body)
+      [obj['status'] || 200, header, [body]]
     end
   end
 end

@@ -1,4 +1,15 @@
+<%
+require 'rack'
+req = Rack::Request.new(env)
+if req.params['loginId'] && req.params['password']
+%>
 {
   "status": 200,
   "message": "ok"
 }
+<% else %>
+{
+  "status": 404,
+  "message": "not_found"
+}
+<% end %>

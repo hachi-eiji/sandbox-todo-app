@@ -12,12 +12,6 @@ class JsonHelper
       return @app.call(env)
     end
 
-    if env['REQUEST_METHOD'] == 'GET'
-      path = "./data/#{match[1]}.json.erb"
-    else
-      path = "./data/#{match[1]}_post.json.erb"
-    end
-
     # webpack-dev-serverからアクセスしてくるためCROS対応
     header = {
       'Content-Type'                     => 'application/json;charset=UTF-8',
@@ -25,6 +19,15 @@ class JsonHelper
       'Access-Control-Allow-Credentials' => 'true',
       'Access-Control-Allow-Headers'     => 'X-PINGOTHER, Content-Type'
     }
+
+    if env['REQUEST_METHOD'] == 'GET'
+      path = "./data/#{match[1]}.json.erb"
+    elsif env['REQUEST_METHOD'] == 'OPTIONS'
+      return [200, header, [{}.to_json]]
+    else
+      path = "./data/#{match[1]}_post.json.erb"
+    end
+
     unless File.exist?(path)
       puts "#{path} not found"
       return [404, header, [{}.to_json]]

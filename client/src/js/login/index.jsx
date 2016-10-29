@@ -16,7 +16,7 @@ class Index extends React.Component {
 
   // ログイン処理をする
   handleLogin() {
-    postJSON('/login', this.state)
+    postJSON('/login', {loginId: this.state.loginId, password: this.state.password})
       .then(res => {
       })
       .catch(e => {

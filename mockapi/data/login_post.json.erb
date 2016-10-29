@@ -1,7 +1,14 @@
 <%
 require 'rack'
+require 'json'
+
+begin
 req = Rack::Request.new(env)
-if req.params['loginId'] && req.params['password']
+d = JSON.parse(req.body.read)
+rescue
+d = {}
+end
+if d['loginId'] && d['password']
 %>
 {
   "status": 200,

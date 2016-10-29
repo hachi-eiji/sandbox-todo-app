@@ -29,17 +29,18 @@ function postJSON(endPoint, data) {
       headers: headers,
       body: body
     }).then(res => {
-      if (res.status < 300) {
+      // 300番台は想定しない
+      if (res.ok) {
         return res.json();
       }
-      if (res.status >= 300 && res.status < 400) {
-        return res;
-      }
-      const e = new Error(res.statusText);
-      e.status = res.status;
-      e.body = res.body.json();
-      e.response = res;
-      throw e;
+      // JSONなげて終わる
+      return res.json().then(d => {
+        const e = new Error(res.statusText);
+        e.status = res.status;
+        e.body = d;
+        e.response = res;
+        throw e;
+      });
     }).then(res => {
       resolve(res);
     }).catch(error => {

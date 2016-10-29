@@ -35,7 +35,7 @@ function postJSON(endPoint, data) {
       }
       // JSONなげて終わる
       return res.json().then(d => {
-        const e = new Error(res.statusText);
+        const e = new Error(res.body ? res.body.message : res.statusText);
         e.status = res.status;
         e.body = d;
         e.response = res;

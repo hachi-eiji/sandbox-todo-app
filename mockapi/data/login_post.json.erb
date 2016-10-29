@@ -8,15 +8,17 @@ d = JSON.parse(req.body.read)
 rescue
 d = {}
 end
-if d['loginId'] && d['password']
+if d['loginId'] == 'test' && d['password'] == 'test'
 %>
 {
   "status": 200,
+  "id": "user_exists",
   "message": "ok"
 }
 <% else %>
 {
   "status": 404,
-  "message": "not_found"
+  "id": "login_failed",
+  "message": "ログインID・パスワードが間違っています"
 }
 <% end %>

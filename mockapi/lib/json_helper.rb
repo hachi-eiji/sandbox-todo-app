@@ -22,6 +22,8 @@ class JsonHelper
 
     if env['REQUEST_METHOD'] == 'GET'
       path = "./data/#{match[1]}.json.erb"
+
+      # CROSの場合は最初に確認通信が来るので返す
     elsif env['REQUEST_METHOD'] == 'OPTIONS'
       return [200, header, [{}.to_json]]
     else

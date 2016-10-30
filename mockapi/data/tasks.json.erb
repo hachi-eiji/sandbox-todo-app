@@ -6,7 +6,7 @@
       "id": <%= (n + 1) * 100 %>,
       "title": "<%= "タイトル#{n}" %>",
       "description": "<%= "説明#{n}" %>",
-      "due_date": "<%= Time.now.strftime('%Y/%m/%d %H:%M')%>"
+      "due_date": "<%= Time.now.strftime('%Y-%m-%d')%>"
     },
     <% end %>
     {

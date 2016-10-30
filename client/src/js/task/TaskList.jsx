@@ -6,7 +6,7 @@ import Alert from '../component/Alert';
 class TaskList extends React.Component {
   constructor(props) {
     super(props);
-    binds(this, 'handleDeleteRow');
+    binds(this, 'handleDeleteRow', 'handleShowAlert');
     this.state = {
       tasks: [],
       status: '',
@@ -24,28 +24,29 @@ class TaskList extends React.Component {
       })
   }
 
-  handleDeleteRow(error, idx, notification) {
-    if (error) {
-      this.setState({status: 'warning', message: 'エラーが発生しました'});
-    } else {
-      let _notification = {status: '', message: ''}
-      Object.assign(_notification, notification);
-      this.setState((prevState, props) => {
-        let newTasks = [];
-        for (let i = 0; i < prevState.tasks.length; i++) {
-          if (i === idx) {
-            continue;
-          }
-          newTasks.push(prevState.tasks[i]);
+  handleDeleteRow(idx) {
+    this.setState((prevState, props) => {
+      let newTasks = [];
+      for (let i = 0; i < prevState.tasks.length; i++) {
+        if (i === idx) {
+          continue;
         }
-        return {tasks: newTasks, status: _notification.status, message: _notification.message};
-      });
-    }
+        newTasks.push(prevState.tasks[i]);
+      }
+      return {tasks: newTasks};
+    });
+  }
+
+  handleShowAlert(status, message) {
+    this.setState({status: status, message: message});
   }
 
   render() {
     const tasks = this.state.tasks.map((task, index) => {
-      return <Task key={task.id} {...task} index={index} handleDeleteRow={this.handleDeleteRow}/>
+      return <Task key={task.id} {...task} index={index}
+                   handleDeleteRow={this.handleDeleteRow}
+                   handleShowAlert={this.handleShowAlert}
+      />
     });
     return (
       <div>

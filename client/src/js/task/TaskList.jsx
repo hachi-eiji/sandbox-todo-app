@@ -9,10 +9,8 @@ class TaskList extends React.Component {
     binds(this, 'handleDeleteRow');
     this.state = {
       tasks: [],
-      delete: {
-        status: '',
-        message: ''
-      }
+      status: '',
+      message: ''
     }
   }
 
@@ -26,10 +24,12 @@ class TaskList extends React.Component {
       })
   }
 
-  handleDeleteRow(error, idx) {
+  handleDeleteRow(error, idx, notification) {
     if (error) {
-      this.setState({delete: {status: 'warning', message: '削除に失敗しました'}});
+      this.setState({status: 'warning', message: 'エラーが発生しました'});
     } else {
+      let _notification = {status: '', message: ''}
+      Object.assign(_notification, notification);
       this.setState((prevState, props) => {
         let newTasks = [];
         for (let i = 0; i < prevState.tasks.length; i++) {
@@ -38,28 +38,19 @@ class TaskList extends React.Component {
           }
           newTasks.push(prevState.tasks[i]);
         }
-        return {tasks: newTasks, delete: {status: '', message: ''}};
+        return {tasks: newTasks, status: _notification.status, message: _notification.message};
       });
     }
   }
 
   render() {
     const tasks = this.state.tasks.map((task, index) => {
-      return <Task key={task.id} {...task} index={index} handelDeleteTask={this.handleDeleteRow}/>
+      return <Task key={task.id} {...task} index={index} handleDeleteRow={this.handleDeleteRow}/>
     });
     return (
       <div>
-        <Alert type={this.state.delete.status} message={this.state.delete.message}/>
+        <Alert type={this.state.status} message={this.state.message}/>
         <table className="table table-hover">
-          <thead>
-          <tr>
-            <th>id</th>
-            <th>タイトル</th>
-            <th>説明</th>
-            <th>期日</th>
-            <th></th>
-          </tr>
-          </thead>
           <tbody>
           {tasks}
           </tbody>

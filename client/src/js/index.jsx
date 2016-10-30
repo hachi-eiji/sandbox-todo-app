@@ -7,6 +7,7 @@ import TaskList from './task/TaskList';
 ReactDOM.render(
   <Router history={browserHistory}>
     <Route path="/" component={Login}/>
+    <Route path="/login" component={Login}/>
     <Route path="/tasks" component={TaskList}/>
   </Router>,
   document.getElementById('container')

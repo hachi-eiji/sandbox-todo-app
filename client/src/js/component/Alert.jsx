@@ -7,7 +7,7 @@ class Alert extends React.Component {
 
   render() {
     if (this.props.message) {
-      const css = `alert alert-${this.props.type}`;
+      const css = `alert__${this.props.type}`;
       return (
         <div className={css}>{this.props.message}</div>
       )

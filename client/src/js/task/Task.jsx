@@ -122,9 +122,9 @@ class Task extends React.Component {
             )
           }
         </td>
-        <th>
-          <button className="btn btn-danger" onClick={this.handleDeleteTask}>削除</button>
-        </th>
+        <td>
+          <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick={this.handleDeleteTask}>削除</button>
+        </td>
       </tr>
     );
   }

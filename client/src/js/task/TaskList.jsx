@@ -50,12 +50,28 @@ class TaskList extends React.Component {
     });
     return (
       <div>
-        <Alert type={this.state.status} message={this.state.message}/>
-        <table className="table table-hover">
-          <tbody>
-          {tasks}
-          </tbody>
-        </table>
+        <div className="mdl-grid">
+          <div className="mdl-cell mdl-cell--4-col"></div>
+          <div className="mdl-cell mdl-cell--4-col"><Alert type={this.state.status} message={this.state.message}/></div>
+        </div>
+        <div className="mdl-grid">
+          <div className="mdl-cell mdl-cell--4-col"></div>
+          <div className="mdl-cell mdl-cell--4-col">
+            <table className="mdl-data-table mdl-js-data-table mdl-shadow--2d">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>タスク</th>
+                  <th>期限</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              {tasks}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     );
   }

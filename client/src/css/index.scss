@@ -1,3 +1,13 @@
 .test {
   margin-top: 10px;
 }
+
+.alert {
+  font-size: 0.8em;
+  &__error {
+    color: #d50000;
+  }
+  &__warning {
+    color: #ffa500;
+  }
+}

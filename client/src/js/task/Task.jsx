@@ -9,8 +9,13 @@ class Task extends React.Component {
 
   handleDeleteTask(e) {
     e.preventDefault();
-    postJSON('/tasks/' + this.props.id, {}, {method: 'DELETE'});
-    this.props.handelDeleteTask(this.props.index);
+    postJSON('/tasks/' + this.props.id, {}, {method: 'DELETE'})
+      .then(res => {
+        this.props.handelDeleteTask(null, this.props.index);
+      })
+      .catch(e => {
+        this.props.handelDeleteTask(e);
+      });
   }
 
   render() {

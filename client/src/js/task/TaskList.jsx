@@ -1,13 +1,18 @@
 import React from 'react';
 import {binds, get} from '../common/util';
 import Task from './Task';
+import Alert from '../component/Alert';
 
 class TaskList extends React.Component {
   constructor(props) {
     super(props);
     binds(this, 'handleDeleteRow');
     this.state = {
-      tasks: []
+      tasks: [],
+      delete: {
+        status: '',
+        message: ''
+      }
     }
   }
 
@@ -21,17 +26,22 @@ class TaskList extends React.Component {
       })
   }
 
-  handleDeleteRow(idx) {
-    this.setState((prevState, props) => {
-      let newTasks = [];
-      for (let i = 0; i < prevState.tasks.length; i++) {
-        if (i === idx) {
-          continue;
+  handleDeleteRow(error, idx) {
+    if (error) {
+      this.setState({delete: {status: 'warning', message: '削除に失敗しました'}});
+    } else {
+      this.setState({delete: {status: '', message: ''}});
+      this.setState((prevState, props) => {
+        let newTasks = [];
+        for (let i = 0; i < prevState.tasks.length; i++) {
+          if (i === idx) {
+            continue;
+          }
+          newTasks.push(prevState.tasks[i]);
         }
-        newTasks.push(prevState.tasks[i]);
-      }
-      return {tasks: newTasks};
-    });
+        return {tasks: newTasks};
+      });
+    }
   }
 
   render() {
@@ -39,20 +49,23 @@ class TaskList extends React.Component {
       return <Task key={task.id} {...task} index={index} handelDeleteTask={this.handleDeleteRow}/>
     });
     return (
-      <table className="table table-hover">
-        <thead>
-        <tr>
-          <th>id</th>
-          <th>タイトル</th>
-          <th>説明</th>
-          <th>期日</th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        {tasks}
-        </tbody>
-      </table>
+      <div>
+        <Alert type={this.state.delete.status} message={this.state.delete.message}/>
+        <table className="table table-hover">
+          <thead>
+          <tr>
+            <th>id</th>
+            <th>タイトル</th>
+            <th>説明</th>
+            <th>期日</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          {tasks}
+          </tbody>
+        </table>
+      </div>
     );
   }
 }

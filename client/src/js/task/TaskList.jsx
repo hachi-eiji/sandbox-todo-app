@@ -30,7 +30,6 @@ class TaskList extends React.Component {
     if (error) {
       this.setState({delete: {status: 'warning', message: '削除に失敗しました'}});
     } else {
-      this.setState({delete: {status: '', message: ''}});
       this.setState((prevState, props) => {
         let newTasks = [];
         for (let i = 0; i < prevState.tasks.length; i++) {
@@ -39,7 +38,7 @@ class TaskList extends React.Component {
           }
           newTasks.push(prevState.tasks[i]);
         }
-        return {tasks: newTasks};
+        return {tasks: newTasks, delete: {status: '', message: ''}};
       });
     }
   }

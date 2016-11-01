@@ -1,14 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {binds, postJSON} from '../common/util';
+import {binds_starts_with, postJSON} from '../common/util';
 
 class Task extends React.Component {
   constructor(props) {
     super(props);
-    const handleMethodName = Object.getOwnPropertyNames(Object.getPrototypeOf(this)).filter(name => {
-      return name.startsWith('handle');
-    });
-    binds(this, ...handleMethodName);
+    binds_starts_with(this, 'handle');
     this.state = {
       editTitle: false,
       title: this.props.title,

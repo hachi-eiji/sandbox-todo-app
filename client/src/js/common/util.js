@@ -8,6 +8,14 @@ function binds(obj, ...methods) {
   });
 }
 
+function binds_starts_with(obj, methodNamePrefix) {
+  const methodName = Object.getOwnPropertyNames(Object.getPrototypeOf(obj))
+    .filter(name => {
+      return name.startsWith(methodNamePrefix);
+    });
+  binds(obj, ...methodName);
+}
+
 /**
  * post data.
  *
@@ -99,6 +107,7 @@ function get(endPoint, data) {
 
 module.exports = {
   binds: binds,
+  binds_starts_with: binds_starts_with,
   postJSON: postJSON,
   get: get
 };

@@ -6,10 +6,10 @@ class Alert extends React.Component {
   }
 
   render() {
-    if (this.props.message) {
+    if (this.props.children) {
       const css = `alert alert__${this.props.type}`;
       return (
-        <div className={css}>{this.props.message}</div>
+        <div className={css}>{this.props.children}</div>
       )
     }
     return (<div></div>);
@@ -17,8 +17,7 @@ class Alert extends React.Component {
 }
 
 Alert.propTypes = {
-  type: React.PropTypes.string,
-  message: React.PropTypes.string
+  type: React.PropTypes.string
 };
 
 export default Alert;

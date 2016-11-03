@@ -58,7 +58,7 @@ class TaskList extends React.Component {
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--1-col"></div>
           <div className="mdl-cell mdl-cell--7-col">
-            <Alert type={this.state.status} message={this.state.message}/>
+            <Alert type={this.state.status}>{this.state.message}</Alert>
             {this.state.showLoading && <Loading/>}
           </div>
         </div>

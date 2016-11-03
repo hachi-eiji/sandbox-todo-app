@@ -20,7 +20,7 @@ class TaskList extends React.Component {
     get('/tasks')
       .then(res => {
         // ローディングを見せたいのでわざと1秒waitする
-        setInterval(() => {
+        setTimeout(() => {
           this.setState({tasks: res.data, showLoading: false});
         }, 1000)
       })

@@ -6,7 +6,7 @@ module.exports = {
   },
   development: {
     api: {
-      url: 'http://dev:4567/api/'
+      url: 'http://localhost:3000/api'
     }
   }
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import {binds, get} from '../common/util';
 import Task from './Task';
 import Alert from '../component/Alert';
+import Loading from '../component/Loading';
 
 class TaskList extends React.Component {
   constructor(props) {
@@ -10,14 +11,18 @@ class TaskList extends React.Component {
     this.state = {
       tasks: [],
       status: '',
-      message: ''
+      message: '',
+      showLoading: true,
     }
   }
 
   componentDidMount() {
     get('/tasks')
       .then(res => {
-        this.setState({tasks: res.data});
+        // ローディングを見せたいのでわざと1秒waitする
+        setInterval(() => {
+          this.setState({tasks: res.data, showLoading: false});
+        }, 1000)
       })
       .catch(e => {
         console.log(e)
@@ -52,7 +57,10 @@ class TaskList extends React.Component {
       <div>
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--1-col"></div>
-          <div className="mdl-cell mdl-cell--7-col"><Alert type={this.state.status} message={this.state.message}/></div>
+          <div className="mdl-cell mdl-cell--7-col">
+            <Alert type={this.state.status} message={this.state.message}/>
+            {this.state.showLoading && <Loading/>}
+          </div>
         </div>
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--1-col"></div>

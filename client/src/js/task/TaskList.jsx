@@ -51,21 +51,13 @@ class TaskList extends React.Component {
     return (
       <div>
         <div className="mdl-grid">
-          <div className="mdl-cell mdl-cell--4-col"></div>
-          <div className="mdl-cell mdl-cell--4-col"><Alert type={this.state.status} message={this.state.message}/></div>
+          <div className="mdl-cell mdl-cell--1-col"></div>
+          <div className="mdl-cell mdl-cell--7-col"><Alert type={this.state.status} message={this.state.message}/></div>
         </div>
         <div className="mdl-grid">
-          <div className="mdl-cell mdl-cell--4-col"></div>
-          <div className="mdl-cell mdl-cell--4-col">
-            <table className="mdl-data-table mdl-js-data-table mdl-shadow--2d">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>タスク</th>
-                  <th>期限</th>
-                  <th></th>
-                </tr>
-              </thead>
+          <div className="mdl-cell mdl-cell--1-col"></div>
+          <div className="mdl-cell mdl-cell--7-col">
+            <table className="mdl-data-table mdl-js-data-table mdl-shadow--2d task-list">
               <tbody>
               {tasks}
               </tbody>

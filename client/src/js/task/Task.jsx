@@ -92,7 +92,7 @@ class Task extends React.Component {
             <input type="radio" name="done" onChange={this.handleDone}/>
           </label>
         </td>
-        <td>
+        <td className="mdl-data-table__cell--non-numeric task-list__title">
           { this.state.editTitle ? (
             <input type="text" value={this.state.title}
                    onChange={this.handleEditTitle}
@@ -106,7 +106,7 @@ class Task extends React.Component {
             </span>
           )}
         </td>
-        <td>
+        <td className="task-list__due-date">
           {
             this.state.editDueDate ? (
               <input type="date" value={this.state.dueDate} onChange={this.handleEditDueDate}

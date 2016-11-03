@@ -2,18 +2,20 @@ class Api::LoginController < ApiController
   def show
     param = login_params
     user  = User.find_by(email: param['login_id'])
-    body  = {}
-
-    # TODO(hachi-eiji): refactoring
-    if user && user.authenticate(param['password'])
-      body['id']      = 'ok'
-      body['message'] = 'user_exists'
-      body['status']  = 200
-    else
-      body['id']      = 'login_failed'
-      body['message'] = 'ログインID・パスワードが間違っています'
-      body['status']  = 404
-    end
+    body  = if user && user.authenticate(param['password'])
+              {
+                id:      'ok',
+                message: 'user_exists',
+                status:  200
+              }
+            else
+              # TODO(hachi-eiji): i18n対応
+              {
+                id:      'login_failed',
+                message: 'ログインID・パスワードが間違っています',
+                status:  404
+              }
+            end
     render_json(body)
   end
 

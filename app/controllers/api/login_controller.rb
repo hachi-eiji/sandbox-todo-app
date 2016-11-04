@@ -1,4 +1,4 @@
-class Api::LoginController < ApiController
+class Api::LoginController < Api::ApiController
   def show
     param = login_params
     user  = User.find_by(email: param['login_id'])

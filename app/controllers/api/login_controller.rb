@@ -2,7 +2,7 @@ class Api::LoginController < Api::ApiController
   def show
     param = login_params
     user  = User.find_by(email: param['login_id'])
-    body  = if user && user.authenticate(param['password'])
+    @body = if user && user.authenticate(param['password'])
               {
                 id:      'ok',
                 message: 'user_exists',
@@ -16,7 +16,6 @@ class Api::LoginController < Api::ApiController
                 status:  404
               }
             end
-    render_json(body)
   end
 
   private

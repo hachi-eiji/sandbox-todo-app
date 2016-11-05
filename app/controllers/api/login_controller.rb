@@ -1,21 +1,24 @@
 class Api::LoginController < Api::ApiController
   def show
     param = login_params
-    user  = User.find_by(email: param['login_id'])
-    @body =
-      if user && user.authenticate(param['password'])
-        {
+    user  = User.find_by(email: param['loginId'])
+    auth  = user && user.authenticate(param['password'])
+
+    if auth
+      session[:user_id] = auth.id
+
+      @body = {
           id:      'ok',
           message: 'user_exists',
           status:  200
         }
       else
-        # TODO(hachi-eiji): i18n対応
-        {
+        @body = {
           id:      'login_failed',
           message: 'ログインID・パスワードが間違っています',
           status:  404
         }
+        render 'api/login/show', status: 404
       end
   end
 
@@ -23,6 +26,6 @@ class Api::LoginController < Api::ApiController
 
   def login_params
     json_params = ActionController::Parameters.new(JSON.parse(request.body.read))
-    json_params.permit(:login_id, :password)
+    json_params.permit(:loginId, :password)
   end
 end

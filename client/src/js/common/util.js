@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 import Promise from 'promise/lib/es6-extensions';
 import Config from '../config';
+import tokenStorage from './TokenStorage';
 
 function binds(obj, ...methods) {
   methods.forEach((method) => {
@@ -30,6 +31,8 @@ function postJSON(endPoint, data, option) {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
+    const token = tokenStorage.get();
+    if (token) headers['X-CSRF-Token'] = token;
     const body = data ? JSON.stringify(data) : '';
     let _option = {
       method: 'POST',
@@ -40,17 +43,22 @@ function postJSON(endPoint, data, option) {
     };
     Object.assign(_option, option);
     fetch(Config.api.url + endPoint, _option).then(res => {
-      // 300番台は想定しない
-      if (res.ok) {
-        return res.json();
-      }
-      // JSONなげて終わる
-      return res.json().then(d => {
-        const e = new Error(res.body ? res.body.message : res.statusText);
-        e.status = res.status;
-        e.body = d;
-        e.response = res;
-        throw e;
+      const p = res.json();
+      return p.then(d => {
+        if (d.token) tokenStorage.save(d.token);
+        if (res.ok) {
+          // 300番台は想定しない
+          return p
+        } else {
+          // JSONなげて終わる
+          return p.then(d => {
+            const e = new Error(res.body ? res.body.message : res.statusText);
+            e.status = res.status;
+            e.body = d;
+            e.response = res;
+            throw e;
+          });
+        }
       });
     }).then(res => {
       resolve(res);
@@ -71,6 +79,8 @@ function get(endPoint, data) {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
+    const token = tokenStorage.get();
+    if (token) headers['X-CSRF-Token'] = token;
 
     let params = [];
     if (data) {
@@ -85,17 +95,23 @@ function get(endPoint, data) {
       credentials: 'include',
       method: 'GET',
       headers: headers,
-    }).then(res=> {
-      if (res.ok) {
-        return res.json();
-      }
-      // JSONなげて終わる
-      return res.json().then(d => {
-        const e = new Error(res.body ? res.body.message : res.statusText);
-        e.status = res.status;
-        e.body = d;
-        e.response = res;
-        throw e;
+    }).then(res => {
+      const p = res.json();
+      return p.then(d => {
+        if (d.token) tokenStorage.save(d.token);
+        if (res.ok) {
+          // 300番台は想定しない
+          return p
+        } else {
+          // JSONなげて終わる
+          return p.then(d => {
+            const e = new Error(res.body ? res.body.message : res.statusText);
+            e.status = res.status;
+            e.body = d;
+            e.response = res;
+            throw e;
+          });
+        }
       });
     }).then(res => {
       resolve(res);

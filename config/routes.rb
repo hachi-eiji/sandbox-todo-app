@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # api
   namespace :api do
     post 'login', to: 'login#show'
+    get 'token', to: 'tokens#index'
+    resources :tasks
     # fetchはOPTIONSが飛んでくるのでとりあえず200を返す
     match '*anything', to: 'api#handle_options_method', via: :options
   end

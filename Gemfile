@@ -24,6 +24,12 @@ gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# redis
+gem 'redis-rails', '~> 4'
+
+# configure
+gem 'config'
+
 gem 'ridgepole'
 gem 'activerecord-mysql-awesome'
 

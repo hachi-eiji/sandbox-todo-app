@@ -1,5 +1,5 @@
 import React from 'react';
-import {binds, postJSON} from '../common/util';
+import {binds, postJSON, get} from '../common/util';
 import Alert from '../component/Alert';
 import {browserHistory} from 'react-router';
 
@@ -12,6 +12,14 @@ class Login extends React.Component {
       password: '',
       message: ''
     };
+  }
+
+  componentDidMount() {
+    get('/token')
+      .then(res => {
+      })
+      .catch(e => {
+      })
   }
 
   // ログイン処理をする

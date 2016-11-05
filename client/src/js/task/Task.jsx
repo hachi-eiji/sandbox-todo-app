@@ -120,7 +120,9 @@ class Task extends React.Component {
           }
         </td>
         <td>
-          <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" onClick={this.handleDeleteTask}>削除</button>
+          <button className="mdl-button mdl-js-button mdl-button--raised mdl-button--accent"
+                  onClick={this.handleDeleteTask}>削除
+          </button>
         </td>
       </tr>
     );

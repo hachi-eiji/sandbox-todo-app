@@ -1,3 +1,6 @@
+require 'done_task_assigns.schema'
+require 'done_task_notes.schema'
+require 'done_tasks.schema'
 require 'project_members.schema'
 require 'projects.schema'
 require 'task_assigns.schema'

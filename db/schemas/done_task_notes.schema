@@ -1,0 +1,10 @@
+create_table "done_task_notes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  t.integer  "done_task_id",    limit: 4,               null: false
+  t.integer  "user_id",    limit: 4,               null: false
+  t.string   "note",       limit: 255,             null: false
+  t.datetime "created_at",                         null: false
+  t.datetime "updated_at",                         null: false
+end
+
+add_index "done_task_notes", ["done_task_id"], name: "index_done_task_notes_on_task_id", using: :btree
+add_index "done_task_notes", ["user_id"], name: "index_done_task_notes_on_user_id", using: :btree

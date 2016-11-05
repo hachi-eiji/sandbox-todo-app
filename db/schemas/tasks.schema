@@ -10,3 +10,4 @@ create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=u
 end
 
 add_index "tasks", ["project_id"], name: "index_project_id_on_tasks", using: :btree
+add_index "tasks", ["creator_id"], name: "index_creator_id_on_tasks", using: :btree

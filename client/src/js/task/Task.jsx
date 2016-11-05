@@ -75,7 +75,7 @@ class Task extends React.Component {
   }
 
   handleBlurDueDate(e) {
-    postJSON(`/tasks/${this.props.id}`, {dueDate: e.target.value}, {method: 'PUT'})
+    postJSON(`/tasks/${this.props.id}`, {due_datke: e.target.value}, {method: 'PUT'})
       .then(res => {
         this.setState({editDueDate: false, dueDateUpdated: true});
       })

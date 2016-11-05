@@ -9,6 +9,11 @@ class Api::TasksController < Api::ApiController
     task.update!(task_params)
   end
 
+  def destroy
+    task = Task.find(params[:id])
+    task.destroy!
+  end
+
   private
 
   def task_params

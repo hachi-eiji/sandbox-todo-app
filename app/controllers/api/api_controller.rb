@@ -1,6 +1,5 @@
 class Api::ApiController < ApplicationController
   class NotFoundError < ActionController::ActionControllerError
-
   end
 
   rescue_from Exception, with: :handle_error

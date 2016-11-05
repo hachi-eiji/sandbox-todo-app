@@ -1,4 +1,6 @@
 class Api::ApiController < ApplicationController
+  include ApplicationHelper
+
   # optionのときはCSRFTokenチェックをしない
   protect_from_forgery with: :exception, :except => [:handle_options_method]
 

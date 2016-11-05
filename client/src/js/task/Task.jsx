@@ -58,7 +58,7 @@ class Task extends React.Component {
         this.setState({editTitle: false, titleUpdated: true});
       })
       .catch(e => {
-
+        this.props.handleShowAlert('warning', 'エラーが発生しました');
       });
   }
 
@@ -80,7 +80,7 @@ class Task extends React.Component {
         this.setState({editDueDate: false, dueDateUpdated: true});
       })
       .catch(e => {
-
+        this.props.handleShowAlert('warning', 'エラーが発生しました');
       });
   }
 

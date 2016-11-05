@@ -52,7 +52,7 @@ function postJSON(endPoint, data, option) {
         } else {
           // JSONなげて終わる
           return p.then(d => {
-            const e = new Error(res.body ? res.body.message : res.statusText);
+            const e = new Error(d.message);
             e.status = res.status;
             e.body = d;
             e.response = res;
@@ -105,7 +105,7 @@ function get(endPoint, data) {
         } else {
           // JSONなげて終わる
           return p.then(d => {
-            const e = new Error(res.body ? res.body.message : res.statusText);
+            const e = new Error(d.message);
             e.status = res.status;
             e.body = d;
             e.response = res;

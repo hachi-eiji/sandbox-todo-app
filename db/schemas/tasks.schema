@@ -2,6 +2,7 @@ create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=u
   t.integer  "project_id",  limit: 4,     null: false
   t.string   "title",       limit: 255,   null: false
   t.text     "description", limit: 65535
+  t.datetime "due_date"
   t.integer  "creator_id",  limit: 4,     null: false
   t.integer  "updater_id",  limit: 4,     null: false
   t.datetime "created_at",                null: false

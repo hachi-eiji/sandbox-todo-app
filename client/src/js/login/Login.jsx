@@ -43,7 +43,7 @@ class Login extends React.Component {
       <div>
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--4-col"></div>
-          <div className="mdl-cell mdl-cell--4-col"><Alert type="error" message={this.state.message}/></div>
+          <div className="mdl-cell mdl-cell--4-col"><Alert type="error">{this.state.message}</Alert></div>
         </div>
         <div className="mdl-grid">
           <div className="mdl-cell mdl-cell--4-col"></div>

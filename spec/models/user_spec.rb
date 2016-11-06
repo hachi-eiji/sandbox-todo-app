@@ -32,4 +32,25 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'activate' do
+    context 'すでにアクティベート済' do
+      let(:user) do
+        create(:user, active: true)
+      end
+
+      it 'すでにアクティベート済' do
+        expect(user.activate).to be nil
+      end
+    end
+
+    context '未アクティベート' do
+      let(:user) do
+        create(:user)
+      end
+      it '未アクティベート' do
+        expect(user.activate).to be true
+      end
+    end
+  end
 end

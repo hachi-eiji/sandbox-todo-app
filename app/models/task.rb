@@ -5,6 +5,7 @@ class Task < ActiveRecord::Base
 
   validates :project_id, presence: true
   validates :title, presence: true
-  validates :creator, presence: true
-  validates :updater, presence: true
+  validates :creator_id, presence: true
+  validates :updater_id, presence: true
+  validates :due_date, feature_date: true
 end

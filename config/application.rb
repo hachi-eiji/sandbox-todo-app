@@ -16,6 +16,7 @@ require "sprockets/railtie"
 Bundler.require(*Rails.groups)
 
 module SandboxTodoApp
+  module Api; end # 名前空間の解決(IDEで警告出したくない)
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

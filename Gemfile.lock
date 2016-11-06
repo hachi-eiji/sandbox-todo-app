@@ -50,6 +50,7 @@ GEM
     config (1.3.0)
       activesupport (>= 3.0)
       deep_merge (~> 1.1.1)
+    database_rewinder (0.6.5)
     debug_inspector (0.0.2)
     deep_merge (1.1.1)
     diff-lcs (1.2.5)
@@ -190,6 +191,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
   config
+  database_rewinder
   factory_girl
   factory_girl_rails
   faker

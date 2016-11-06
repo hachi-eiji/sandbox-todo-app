@@ -40,6 +40,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'factory_girl'
   gem 'faker'
+  # データを自動的にけす(database_cleanerよりはやいらしい)
+  gem 'database_rewinder'
 end
 
 group :development do

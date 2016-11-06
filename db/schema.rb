@@ -14,7 +14,9 @@
 ActiveRecord::Schema.define(version: 0) do
   # ridgepole 用に全部読みこむ
   # テストの際毎回drop&createしてるとつらいので中規模以上はしないほうがよいとおもう
-  Dir.glob(Rails.root.join('db', 'schemas', '**', '*.schema')).each do |f|
-    self.instance_eval(File.read(f))
+  if Rails.env == 'test'
+    Dir.glob(Rails.root.join('db', 'schemas', '**', '*.schema')).each do |f|
+      self.instance_eval(File.read(f))
+    end
   end
 end

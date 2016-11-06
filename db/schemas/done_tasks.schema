@@ -1,13 +1,10 @@
-create_table "done_tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-  t.integer  "project_id",  limit: 4,                 null: false
-  t.string   "title",       limit: 255,               null: false
+create_table "done_tasks", id: :integer, limit: 4, default: 0, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
+  t.integer  "project_id",  limit: 4,     null: false
+  t.string   "title",       limit: 255,   null: false
   t.text     "description", limit: 65535
   t.datetime "due_date"
-  t.integer  "creator_id",  limit: 4,                 null: false
-  t.integer  "updater_id",  limit: 4,                 null: false
-  t.datetime "created_at",                            null: false
-  t.datetime "updated_at",                            null: false
+  t.integer  "creator_id",  limit: 4,     null: false
+  t.integer  "updater_id",  limit: 4,     null: false
+  t.datetime "created_at",                null: false
+  t.datetime "updated_at",                null: false
 end
-
-add_index "done_tasks", ["project_id"], name: "index_project_id_on_done_tasks", using: :btree
-add_index "done_tasks", ["creator_id"], name: "index_creator_id_on_done_tasks", using: :btree

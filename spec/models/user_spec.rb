@@ -50,6 +50,7 @@ RSpec.describe User, type: :model do
       end
       it '未アクティベート' do
         expect(user.activate).to be true
+        expect(user.active).to be true
       end
     end
   end

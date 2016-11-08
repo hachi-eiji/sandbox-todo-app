@@ -9,8 +9,8 @@
 vendor/bundle
 .idea/
 /client/node_modules
-/app/assets/javascripts/webpack
-/app/assets/stylesheets/webpack
+/app/assets/javascripts
+/app/assets/stylesheets
 
 # Ignore all logfiles and tempfiles.
 /log/*

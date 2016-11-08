@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'top#index'
 
   # api
   namespace :api do
@@ -62,6 +62,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  get '*anything' => 'errors#index'
-  post '*anything' => 'errors#index'
+  get '*anything' => 'top#index'
+  post '*anything' => 'errors#not_found'
 end

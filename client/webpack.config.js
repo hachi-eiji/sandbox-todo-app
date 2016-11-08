@@ -50,8 +50,9 @@ function entryCss() {
 module.exports = [
   {
     entry: entryJs(),
+    debug: true,
     output: {
-      path: '../app/assets/javascripts/webpack',
+      path: '../app/assets/javascripts',
       filename: '[name].js'
     },
     module: {
@@ -67,7 +68,7 @@ module.exports = [
       ]
     },
     loader: {
-      configEnvironment: process.env.NODE_ENV || 'local'
+      configEnvironment: process.env.NODE_ENV || 'development'
     },
     plugins: [
       // vendor.bundle.jsを入れてないものはエラーになる
@@ -86,7 +87,7 @@ module.exports = [
   {
     entry: entryCss(),
     output: {
-      path: '../app/assets/stylesheets/webpack',
+      path: '../app/assets/stylesheets',
       filename: '[name].css'
     },
     module: {

@@ -9,11 +9,24 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
-  def before_create
-    self.active = false
+  before_create :initialize_activate
+
+  # アクティベート処理を行う
+  #
+  # @params [String] activate_hash_id アクティベートするためのhash処理
+  # @return [true,false] 成功時はtrue
+  def activate(activate_hash_id = nil)
+    return false if self.active?
+    return false if activate_hash_id.blank? || self.activate_hash_id != activate_hash_id
+    return false if self.activate_expired_at < Time.current
+    update(active: true)
   end
 
-  def activate
-    update(active: true) unless active?
+  private
+
+  def initialize_activate
+    self.active              = false
+    self.activate_expired_at = Time.current + 7.days
+    self.activate_hash_id    = SecureRandom.uuid
   end
 end

@@ -3,6 +3,8 @@ create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=u
   t.string   "email",           limit: 255,                 null: false
   t.string   "password_digest", limit: 255,                 null: false
   t.boolean  "active",                      default: false, null: false
+  t.string   "activate_hash_id",  limit: 255,               null: false
+  t.datetime "activate_expired_at",                         null: false
   t.datetime "created_at",                                  null: false
   t.datetime "updated_at",                                  null: false
 end

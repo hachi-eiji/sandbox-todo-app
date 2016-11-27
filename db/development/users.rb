@@ -6,6 +6,8 @@ require 'faker'
     email:                 "test#{i}@example.com",
     password:              'test',
     password_confirmation: 'test',
+    activate_hash_id:      'test_hash_id',
+    activate_expired_at:   Time.current,
     active:                true
   )
 end

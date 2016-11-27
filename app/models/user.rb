@@ -13,13 +13,20 @@ class User < ActiveRecord::Base
 
   # アクティベート処理を行う
   #
+  # @params [String] password パスワード
   # @params [String] activate_hash_id アクティベートするためのhash処理
   # @return [true,false] 成功時はtrue
-  def activate(activate_hash_id = nil)
+  def activate(password, activate_hash_id)
     return false if self.active?
+    return false unless authenticate(password)
     return false if activate_hash_id.blank? || self.activate_hash_id != activate_hash_id
     return false if self.activate_expired_at < Time.current
     update(active: true)
+    self
+  end
+
+  def login(password)
+    self.active? && authenticate(password)
   end
 
   private

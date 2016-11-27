@@ -40,7 +40,7 @@ RSpec.describe User, type: :model do
       end
 
       it 'すでにアクティベート済' do
-        expect(user.activate).to be false
+        expect(user.activate('test', 'test')).to be false
       end
     end
 
@@ -55,17 +55,17 @@ RSpec.describe User, type: :model do
       end
       it 'アクティベート有効期限が切れてる' do
         params.merge!(activate_expired_at: Time.new(2000, 1, 1), activate_hash_id: 'some_hash_id')
-        expect(user.activate('some_hash_id')).to be false
+        expect(user.activate('test', 'some_hash_id')).to be false
         expect(user.active).to be false
       end
       it 'アクティベート有効期限以内だが、ハッシュIDが間違っている' do
         params.merge!(activate_expired_at: Time.current + 2.days, activate_hash_id: 'some_hash_id')
-        expect(user.activate('wrong_hash_id')).to be false
+        expect(user.activate('test', 'wrong_hash_id')).to be false
         expect(user.active).to be false
       end
       it 'アクティベート有効期限いないかつ、ハッシュIDが正しい' do
         params.merge!(activate_expired_at: Time.current + 2.days, activate_hash_id: 'some_hash_id')
-        expect(user.activate('some_hash_id')).to be true
+        expect(user.activate('test', 'some_hash_id')).to be true
         expect(user.active).to be true
       end
     end

@@ -24,6 +24,10 @@ class Api::ApiController < ApplicationController
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
+  def json_params
+    ActionController::Parameters.new(JSON.parse(request.body.read))
+  end
+
   private
 
   def not_found_error(e)

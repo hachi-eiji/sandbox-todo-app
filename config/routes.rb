@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # api
   namespace :api do
     post 'login', to: 'login#show'
+    post 'activate', to: 'login#activate'
+    post 'reset', to: 'login#reset'
     get 'token', to: 'tokens#index'
     resources :tasks
     # fetchはOPTIONSが飛んでくるのでとりあえず200を返す

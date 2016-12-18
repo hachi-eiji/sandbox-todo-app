@@ -21,8 +21,8 @@ class User < ActiveRecord::Base
     return false unless authenticate(password)
     return false if activate_hash_id.blank? || self.activate_hash_id != activate_hash_id
     return false if self.activate_expired_at < Time.current
-    update(active: true)
-    self
+    update!(active: true)
+    true
   end
 
   def login(password)

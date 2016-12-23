@@ -36,6 +36,9 @@ gem 'activerecord-mysql-awesome'
 # template engine
 gem 'haml', '~> 4.0', '>= 4.0.7'
 
+# bulk insert
+gem 'active_record_bulk_insert', '~> 1.2'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

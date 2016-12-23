@@ -21,13 +21,26 @@ class Task < ActiveRecord::Base
         creator_id:  creator_id,
         updater_id:  updater_id
       )
-      task_notes.each do |task_note|
-        DoneTaskNote.create!(id: task_note.id, task_id: task_note.task_id, user_id: task_note.user_id, note: task_note.note)
-      end
 
-      task_assigns.each do |task_assign|
-        DoneTaskAssign.create!(id: task_assign.id, task_id: task_assign.task_id, user_id: task_assign.user_id)
-      end
+      done_task_notes = task_notes.map { |task_note|
+        {
+          id:      task_note.id,
+          task_id: task_note.task_id,
+          user_id: task_note.user_id,
+          note:    task_note.note
+        }
+      }
+      DoneTaskNote.bulk_insert(done_task_notes, { :validate => true, :use_provided_primary_key => true })
+
+      done_task_assigns = task_assigns.map { |task_assign|
+        {
+          id:      task_assign.id,
+          task_id: task_assign.task_id,
+          user_id: task_assign.user_id
+        }
+      }
+      DoneTaskAssign.bulk_insert(done_task_assigns, { :validate => true, :use_provided_primary_key => true })
+
       # まとめて削除する
       destroy!
     end

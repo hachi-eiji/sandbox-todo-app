@@ -30,7 +30,7 @@ class Task < ActiveRecord::Base
           note:    task_note.note
         }
       }
-      DoneTaskNote.bulk_insert(done_task_notes, { :validate => true, :use_provided_primary_key => true })
+      DoneTaskNote.bulk_insert(done_task_notes, { validate: true, use_provided_primary_key: true })
 
       done_task_assigns = task_assigns.map { |task_assign|
         {
@@ -39,7 +39,7 @@ class Task < ActiveRecord::Base
           user_id: task_assign.user_id
         }
       }
-      DoneTaskAssign.bulk_insert(done_task_assigns, { :validate => true, :use_provided_primary_key => true })
+      DoneTaskAssign.bulk_insert(done_task_assigns, { validate: true, use_provided_primary_key: true })
 
       # まとめて削除する
       destroy!

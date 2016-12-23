@@ -22,7 +22,7 @@ class Task < ActiveRecord::Base
         updater_id:  updater_id
       )
       task_notes.each do |task_note|
-        DoneTaskNote.create!(id: task_note.id, task_id: task_note.task_id, user_id: task_note.user_id, note: task_note)
+        DoneTaskNote.create!(id: task_note.id, task_id: task_note.task_id, user_id: task_note.user_id, note: task_note.note)
       end
 
       task_assigns.each do |task_assign|

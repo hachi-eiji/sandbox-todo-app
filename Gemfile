@@ -40,14 +40,15 @@ gem 'haml', '~> 4.0', '>= 4.0.7'
 gem 'active_record_bulk_insert', '~> 1.2'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
   gem 'rspec-rails', '3.5'
   gem 'factory_girl_rails'
   gem 'factory_girl'
   gem 'faker'
   # データを自動的にけす(database_cleanerよりはやいらしい)
   gem 'database_rewinder'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'pry-stack_explorer'
 end
 
 group :development do

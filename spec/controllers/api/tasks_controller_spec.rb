@@ -40,4 +40,17 @@ describe Api::TasksController do
       end
     end
   end
+
+  describe 'DELETE' do
+    context 'destroy' do
+      it 'タスクを削除する' do
+        task = create(:task)
+
+        delete :destroy, id: task.id, format: :jbuilder
+
+        expect(response.status).to eq(200)
+        expect(Task.find_by(id: task.id)).to be nil
+      end
+    end
+  end
 end

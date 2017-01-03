@@ -21,10 +21,10 @@ class Task extends React.Component {
     postJSON('/tasks/' + this.props.id, {}, {method: 'DELETE'})
       .then(res => {
         this.props.handleDeleteRow(this.props.index);
-        this.props.handleShowAlert('success', '削除しました');
+        this.props.handleShowAlert({status: 'success', message: '削除しました'});
       })
       .catch(e => {
-        this.props.handleShowAlert('warning', 'エラーが発生しました');
+        this.props.handleShowAlert({status: 'warning', message: 'エラーが発生しました ' + e.message });
       });
   }
 
@@ -33,10 +33,10 @@ class Task extends React.Component {
     postJSON('/tasks/' + this.props.id, {done: true}, {method: 'PUT'})
       .then(res => {
         this.props.handleDeleteRow(this.props.index);
-        this.props.handleShowAlert('success', '完了しました');
+        this.props.handleShowAlert({status: 'success', message: '完了しました'});
       })
       .catch(e => {
-        this.props.handleShowAlert('warning', 'エラーが発生しました');
+        this.props.handleShowAlert({status: 'warning', message: 'エラーが発生しました ' + e.message });
       })
   }
 
@@ -58,7 +58,7 @@ class Task extends React.Component {
         this.setState({editTitle: false, titleUpdated: true});
       })
       .catch(e => {
-        this.props.handleShowAlert('warning', 'エラーが発生しました');
+        this.props.handleShowAlert({status: 'warning', message: 'エラーが発生しました ' + e.message });
       });
   }
 
@@ -80,7 +80,7 @@ class Task extends React.Component {
         this.setState({editDueDate: false, dueDateUpdated: true});
       })
       .catch(e => {
-        this.props.handleShowAlert('warning', 'エラーが発生しました');
+        this.props.handleShowAlert({status: 'warning', message: 'エラーが発生しました ' + e.message });
       });
   }
 

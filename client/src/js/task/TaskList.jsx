@@ -42,8 +42,8 @@ class TaskList extends React.Component {
     });
   }
 
-  handleShowAlert(status, message) {
-    this.setState({status: status, message: message});
+  handleShowAlert(alertObj) {
+    this.setState({status: alertObj.status, message: alertObj.message});
   }
 
   render() {

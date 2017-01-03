@@ -7,7 +7,6 @@ class Task < ActiveRecord::Base
   validates :title, presence: true
   validates :creator_id, presence: true
   validates :updater_id, presence: true
-  validates :due_date, feature_date: true
 
   def done
     ActiveRecord::Base.transaction do

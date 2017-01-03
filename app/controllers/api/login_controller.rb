@@ -27,11 +27,11 @@ class Api::LoginController < Api::ApiController
   def activate
     param = login_params
     user  = User.find_by(email: param[:loginId])
-    auth  = user && user.activate(param[:password], param[:code])
+    is_auth = user && user.activate(param[:password], param[:code])
 
     status = 200
-    if auth
-      session[:user_id] = auth.id
+    if is_auth
+      session[:user_id] = user.id
       @body = {
         id:      'ok',
         message: 'user_exists',

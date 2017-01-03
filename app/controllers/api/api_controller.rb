@@ -38,6 +38,7 @@ class Api::ApiController < ApplicationController
 
   def handle_error(e)
     @exception = e
+    logger.error(e)
     add_response_header
     render 'api/errors/error', status: 500
   end

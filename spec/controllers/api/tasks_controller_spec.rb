@@ -44,12 +44,27 @@ describe Api::TasksController do
   describe 'DELETE' do
     context 'destroy' do
       it 'タスクを削除する' do
-        task = create(:task)
+        user = create(:user)
+        session[:user_id] = user.id
+        project = create(:project, user: user)
+        task = create(:task, project: project)
+        create(:project_member, project: project, user: user)
 
         delete :destroy, id: task.id, format: :jbuilder
 
         expect(response.status).to eq(200)
         expect(Task.find_by(id: task.id)).to be nil
+      end
+
+      it '自分が入っていないプロジェクトのタスクは削除できない' do
+        user = create(:user)
+        session[:user_id] = user.id
+        project = create(:project, user: user)
+        task = create(:task, project: project)
+
+        delete :destroy, id: task.id, format: :jbuilder
+
+        expect(response.status).to eq(404)
       end
     end
   end

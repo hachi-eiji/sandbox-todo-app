@@ -16,6 +16,9 @@ class Api::TasksController < Api::ApiController
 
   def destroy
     task = Task.find(params[:id])
+    if !task.modifiable?(current_user.id)
+      raise NotFoundError and return
+    end
     task.destroy!
   end
 

@@ -8,6 +8,12 @@ class Task < ActiveRecord::Base
   validates :creator_id, presence: true
   validates :updater_id, presence: true
 
+  # タスクが変更可能か
+  # @param [int] user_id ユーザID
+  def modifiable?(user_id)
+    project.project_members.map(&:user_id).include?(user_id)
+  end
+
   def done
     ActiveRecord::Base.transaction do
       lock!

@@ -18,7 +18,7 @@ vendor/bundle
 /log/*
 !/log/.keep
 /tmp
-client/npm-debug.log
+npm-debug.log
 mockapi/source/
 out/
 

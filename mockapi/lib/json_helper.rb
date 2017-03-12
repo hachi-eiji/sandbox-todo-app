@@ -17,7 +17,7 @@ class JsonHelper
       'Content-Type'                     => 'application/json;charset=UTF-8',
       'Access-Control-Allow-Origin'      => 'http://localhost:3001',
       'Access-Control-Allow-Credentials' => 'true',
-      'Access-Control-Allow-Headers'     => 'X-PINGOTHER, Content-Type',
+      'Access-Control-Allow-Headers'     => 'X-PINGOTHER, Content-Type, x-csrf-token',
       'Access-Control-Allow-Methods'     => 'GET, POST, DELETE, OPTIONS, PUT'
     }
 

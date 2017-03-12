@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Login } from "./login";
+import "rxjs/add/operator/catch";
+import "rxjs/add/operator/map";
+import { HttpClient } from "../common/HttpClient";
 
 @Component({
   selector: 'app-login-form',
@@ -9,13 +12,16 @@ import { Login } from "./login";
 export class LoginFormComponent implements OnInit {
   model = new Login('', '');
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
   ngOnInit() {
+    this.httpClient.getJson('/token')
+      .subscribe(data => console.log(data), error => console.log(error));
   }
 
   onSubmit() {
-    console.log(this.model);
+    this.httpClient.postJson('/login', this.model)
+      .subscribe(res => console.log(res), error => console.log(error));
   }
 }

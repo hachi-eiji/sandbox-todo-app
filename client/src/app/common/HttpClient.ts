@@ -1,12 +1,13 @@
-import { Injectable } from "@angular/core";
-import { Http, Response, Headers, RequestOptionsArgs } from "@angular/http";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/catch";
-import "rxjs/add/operator/map";
-import { environment } from "../../environments/environment";
-import { TokenStorage } from "./TokenStorage";
-import { HttpResponseError } from "./HttpResponseError";
-import { IHttpDataModel } from "./IHttpDataModel";
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptionsArgs } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw';
+import { environment } from '../../environments/environment';
+import { TokenStorage } from './TokenStorage';
+import { HttpResponseError } from './HttpResponseError';
+import { IHttpDataModel } from './IHttpDataModel';
 
 @Injectable()
 export class HttpClient {
@@ -14,7 +15,7 @@ export class HttpClient {
   }
 
   getJson(endPoint: string, data?: any): Observable<any> {
-    let params = [];
+    const params = [];
     if (data) {
       Object.keys(data).forEach(k => {
         const v = encodeURIComponent(data[k]);
@@ -67,7 +68,7 @@ export class HttpClient {
   }
 
   private createOption(): RequestOptionsArgs {
-    let headers = new Headers({
+    const headers = new Headers({
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     });

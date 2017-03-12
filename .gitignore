@@ -9,8 +9,10 @@
 vendor/bundle
 .idea/
 /client/node_modules
-/app/assets/javascripts
-/app/assets/stylesheets
+/app/assets/javascripts/*
+/app/assets/stylesheets/*
+!.gitkeep
+!application.css
 
 # Ignore all logfiles and tempfiles.
 /log/*

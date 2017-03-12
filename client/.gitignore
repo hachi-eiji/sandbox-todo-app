@@ -4,6 +4,9 @@
 /dist
 /tmp
 
+# 自動コンパイルで出力されても弾く
+/src/**/*.js
+
 # dependencies
 /node_modules
 
@@ -39,3 +42,4 @@ testem.log
 #System Files
 .DS_Store
 Thumbs.db
+

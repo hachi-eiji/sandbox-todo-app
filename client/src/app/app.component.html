@@ -1,3 +1,29 @@
-<h1>
-  {{title}}
-</h1>
+<div>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--4-col"></div>
+    <div class="mdl-cell mdl-cell--4-col"></div>
+  </div>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--4-col"></div>
+    <div class="mdl-cell mdl-cell--4-col">
+      <form onSubmit={this.handleLogin} class="form-horizontal">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="col-sm-10">
+            <input type="text" name="loginId" value={this.state.loginId} class="mdl-textfield__input"
+                   onChange={this.handleLoginId}/>
+            <label htmlFor="loginId" class="mdl-textfield__label">ログインID</label>
+          </div>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input type="password" name="password" class="mdl-textfield__input"
+                 value={this.state.password}
+                 onChange={this.handlePassword}/>
+          <label htmlFor="password" class="mdl-textfield__label">パスワード</label>
+        </div>
+        <div>
+          <button type="submit" class="mdl-button mdl-js-button mdl-button--raised">ログイン</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

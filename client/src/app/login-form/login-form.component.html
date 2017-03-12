@@ -1,0 +1,27 @@
+<div>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--4-col"></div>
+    <div class="mdl-cell mdl-cell--4-col"></div>
+  </div>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--4-col"></div>
+    <div class="mdl-cell mdl-cell--4-col">
+      <form class="form-horizontal" (submit)="onSubmit()">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <div class="col-sm-10">
+            <input type="text" class="mdl-textfield__input" name="loginId" [(ngModel)]="model.loginId"/>
+            <label htmlFor="loginId" class="mdl-textfield__label">ログインID</label>
+          </div>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input type="password" class="mdl-textfield__input" name="password" [(ngModel)]="model.password"/>
+          <label htmlFor="password" class="mdl-textfield__label">パスワード</label>
+        </div>
+        <div>
+          <button type="submit" class="mdl-button mdl-js-button mdl-button--raised">ログイン</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

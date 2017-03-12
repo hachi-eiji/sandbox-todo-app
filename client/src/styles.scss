@@ -3,29 +3,6 @@
   font-style: italic;
 }
 
-.alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 10px;
-
-  &__success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
-  }
-  &__error {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
-  }
-  &__warning {
-    color: #8a6d3b;
-    background-color: #fcf8e3;
-    border-color: #faebcc;
-  }
-}
-
 .task-list {
   &__title {
     width: 40%;

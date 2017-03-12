@@ -1,7 +1,7 @@
 <div>
-  <div class="mdl-grid">
+  <div class="mdl-grid" *ngIf="showError">
     <div class="mdl-cell mdl-cell--4-col"></div>
-    <div class="mdl-cell mdl-cell--4-col"></div>
+    <div class="mdl-cell mdl-cell--4-col"><app-alert [message]="message" [type]="type"></app-alert></div>
   </div>
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--4-col"></div>

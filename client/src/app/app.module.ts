@@ -6,11 +6,13 @@ import { AppComponent } from "./app.component";
 import { LoginFormComponent } from "./login-form/login-form.component";
 import { TokenStorage } from "./common/TokenStorage";
 import { HttpClient } from "./common/HttpClient";
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

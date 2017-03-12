@@ -1,8 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { Login } from "./login";
-import "rxjs/add/operator/catch";
-import "rxjs/add/operator/map";
-import { HttpClient } from "../common/HttpClient";
+import { Component, OnInit } from '@angular/core';
+import { Response } from '@angular/http';
+import { Login } from './login';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import { HttpClient } from '../common/HttpClient';
+import { HttpResponseError } from '../common/HttpResponseError';
 
 @Component({
   selector: 'app-login-form',
@@ -11,17 +13,30 @@ import { HttpClient } from "../common/HttpClient";
 })
 export class LoginFormComponent implements OnInit {
   model = new Login('', '');
+  showError = false;
+  message = '';
+  type = '';
 
   constructor(private httpClient: HttpClient) {
   }
 
   ngOnInit() {
     this.httpClient.getJson('/token')
-      .subscribe(data => console.log(data), error => console.log(error));
+      .subscribe();
   }
 
   onSubmit() {
     this.httpClient.postJson('/login', this.model)
-      .subscribe(res => console.log(res), error => console.log(error));
+      .subscribe(res => this.loginSuccessHandler(res), (error) => this.loginErrorHandler(error));
+  }
+
+  private loginSuccessHandler(res: Response) {
+    this.showError = false;
+  }
+
+  private loginErrorHandler(error: HttpResponseError) {
+    this.showError = true;
+    this.message = error.message;
+    this.type = 'error';
   }
 }

@@ -7,7 +7,6 @@ import 'rxjs/add/observable/throw';
 import { environment } from '../../environments/environment';
 import { TokenStorage } from './TokenStorage';
 import { HttpResponseError } from './HttpResponseError';
-import { IHttpDataModel } from './IHttpDataModel';
 
 @Injectable()
 export class HttpClient {
@@ -39,9 +38,9 @@ export class HttpClient {
       .catch(this.handleError);
   }
 
-  postJson(endPoint: string, model: IHttpDataModel): Observable<any> {
+  postJson(endPoint: string, data: any): Observable<any> {
     const self = this;
-    return this.http.post(environment.api.url + endPoint, model.toJSONString(), this.createOption())
+    return this.http.post(environment.api.url + endPoint, JSON.stringify(data), this.createOption())
       .map(function (res: Response) {
         const body = res.json();
         if (body.token) {

@@ -9,9 +9,13 @@ import { TokenStorage } from './common/TokenStorage';
 import { HttpClient } from './common/HttpClient';
 import { AlertComponent } from './alert/alert.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { TaskListComponent } from './task-list/task-list.component';
+import { LoadingComponent } from './loading/loading.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginFormComponent},
+  {path: 'tasks', component: TaskListComponent},
+  {path: '', redirectTo: '/tasks', pathMatch: 'full'},
   {path: '**', component: NotFoundComponent}
 ];
 
@@ -20,7 +24,9 @@ const appRoutes: Routes = [
     AppComponent,
     LoginFormComponent,
     AlertComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    TaskListComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

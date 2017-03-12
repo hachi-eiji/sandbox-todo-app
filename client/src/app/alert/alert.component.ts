@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Alert } from './Alert';
 
 @Component({
   selector: 'app-alert',
@@ -7,7 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class AlertComponent {
   @Input()
-  message: string;
-  @Input()
-  type: string;
+  alert: Alert;
 }

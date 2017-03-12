@@ -1,0 +1,21 @@
+<div>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--1-col"></div>
+    <div class="mdl-cell mdl-cell--7-col" *ngIf="showLoading">
+      <app-loading></app-loading>
+    </div>
+  </div>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--1-col"></div>
+    <div class="mdl-cell mdl-cell--7-col">
+      <table class="mdl-data-table mdl-js-data-table mdl-shadow--2d task-list">
+        <tbody>
+          <tr *ngFor="let task of tasks">
+            <td>{{task.title}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

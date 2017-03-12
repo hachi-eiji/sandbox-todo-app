@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Response } from '@angular/http';
+import { Router } from '@angular/router';
 import { Login } from './login';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { HttpClient } from '../common/HttpClient';
 import { HttpResponseError } from '../common/HttpResponseError';
+import { Alert } from '../alert/Alert';
 
 @Component({
   selector: 'app-login-form',
@@ -13,11 +15,9 @@ import { HttpResponseError } from '../common/HttpResponseError';
 })
 export class LoginFormComponent implements OnInit {
   model = new Login('', '');
-  showError = false;
-  message = '';
-  type = '';
+  alert: Alert;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router: Router) {
   }
 
   ngOnInit() {
@@ -31,12 +31,10 @@ export class LoginFormComponent implements OnInit {
   }
 
   private loginSuccessHandler(res: Response) {
-    this.showError = false;
+    this.router.navigate(['tasks']);
   }
 
   private loginErrorHandler(error: HttpResponseError) {
-    this.showError = true;
-    this.message = error.message;
-    this.type = 'error';
+    this.alert = new Alert(error.message);
   }
 }

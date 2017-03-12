@@ -26,7 +26,7 @@ const appRoutes: Routes = [
     AlertComponent,
     NotFoundComponent,
     TaskListComponent,
-    LoadingComponent
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,

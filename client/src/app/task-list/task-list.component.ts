@@ -28,4 +28,14 @@ export class TaskListComponent implements OnInit {
         console.log(e);
       });
   }
+
+  onDeleteTask(task: Task, index: number) {
+    console.log(task);
+    this.tasks.splice(index, 1);
+  }
+
+  onDoneTask(task: Task, index: number) {
+    console.log(task);
+    this.tasks.splice(index, 1);
+  }
 }

@@ -16,6 +16,18 @@ export class TaskListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fetch();
+  }
+
+  onDeleteTask(task: Task, index: number) {
+    this.fetch();
+  }
+
+  onDoneTask(task: Task, index: number) {
+    this.fetch();
+  }
+
+  private fetch() {
     this.httpClient.getJson('/tasks')
       .subscribe(res => {
         res.data.forEach(value => {
@@ -27,15 +39,5 @@ export class TaskListComponent implements OnInit {
       }, e => {
         console.log(e);
       });
-  }
-
-  onDeleteTask(task: Task, index: number) {
-    console.log(task);
-    this.tasks.splice(index, 1);
-  }
-
-  onDoneTask(task: Task, index: number) {
-    console.log(task);
-    this.tasks.splice(index, 1);
   }
 }

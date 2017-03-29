@@ -9,25 +9,33 @@
     <div class="mdl-cell mdl-cell--1-col"></div>
     <div class="mdl-cell mdl-cell--7-col">
       <table class="mdl-data-table mdl-js-data-table mdl-shadow--2d task-list">
-        <tbody>
-        <tr *ngFor="let task of tasks; let i = index">
-          <td>
-            <label class="radio-inline">
-              <input type="radio" name="done" (click)="onDoneTask(task, i)"/>
-            </label>
-          </td>
-          <td class="mdl-data-table__cell--non-numeric task-list__title">
-            {{task.title}}
-          </td>
-          <td class="task-list__due-date">
-            {{task.due_date}}
-          </td>
-          <td>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" (click)="onDeleteTask(task, i)">
-              削除
-            </button>
-          </td>
+        <thead>
+          <tr>
+            <td></td>
+            <td>your task</td>
+            <td>deadline</td>
+            <td></td>
           </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks; let i = index">
+            <td>
+              <label class="radio-inline">
+                <input type="radio" name="done" (click)="onDoneTask(task, i)"/>
+              </label>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric task-list__title">
+              {{task.title}}
+            </td>
+            <td class="task-list__due-date">
+              {{task.due_date}}
+            </td>
+            <td>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" (click)="onDeleteTask(task, i)">
+                削除
+              </button>
+            </td>
+            </tr>
         </tbody>
       </table>
     </div>

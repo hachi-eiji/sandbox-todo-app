@@ -2,7 +2,7 @@ FROM hachiyae/rbenv-on-amzn-linux:latest
 
 RUN yum -y update \
   && yum -y install mysql-devel \
-  && curl -fsSL https://rpm.nodesource.com/setup_6.x | bash - \
+  && curl -fsSL https://rpm.nodesource.com/setup_7.x | bash - \
   && yum install -y gcc-c++ make nodejs
 RUN mkdir /var/lib/sandbox-todo-app
 WORKDIR /var/lib/sandbox-todo-app

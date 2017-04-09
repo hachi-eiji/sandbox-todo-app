@@ -5,8 +5,8 @@ services:
   datastore:
     image: busybox
     volumes:
-      - mysql-data:/var/lib/mysql
-      - redis-data:/data
+      - mysql_data:/var/lib/mysql
+      - redis_data:/data
       - bundle_install:/var/lib/sandbox-todo-app/vendor/bundle
       - bundle:/var/lib/sandbox-todo-app/.bundle
       - node_modules:/var/lib/sandbox-todo-app/node_modules
@@ -47,9 +47,9 @@ services:
       - datastore
 
 volumes:
-  mysql-data:
+  mysql_data:
     driver: local
-  redis-data:
+  redis_data:
     driver: local
   bundle_install:
     driver: local

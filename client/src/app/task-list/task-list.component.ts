@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '../common/HttpClient';
 import { Task } from '../task/Task';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-list',
@@ -11,7 +12,7 @@ export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
   showLoading = true;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router: Router) {
 
   }
 
@@ -20,6 +21,7 @@ export class TaskListComponent implements OnInit {
   }
 
   onDeleteTask(task: Task, index: number) {
+
     this.fetch();
   }
 
@@ -38,6 +40,11 @@ export class TaskListComponent implements OnInit {
         });
       }, e => {
         console.log(e);
+        if (e.body.status === 404) {
+          if (e.body.message === 'user_not_found') {
+            this.router.navigate(['login']);
+          }
+        }
       });
   }
 }

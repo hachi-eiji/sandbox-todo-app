@@ -26,7 +26,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.httpClient.postJson('/login', {loginId: this.model, password: this.model.password})
+    this.httpClient.postJson('/login', {loginId: this.model.loginId, password: this.model.password})
       .subscribe(res => this.loginSuccessHandler(res), (error) => this.loginErrorHandler(error));
   }
 

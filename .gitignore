@@ -9,17 +9,21 @@
 vendor/bundle
 .idea/
 /client/node_modules
-/app/assets/javascripts
-/app/assets/stylesheets
+/app/assets/javascripts/*
+/app/assets/stylesheets/*
+!.gitkeep
+!application.css
 
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
 /tmp
-client/npm-debug.log
+npm-debug.log
 mockapi/source/
 out/
 
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
+
+mockapi/vendor/bundle

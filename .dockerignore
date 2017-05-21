@@ -1,0 +1,9 @@
+### Rails ###
+public/assets/*
+log/*
+tmp/*
+out/*
+
+## Environment normalisation:
+.bundle
+vendor/bundle

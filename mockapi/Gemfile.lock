@@ -108,8 +108,6 @@ PLATFORMS
 DEPENDENCIES
   middleman (>= 4.0.0)
   middleman-livereload
-  tzinfo-data
-  wdm (~> 0.1.0)
 
 BUNDLED WITH
    1.12.5

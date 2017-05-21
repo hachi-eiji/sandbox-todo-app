@@ -1,7 +1,11 @@
 class Api::TasksController < Api::ApiController
   def index
     user   = current_user
-    @tasks = Task.where(creator_id: user.id).order(:due_date)
+    if user.nil?
+      raise NotFoundError, 'user_not_found'
+    else
+      @tasks = Task.where(creator_id: user.id).order(:due_date)
+    end
   end
 
   def update

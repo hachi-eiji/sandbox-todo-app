@@ -1,4 +1,9 @@
 <div>
+  <div class="mdl-grid" *ngIf="alert">
+    <div class="mdl-cell mdl-cell--4-col"></div>
+    <div class="mdl-cell mdl-cell--4-col"><app-alert [alert]="alert"></app-alert></div>
+  </div>
+  <app-confirm-modal [modal]="confirmModal" *ngIf="confirmModal"></app-confirm-modal>
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--1-col"></div>
     <div class="mdl-cell mdl-cell--7-col" *ngIf="showLoading">

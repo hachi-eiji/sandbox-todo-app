@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptionsArgs } from '@angular/http';
+import { Headers, Http, RequestOptionsArgs, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -41,6 +41,30 @@ export class HttpClient {
   postJson(endPoint: string, data: any): Observable<any> {
     const self = this;
     return this.http.post(environment.api.url + endPoint, JSON.stringify(data), this.createOption())
+      .map(function (res: Response) {
+        const body = res.json();
+        if (body.token) {
+          self.tokenStorage.save(body.token);
+        }
+        if (res.ok) {
+          return body;
+        }
+        Observable.throw(new HttpResponseError(res.status, body, res));
+      })
+      .catch(this.handleError);
+  }
+
+  deleteJson(endPoint: string, data?: any): Observable<any> {
+    const params = [];
+    if (data) {
+      Object.keys(data).forEach(k => {
+        const v = encodeURIComponent(data[k]);
+        params.push(`${k}=${v}`);
+      });
+    }
+    const query = params.length === 0 ? '' : '?' + params.join('&');
+    const self = this;
+    return this.http.delete(environment.api.url + endPoint + query, this.createOption())
       .map(function (res: Response) {
         const body = res.json();
         if (body.token) {

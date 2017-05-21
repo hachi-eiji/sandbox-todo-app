@@ -11,6 +11,7 @@ import { AlertComponent } from './alert/alert.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { LoadingComponent } from './loading/loading.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginFormComponent},
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
     NotFoundComponent,
     TaskListComponent,
     LoadingComponent,
+    ConfirmModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,62 @@
+version: "3"
+services:
+  rails:
+    build: .
+    command: ./entrypoint.sh
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/var/lib/sandbox-todo-app
+      - bundle_install:/var/lib/sandbox-todo-app/vendor/bundle
+      - bundle:/var/lib/sandbox-todo-app/.bundle
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      REDIS_HOST: redis
+    depends_on:
+      - mysql
+      - redis
+    tty: true
+    stdin_open: true
+  mock_api:
+    build: ./mockapi
+    command: sh start_api_mock.sh
+    ports:
+      - "4567:4567"
+    volumes:
+      - ./mockapi:/var/lib/mockapi
+      - mock_api_bundle:/var/lib/mockapi/.bundle
+      - mock_api_bundle_install:/var/lib/mockapi/vendor/bundle
+  mysql:
+    build: ./docker/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mysql_data:
+    driver: local
+  redis_data:
+    driver: local
+  bundle_install:
+    driver: local
+  bundle:
+    driver: local
+  mock_api_bundle:
+    driver: local
+  mock_api_bundle_install:
+    driver: local
+  node_modules:
+    driver: local

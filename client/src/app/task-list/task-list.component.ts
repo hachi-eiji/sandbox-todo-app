@@ -32,12 +32,12 @@ export class TaskListComponent implements OnInit {
   private fetch() {
     this.httpClient.getJson('/tasks')
       .subscribe(res => {
-        res.data.forEach(value => {
-          setTimeout(() => {
-            this.showLoading = false;
-            this.tasks.push(Task.create(value));
-          }, 1000);
-        });
+        setTimeout(() => {
+          this.tasks = res.data.map(value => {
+            return Task.create(value);
+          });
+          this.showLoading = false;
+        }, 1000);
       }, e => {
         console.log(e);
         if (e.body.status === 404) {

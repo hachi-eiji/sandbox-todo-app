@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '../common/HttpClient';
 import { Task } from '../task/Task';
 import { Router } from '@angular/router';
 import { Modal } from '../confirm-modal/Modal';
 import { Alert } from '../alert/Alert';
+import { TaskService } from '../task/task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -16,8 +16,8 @@ export class TaskListComponent implements OnInit {
   confirmModal: Modal;
   alert: Alert;
 
-  constructor(private httpClient: HttpClient, private router: Router) {
-
+  constructor(private taskService: TaskService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class TaskListComponent implements OnInit {
       () => {
         // モデルの破棄
         this.confirmModal = null;
-        this.httpClient.deleteJson(`/tasks/${task.id}`)
+        this.taskService.delete(task.id)
           .subscribe(() => {
             this.alert = new Alert('削除しました', 'success');
             // データ再読込
@@ -50,18 +50,15 @@ export class TaskListComponent implements OnInit {
   }
 
   private fetch() {
-    this.httpClient.getJson('/tasks')
-      .subscribe(res => {
+    this.taskService.list()
+      .subscribe(tasks => {
         setTimeout(() => {
-          this.tasks = res.data.map(value => {
-            return Task.create(value);
-          });
+          this.tasks = tasks;
           this.showLoading = false;
         }, 1000);
       }, e => {
-        console.log(e);
-        if (e.body.status === 404) {
-          if (e.body.message === 'user_not_found') {
+        if (e.status === 404) {
+          if (e.message === 'user_not_found') {
             this.router.navigate(['login']);
           }
         }

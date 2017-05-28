@@ -12,6 +12,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
+import { LoginService } from './login-form/login.service';
+import { TokenService } from './common/token.service';
+import { TaskService } from './task/task.service';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginFormComponent},
@@ -38,7 +41,11 @@ const appRoutes: Routes = [
   ],
   providers: [
     HttpClient,
-    TokenStorage
+    TokenService,
+    TokenStorage,
+    LoginService,
+    TaskService,
+
   ],
   bootstrap: [AppComponent]
 })

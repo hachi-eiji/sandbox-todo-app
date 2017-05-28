@@ -4,9 +4,10 @@ import { Router } from '@angular/router';
 import { Login } from './login';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { HttpClient } from '../common/HttpClient';
 import { HttpResponseError } from '../common/HttpResponseError';
 import { Alert } from '../alert/Alert';
+import { TokenService } from '../common/token.service';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login-form',
@@ -17,16 +18,17 @@ export class LoginFormComponent implements OnInit {
   model = new Login('', '');
   alert: Alert;
 
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(private tokenService: TokenService,
+              private loginService: LoginService,
+              private router: Router) {
   }
 
   ngOnInit() {
-    this.httpClient.getJson('/token')
-      .subscribe();
+    this.tokenService.get();
   }
 
   onSubmit() {
-    this.httpClient.postJson('/login', {loginId: this.model.loginId, password: this.model.password})
+    this.loginService.login(this.model.loginId, this.model.password)
       .subscribe(res => this.loginSuccessHandler(res), (error) => this.loginErrorHandler(error));
   }
 

@@ -7,13 +7,14 @@ import 'rxjs/add/observable/throw';
 import { environment } from '../../environments/environment';
 import { TokenStorage } from './TokenStorage';
 import { HttpResponseError } from './HttpResponseError';
+import { HttpResponse } from './HttpResponse';
 
 @Injectable()
 export class HttpClient {
   constructor(private tokenStorage: TokenStorage, private http: Http) {
   }
 
-  getJson(endPoint: string, data?: any): Observable<any> {
+  getJson(endPoint: string, data?: any): Observable<HttpResponse> {
     const params = [];
     if (data) {
       Object.keys(data).forEach(k => {
@@ -31,14 +32,14 @@ export class HttpClient {
           self.tokenStorage.save(body.token);
         }
         if (res.ok) {
-          return body;
+          return new HttpResponse(body);
         }
-        Observable.throw(new HttpResponseError(res.status, body, res));
+        Observable.throw(new HttpResponseError(body, res, res.status));
       })
       .catch(this.handleError);
   }
 
-  postJson(endPoint: string, data: any): Observable<any> {
+  postJson(endPoint: string, data: any): Observable<HttpResponse> {
     const self = this;
     return this.http.post(environment.api.url + endPoint, JSON.stringify(data), this.createOption())
       .map(function (res: Response) {
@@ -47,14 +48,14 @@ export class HttpClient {
           self.tokenStorage.save(body.token);
         }
         if (res.ok) {
-          return body;
+          return new HttpResponse(body);
         }
-        Observable.throw(new HttpResponseError(res.status, body, res));
+        Observable.throw(new HttpResponseError(body, res, res.status));
       })
       .catch(this.handleError);
   }
 
-  deleteJson(endPoint: string, data?: any): Observable<any> {
+  deleteJson(endPoint: string, data?: any): Observable<HttpResponse> {
     const params = [];
     if (data) {
       Object.keys(data).forEach(k => {
@@ -71,9 +72,9 @@ export class HttpClient {
           self.tokenStorage.save(body.token);
         }
         if (res.ok) {
-          return body;
+          return new HttpResponse(body);
         }
-        Observable.throw(new HttpResponseError(res.status, body, res));
+        Observable.throw(new HttpResponseError(body, res, res.status));
       })
       .catch(this.handleError);
   }
@@ -81,7 +82,7 @@ export class HttpClient {
   private handleError(error: Response | any) {
     if (error instanceof Response) {
       const body = error.json() || {};
-      return Observable.throw(new HttpResponseError(error.status, body, error));
+      return Observable.throw(new HttpResponseError(body, error, error.status));
     }
     return Observable.throw(error.message ? error.message : error.toString());
   }

@@ -5,7 +5,7 @@ export class HttpResponseError extends Error {
   body: any;
   res: Response;
 
-  constructor(status: number, body: any, res: Response) {
+  constructor(body: any, res: Response, status: number) {
     super(body.message);
     this.status = status;
     this.body = body;

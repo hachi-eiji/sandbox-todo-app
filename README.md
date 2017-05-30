@@ -13,3 +13,9 @@ Sandbox of the following middlewares
 * docker - docker
 * mockapi - mock API server
 * others - Rails
+
+
+avaiable this button.
+disable features.
+
+add gacha id

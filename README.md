@@ -19,3 +19,5 @@ avaiable this button.
 disable features.
 
 add gacha id
+
+remove gacha

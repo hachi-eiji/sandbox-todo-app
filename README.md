@@ -17,3 +17,5 @@ Sandbox of the following middlewares
 
 avaiable this button.
 disable features.
+
+add gacha id

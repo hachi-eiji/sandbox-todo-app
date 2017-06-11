@@ -1,0 +1,25 @@
+machine:
+  ruby:
+    version: 2.3.0
+  node:
+    version: 4.4.4
+  timezone:
+    Asia/Tokyo
+  environment:
+    MYSQL_HOST: localhost
+    MYSQL_USER: ubuntu
+    MYSQL_PASSWORD: ''
+    MYSQL_CONNECTION_LIMIT: 30
+    MYSQL_PORT: 3306
+
+dependencies:
+  cache_directories:
+    - "vendor/bundle"
+  override:
+    - bundle -j4 --path=vendor/bundle
+
+test:
+  pre:
+    - bundle exec brakeman --exit-on-warn
+    - bundle exec rails_best_practices -e 'db, */concerns/*, */vendor/*' .
+    - bundle exec pronto run -f github_pr_review -c origin/master

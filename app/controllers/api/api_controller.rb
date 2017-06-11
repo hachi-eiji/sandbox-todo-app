@@ -56,4 +56,8 @@ class Api::ApiController < ApplicationController
       response.headers = response.headers.merge(header)
     end
   end
+
+  def test
+    Time.now
+  end
 end

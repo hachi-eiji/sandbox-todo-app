@@ -41,12 +41,18 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.5.1)
+      public_suffix (~> 2.0, >= 2.0.2)
     arel (6.0.3)
+    ast (2.3.0)
     bcrypt (3.1.11)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    brakeman (3.6.2)
     builder (3.2.2)
     byebug (9.0.6)
+    code_analyzer (0.4.7)
+      sexp_processor
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
     config (1.3.0)
@@ -65,10 +71,22 @@ GEM
       railties (>= 3.0.0)
     faker (1.6.6)
       i18n (~> 0.5)
+    faraday (0.12.1)
+      multipart-post (>= 1.2, < 3)
+    flay (2.9.0)
+      erubis (~> 2.7.0)
+      path_expander (~> 1.0)
+      ruby_parser (~> 3.0)
+      sexp_processor (~> 4.0)
+    gitlab (4.1.0)
+      httparty
+      terminal-table
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     haml (4.0.7)
       tilt
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -87,9 +105,31 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.1)
     multi_json (1.12.1)
+    multi_xml (0.6.0)
+    multipart-post (2.0.0)
     mysql2 (0.4.4)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
+    octokit (4.7.0)
+      sawyer (~> 0.8.0, >= 0.5.3)
+    parallel (1.11.2)
+    parser (2.4.0.0)
+      ast (~> 2.2)
+    path_expander (1.0.2)
+    powerpack (0.1.1)
+    pronto (0.9.3)
+      gitlab (~> 4.0, >= 4.0.0)
+      httparty (>= 0.13.7, < 0.15)
+      octokit (~> 4.7, >= 4.7.0)
+      rainbow (~> 2.1)
+      rugged (~> 0.24, >= 0.23.0)
+      thor (~> 0.19.0)
+    pronto-flay (0.9.0)
+      flay (~> 2.8)
+      pronto (~> 0.9.0)
+    pronto-rubocop (0.9.0)
+      pronto (~> 0.9.0)
+      rubocop (~> 0.38, >= 0.35.0)
     pry (0.10.4)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -102,6 +142,7 @@ GEM
     pry-stack_explorer (0.4.9.2)
       binding_of_caller (>= 0.7)
       pry (>= 0.9.11)
+    public_suffix (2.0.5)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -124,11 +165,21 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
+    rails_best_practices (1.18.1)
+      activesupport
+      code_analyzer (>= 0.4.3)
+      erubis
+      i18n
+      json
+      require_all
+      ruby-progressbar
     railties (4.2.7.1)
       actionpack (= 4.2.7.1)
       activesupport (= 4.2.7.1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbow (2.2.2)
+      rake
     rake (11.3.0)
     rdoc (4.2.2)
       json (~> 1.4)
@@ -149,6 +200,7 @@ GEM
       redis-store (~> 1.1.0)
     redis-store (1.1.7)
       redis (>= 2.2)
+    require_all (1.4.0)
     ridgepole (0.6.4)
       activerecord (~> 4.2.1)
     rspec-core (3.5.4)
@@ -168,6 +220,17 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    rubocop (0.49.1)
+      parallel (~> 1.10)
+      parser (>= 2.3.3.1, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (~> 1.0, >= 1.0.1)
+    ruby-progressbar (1.8.1)
+    ruby_parser (3.9.0)
+      sexp_processor (~> 4.1)
+    rugged (0.25.1.1)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -175,9 +238,13 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
+    sawyer (0.8.1)
+      addressable (>= 2.3.5, < 2.6)
+      faraday (~> 0.8, < 1.0)
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    sexp_processor (4.9.0)
     slop (3.6.0)
     spring (2.0.0)
       activesupport (>= 4.2)
@@ -188,6 +255,8 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    terminal-table (1.8.0)
+      unicode-display_width (~> 1.1, >= 1.1.1)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
@@ -195,6 +264,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.2)
       execjs (>= 0.3.0, < 3)
+    unicode-display_width (1.2.1)
     web-console (2.3.0)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -208,6 +278,7 @@ DEPENDENCIES
   active_record_bulk_insert (~> 1.2)
   activerecord-mysql-awesome
   bcrypt (~> 3.1.7)
+  brakeman
   config
   database_rewinder
   factory_girl
@@ -217,13 +288,18 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   migration_comments
   mysql2 (>= 0.3.13, < 0.5)
+  pronto
+  pronto-flay
+  pronto-rubocop
   pry-byebug
   pry-rails
   pry-stack_explorer
   rails (= 4.2.7.1)
+  rails_best_practices
   redis-rails (~> 4)
   ridgepole
   rspec-rails (= 3.5)
+  rubocop
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
@@ -231,4 +307,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.12.5
+   1.15.1

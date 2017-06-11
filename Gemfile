@@ -50,6 +50,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
   gem 'rubocop'
+  gem "onkcop", require: false
   gem 'pronto'
   gem 'pronto-rubocop', require: false
   gem 'pronto-flay', require: false

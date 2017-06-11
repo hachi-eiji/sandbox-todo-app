@@ -18,8 +18,6 @@ dependencies:
   override:
     - bundle -j4 --path=vendor/bundle
 
-database:
-
 test:
   pre:
     - bundle exec rubocop

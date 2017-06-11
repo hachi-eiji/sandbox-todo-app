@@ -49,6 +49,12 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+  gem 'rubocop'
+  gem 'pronto'
+  gem 'pronto-rubocop', require: false
+  gem 'pronto-flay', require: false
+  gem 'rails_best_practices'
+  gem 'brakeman'
 end
 
 group :development do

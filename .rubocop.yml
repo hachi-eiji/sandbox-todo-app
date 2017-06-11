@@ -1,0 +1,37 @@
+# refs: http://blog.onk.ninja/2015/10/27/rubocop-getting-started
+inherit_gem:
+  onkcop: "config/rubocop.yml"
+
+AllCops:
+  TargetRubyVersion: 2.4
+
+  Exclude:
+    - "vendor/**/*" # rubocop config/default.yml
+    - "db/schema.rb"
+    - "doc/*"
+    - "spec/spec_helper.rb"
+    - "spec/rails_helper.rb"
+    - "spec/support/*"
+    - "config/unicorn.rb"
+    - "config/application.rb"
+    - "Guardfile"
+    - "lib/tasks/*"
+    - "jmeter/**/*"
+    - "node_modules/**/*"
+    - "tools/**/*"
+    - "app/controllers/mock/**/*"
+
+  DisplayCopNames: true
+
+Style/StringLiterals: # classiの他リポジトリはsingle_quotesなので合わせておく
+  EnforcedStyle: single_quotes
+Style/ParameterLists: # キーワード引数の場合は対象としない
+  CountKeywordArgs: false
+Metrics/ClassLength: # TODO: モック用、実装時には外す
+  Max: 200
+Metrics/MethodLength: # TODO: モック用、実装時には外す
+  Max: 100
+Metrics/LineLength: # TODO: モック用、実装時には外す
+  Max: 50000
+Metrics/AbcSize: # TODO: モック用、実装時には外す
+  Max: 200

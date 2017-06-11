@@ -13,6 +13,10 @@ machine:
     MYSQL_PORT: 3306
 
 dependencies:
+  cache_directories:
+    - "vendor/bundle"
+  override:
+    - bundle -j4 --path=vendor/bundle
 
 database:
 

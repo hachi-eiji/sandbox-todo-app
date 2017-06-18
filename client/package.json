@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "mock-start": "ng serve --env=mock",
-    "build": "echo 'build to rails assets'; ng build && cp -p dist/*.js* ../app/assets/javascripts/",
+    "build": "ng build",
     "mock-build": "echo 'build to dist dir'; ng build",
     "test": "ng test",
     "lint": "ng lint",

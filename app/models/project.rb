@@ -1,4 +1,4 @@
-class Project < ActiveRecord::Base
+class Project < ApplicationRecord
   has_many :project_members, dependent: :destroy
   has_many :tasks, dependent: :destroy
   has_many :done_tasks, dependent: :destroy

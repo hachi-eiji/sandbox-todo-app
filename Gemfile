@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.1.2'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 # Use SCSS for stylesheets
@@ -31,7 +31,6 @@ gem 'redis-rails'
 gem 'config'
 
 gem 'ridgepole'
-gem 'activerecord-mysql-awesome'
 
 # template engine
 gem 'haml', '~> 4.0', '>= 4.0.7'

@@ -38,6 +38,8 @@ gem 'haml', '~> 4.0', '>= 4.0.7'
 # bulk insert
 gem 'active_record_bulk_insert', '~> 1.2'
 
+gem 'erubis'
+
 group :development, :test do
   gem 'rspec-rails', '3.5'
   gem 'factory_girl_rails'

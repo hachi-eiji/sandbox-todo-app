@@ -25,7 +25,7 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 # redis
-gem 'redis-rails', '~> 4'
+gem 'redis-rails'
 
 # configure
 gem 'config'

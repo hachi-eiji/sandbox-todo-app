@@ -53,7 +53,7 @@ class Api::ApiController < ApplicationController
         'Access-Control-Allow-Headers'     => 'X-PINGOTHER, Content-Type, x-csrf-token, Accept',
         'Access-Control-Allow-Methods'     => 'GET, POST, DELETE, OPTIONS, PUT'
       }
-      response.headers = response.headers.merge(header)
+      response.headers.merge!(header)
     end
   end
 end

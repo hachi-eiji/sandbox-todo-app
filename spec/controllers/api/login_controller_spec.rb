@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::LoginController do
+describe Api::LoginController, :type => :controller do
   describe 'POST #show' do
     context 'すでにアクティベート済み' do
       it 'ログインIDパスワードが正しい' do
@@ -8,7 +8,7 @@ describe Api::LoginController do
         u.active = true
         u.save
         params = { loginId: 'test@example.com', password: 'test' }
-        post :show, params.to_json, format: :jbuilder
+        post :show, params: params, format: :jbuilder
         expect(response.status).to eq(200)
       end
 
@@ -19,7 +19,7 @@ describe Api::LoginController do
         u.active = true
         u.save
         params = { loginId: 'test@example.com', password: 'wrong' }
-        post :show, params.to_json, format: :jbuilder
+        post :show, params: params, format: :jbuilder
         expect(response.status).to eq(404)
       end
     end
@@ -28,7 +28,7 @@ describe Api::LoginController do
       it 'ログインIDパスワードが正しい' do
         create(:user, email: 'test@example.com')
         params = { loginId: 'test@example.com', password: 'test' }
-        post :show, params.to_json, format: :jbuilder
+        post :show, params: params, format: :jbuilder
         expect(response.status).to eq(404)
       end
     end
@@ -44,7 +44,7 @@ describe Api::LoginController do
         u.save
 
         params = { loginId: 'test@example.com', password: 'test', code: 'test' }
-        post :activate, params.to_json, format: :jbuilder
+        post :activate, params: params, format: :jbuilder
         u.reload
         expect(response.status).to eq(404)
         expect(u.active?).to eq(true)
@@ -59,7 +59,7 @@ describe Api::LoginController do
         u.save
 
         params = { loginId: 'test@example.com', password: 'test', code: 'test' }
-        post :activate, params.to_json, format: :jbuilder
+        post :activate, params: params, format: :jbuilder
         u.reload
         expect(response.status).to eq(200)
         expect(u.active?).to eq(true)
@@ -72,7 +72,7 @@ describe Api::LoginController do
         u.save
 
         params = { loginId: 'test@example.com', password: 'test2', code: 'test' }
-        post :activate, params.to_json, format: :jbuilder
+        post :activate, params: params, format: :jbuilder
         expect(response.status).to eq(404)
         expect(u.active?).to eq(false)
       end
@@ -84,7 +84,7 @@ describe Api::LoginController do
         u.save
 
         params = { loginId: 'test@example.com', password: 'test' }
-        post :activate, params.to_json, format: :jbuilder
+        post :activate, params: params, format: :jbuilder
         expect(response.status).to eq(404)
         expect(u.active?).to eq(false)
       end

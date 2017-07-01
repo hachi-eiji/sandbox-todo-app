@@ -7,7 +7,7 @@ describe Api::TasksController do
         task = create(:task)
 
         params = {title: 'updated title'}
-        put :update, id: task.id, task: params, format: :jbuilder
+        put :update, params: {id: task.id, task: params}, format: :jbuilder
 
         task.reload
 
@@ -19,7 +19,7 @@ describe Api::TasksController do
         task = create(:task)
 
         params = {due_date: '2100-01-02'}
-        put :update, id: task.id, task: params ,format: :jbuilder
+        put :update, params: {id: task.id, task: params}, format: :jbuilder
 
         task.reload
 
@@ -33,7 +33,7 @@ describe Api::TasksController do
         task = create(:task)
 
         params = {done: true}
-        put :update, id: task.id, task: params ,format: :jbuilder
+        put :update, params: {id: task.id, task: params}, format: :jbuilder
 
         expect(response.status).to eq(200)
         expect(Task.find_by(id: task.id)).to be nil
@@ -50,7 +50,7 @@ describe Api::TasksController do
         task = create(:task, project: project)
         create(:project_member, project: project, user: user)
 
-        delete :destroy, id: task.id, format: :jbuilder
+        delete :destroy, params: {id: task.id}, format: :jbuilder
 
         expect(response.status).to eq(200)
         expect(Task.find_by(id: task.id)).to be nil
@@ -62,7 +62,7 @@ describe Api::TasksController do
         project = create(:project, user: user)
         task = create(:task, project: project)
 
-        delete :destroy, id: task.id, format: :jbuilder
+        delete :destroy, params: {id: task.id}, format: :jbuilder
 
         expect(response.status).to eq(404)
       end

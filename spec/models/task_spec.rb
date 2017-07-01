@@ -13,8 +13,8 @@ RSpec.describe Task, type: :model do
         create(:task)
         task = Task.first
         task.done
-        expect(Task.find_by(task.id)).to be_nil
-        expect(DoneTask.find_by(task.id)).not_to be_nil
+        expect(Task.find_by(id: task.id)).to be_nil
+        expect(DoneTask.find_by(id: task.id)).not_to be_nil
       end
     end
 

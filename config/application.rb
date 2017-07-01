@@ -29,5 +29,18 @@ module SandboxTodoApp
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # session for redis
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::RedisStore
+    config.session_store :redis_store, {
+      key:          'session',
+      servers:      {
+        host: Settings.redis.host,
+        port: 6379,
+        db:   0
+      },
+      expire_after: 60.minutes
+    }
   end
 end

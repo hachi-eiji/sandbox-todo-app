@@ -32,13 +32,10 @@ gem 'config'
 
 gem 'ridgepole'
 
-# template engine
-gem 'haml'
-
 # bulk insert
 gem 'active_record_bulk_insert', '~> 1.2'
 
-gem 'erubis'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'rspec-rails', '3.5'

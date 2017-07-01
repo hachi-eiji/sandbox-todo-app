@@ -1,6 +1,6 @@
 create_table "done_task_assigns", id: :integer, limit: 4, default: 0, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-  t.integer  "task_id",    limit: 4, null: false
-  t.integer  "user_id",    limit: 4, null: false
+  t.integer  "task_id",    limit: 5, null: false
+  t.integer  "user_id",    limit: 5, null: false
   t.datetime "created_at",           null: false
   t.datetime "updated_at",           null: false
 end

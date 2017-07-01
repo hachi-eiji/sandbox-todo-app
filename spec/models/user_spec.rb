@@ -47,7 +47,8 @@ RSpec.describe User, type: :model do
     context '未アクティベート' do
       before do
         # デフォルト値をセットさせたくないのでskipする
-        User.skip_callback(:create, :before, :initialize_activate)
+        # see https://github.com/thoughtbot/factory_girl/issues/931
+        User.skip_callback(:create, :before, :initialize_activate, raise: false)
       end
       let(:params) { {} }
       let(:user) do

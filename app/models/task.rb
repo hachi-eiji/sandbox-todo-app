@@ -1,4 +1,4 @@
-class Task < ActiveRecord::Base
+class Task < ApplicationRecord
   belongs_to :project
   has_many :task_assigns, dependent: :destroy
   has_many :task_notes, dependent: :destroy

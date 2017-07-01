@@ -1,4 +1,4 @@
-class ProjectMember < ActiveRecord::Base
+class ProjectMember < ApplicationRecord
   belongs_to :project
   belongs_to :user
 end

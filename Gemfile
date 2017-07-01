@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.1.2'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 # Use SCSS for stylesheets
@@ -25,19 +25,17 @@ gem 'bcrypt', '~> 3.1.7'
 # gem 'capistrano-rails', group: :development
 
 # redis
-gem 'redis-rails', '~> 4'
+gem 'redis-rails'
 
 # configure
 gem 'config'
 
 gem 'ridgepole'
-gem 'activerecord-mysql-awesome'
-
-# template engine
-gem 'haml', '~> 4.0', '>= 4.0.7'
 
 # bulk insert
 gem 'active_record_bulk_insert', '~> 1.2'
+
+gem 'rack-cors'
 
 group :development, :test do
   gem 'rspec-rails', '3.5'
@@ -52,10 +50,9 @@ group :development, :test do
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  gem 'listen'
 end
 

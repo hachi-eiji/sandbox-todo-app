@@ -1,3 +1,3 @@
-class DoneTaskNote < ActiveRecord::Base
+class DoneTaskNote < ApplicationRecord
   belongs_to :done_task
 end

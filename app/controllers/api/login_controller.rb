@@ -51,6 +51,6 @@ class Api::LoginController < Api::ApiController
   private
 
   def login_params
-    json_params.permit(:loginId, :password, :code)
+    params.permit(:loginId, :password, :code)
   end
 end

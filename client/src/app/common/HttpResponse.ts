@@ -1,5 +1,3 @@
-import { Response } from '@angular/http';
-
 export class HttpResponse {
   body: any;
   status: number;

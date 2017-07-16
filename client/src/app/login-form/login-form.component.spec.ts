@@ -80,7 +80,7 @@ describe('LoginFormComponent', () => {
     component.model = new Login('user', 'pass');
     fixture.debugElement.nativeElement.querySelector('button').click();
     fixture.whenStable().then(() => {
-      expect(mockRouter.navigate).toHaveBeenCalledWith(['task']);
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['tasks']);
     });
   }));
 });

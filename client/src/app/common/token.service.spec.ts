@@ -3,7 +3,7 @@ import { async, inject, TestBed } from '@angular/core/testing';
 import { TokenService } from './token.service';
 import { HttpClient } from './HttpClient';
 import { TokenStorage } from './TokenStorage';
-import { ConnectionBackend, Http, HttpModule } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 describe('TokenService', () => {
@@ -13,8 +13,6 @@ describe('TokenService', () => {
       providers: [
         TokenService,
         HttpClient,
-        Http,
-        ConnectionBackend,
         TokenStorage,
       ],
     });

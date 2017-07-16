@@ -34,8 +34,6 @@ describe('LoginFormComponent', () => {
         TokenService,
         LoginService,
         HttpClient,
-        Http,
-        ConnectionBackend,
         TokenStorage,
         {provide: Router, useValue: mockRouter}
       ],

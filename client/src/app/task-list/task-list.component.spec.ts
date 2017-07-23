@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpModule } from '@angular/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -10,7 +9,6 @@ import { TaskListComponent } from './task-list.component';
 import { AlertComponent } from '../alert/alert.component';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { LoadingComponent } from '../loading/loading.component';
-import { HttpClient } from '../common/HttpClient';
 import { TokenStorage } from '../common/TokenStorage';
 import { Task } from '../task/Task';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,11 +29,9 @@ describe('TaskListComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
-        HttpModule,
       ],
       providers: [
         TaskService,
-        HttpClient,
         HttpClientService,
         TokenStorage,
         {provide: Router, useValue: mockRouter}

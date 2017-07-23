@@ -1,7 +1,13 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw';
+
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HttpClientService {
@@ -23,6 +29,9 @@ export class HttpClientService {
     return params;
   }
 
+  private static handleError(err: HttpErrorResponse): ErrorObservable {
+    return Observable.throw(err.error);
+  }
 
   constructor(private httpClient: HttpClient) {
   }
@@ -34,9 +43,7 @@ export class HttpClientService {
       withCredentials: true
     };
     return this.httpClient.get<T>(environment.api.url + endPoint, options)
-      .catch((err: HttpErrorResponse) => {
-        return Observable.throw(err.error);
-      });
+      .catch(HttpClientService.handleError);
   }
 
   post<T>(endPoint: string, data?: {}): Observable<T> {
@@ -47,8 +54,17 @@ export class HttpClientService {
     };
     return this.httpClient
       .post<T>(environment.api.url + endPoint, params, options)
-      .catch((err: HttpErrorResponse) => {
-        return Observable.throw(err.error);
-      });
+      .catch(HttpClientService.handleError);
+  }
+
+  delete<T>(endPoint: string, data?: {}): Observable<T> {
+    const options = {
+      headers: HttpClientService.headers(),
+      params: HttpClientService.createParams(data),
+      withCredentials: true
+    };
+
+    return this.httpClient.delete<T>(environment.api.url + endPoint, options)
+      .catch(HttpClientService.handleError);
   }
 }

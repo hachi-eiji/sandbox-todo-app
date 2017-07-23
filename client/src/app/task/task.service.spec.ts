@@ -1,10 +1,8 @@
 import { inject, TestBed } from '@angular/core/testing';
-import { HttpModule } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import { TaskService } from './task.service';
-import { HttpClient } from '../common/HttpClient';
 import { TokenStorage } from '../common/TokenStorage';
 import { Task } from './Task';
 import { HttpClientService } from '../common/http-client.service';
@@ -14,8 +12,8 @@ import { Tasks } from './Tasks';
 describe('TaskService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpModule, HttpClientModule],
-      providers: [TaskService, HttpClient, HttpClientService, TokenStorage]
+      imports: [HttpClientModule],
+      providers: [TaskService, HttpClientService, TokenStorage]
     });
   });
 

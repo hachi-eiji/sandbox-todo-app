@@ -15,7 +15,7 @@ import { TokenStorage } from '../common/TokenStorage';
 import { Task } from '../task/Task';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientService } from '../common/http-client.service';
-import { Tasks } from '../common/Tasks';
+import { Tasks } from '../task/Tasks';
 
 describe('TaskListComponent', () => {
   class MockRouter {

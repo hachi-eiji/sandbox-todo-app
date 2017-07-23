@@ -5,7 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { HttpResponse } from '../common/HttpResponse';
 import { HttpClientService } from '../common/http-client.service';
-import { Tasks } from '../common/Tasks';
+import { Tasks } from './Tasks';
 
 @Injectable()
 export class TaskService {

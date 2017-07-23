@@ -9,7 +9,7 @@ import { TokenStorage } from '../common/TokenStorage';
 import { Task } from './Task';
 import { HttpClientService } from '../common/http-client.service';
 import { HttpClientModule } from '@angular/common/http';
-import { Tasks } from '../common/Tasks';
+import { Tasks } from './Tasks';
 
 describe('TaskService', () => {
   beforeEach(() => {

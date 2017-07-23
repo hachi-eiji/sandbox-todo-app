@@ -7,13 +7,14 @@ import { AlertComponent } from '../alert/alert.component';
 import { TokenService } from '../common/token.service';
 import { LoginService } from './login.service';
 import { Login } from './login';
-import { ConnectionBackend, Http, HttpModule, Response, ResponseOptions } from '@angular/http';
-import { HttpClient } from '../common/HttpClient';
+import { Response, ResponseOptions } from '@angular/http';
 import { TokenStorage } from '../common/TokenStorage';
 import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { HttpResponseError } from '../common/HttpResponseError';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientService } from '../common/http-client.service';
 
 describe('LoginFormComponent', () => {
   class MockRouter {
@@ -29,11 +30,11 @@ describe('LoginFormComponent', () => {
   beforeEach(async(() => {
     mockRouter = new MockRouter();
     TestBed.configureTestingModule({
-      imports: [FormsModule, HttpModule],
+      imports: [FormsModule, HttpClientModule],
       providers: [
         TokenService,
         LoginService,
-        HttpClient,
+        HttpClientService,
         TokenStorage,
         {provide: Router, useValue: mockRouter}
       ],

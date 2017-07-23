@@ -1,15 +1,15 @@
 import { inject, TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
 
 import { LoginService } from './login.service';
-import { HttpModule } from '@angular/http';
-import { HttpClient } from '../common/HttpClient';
 import { TokenStorage } from '../common/TokenStorage';
+import { HttpClientService } from '../common/http-client.service';
 
 describe('LoginService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpModule],
-      providers: [LoginService, HttpClient, TokenStorage]
+      imports: [HttpClientModule],
+      providers: [LoginService, HttpClientService, TokenStorage]
     });
   });
 

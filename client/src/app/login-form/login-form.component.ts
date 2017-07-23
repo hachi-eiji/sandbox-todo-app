@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { Login } from './login';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { HttpResponseError } from '../common/HttpResponseError';
 import { Alert } from '../alert/Alert';
 import { TokenService } from '../common/token.service';
 import { LoginService } from './login.service';
-import { HttpResponse } from '../common/HttpResponse';
+import { LoginResult } from './login-result';
+import { HttpError } from '../common/http-error.model';
 
 @Component({
   selector: 'app-login-form',
@@ -32,11 +32,11 @@ export class LoginFormComponent implements OnInit {
       .subscribe(res => this.loginSuccessHandler(res), (error) => this.loginErrorHandler(error));
   }
 
-  private loginSuccessHandler(res: HttpResponse) {
+  private loginSuccessHandler(res: LoginResult) {
     this.router.navigate(['tasks']);
   }
 
-  private loginErrorHandler(error: HttpResponseError) {
+  private loginErrorHandler(error: HttpError) {
     this.alert = new Alert(error.message);
   }
 }

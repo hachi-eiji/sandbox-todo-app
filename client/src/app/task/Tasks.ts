@@ -1,4 +1,4 @@
-import { Task } from '../task/Task';
+import { Task } from './Task';
 
 export interface Tasks {
   data: Task[];

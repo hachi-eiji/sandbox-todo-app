@@ -51,17 +51,16 @@ export class TaskListComponent implements OnInit {
 
   private fetch() {
     this.taskService.list()
-      .subscribe(tasks => {
-        setTimeout(() => {
-          this.tasks = tasks;
+      .subscribe(
+        response => {
+          this.tasks = response.data;
           this.showLoading = false;
-        }, 1000);
-      }, e => {
-        if (e.status === 404) {
-          if (e.message === 'user_not_found') {
+        },
+        error => {
+          if (error.status === 404 && error.message === 'user_not_found') {
             this.router.navigate(['login']);
           }
         }
-      });
+      );
   }
 }

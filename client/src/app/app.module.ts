@@ -15,6 +15,8 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { LoginService } from './login-form/login.service';
 import { TokenService } from './common/token.service';
 import { TaskService } from './task/task.service';
+import { HttpClientService } from './common/http-client.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginFormComponent},
@@ -37,6 +39,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
@@ -45,7 +48,7 @@ const appRoutes: Routes = [
     TokenStorage,
     LoginService,
     TaskService,
-
+    HttpClientService,
   ],
   bootstrap: [AppComponent]
 })

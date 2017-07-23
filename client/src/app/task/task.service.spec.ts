@@ -1,4 +1,4 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 import { HttpModule } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
@@ -7,12 +7,15 @@ import { TaskService } from './task.service';
 import { HttpClient } from '../common/HttpClient';
 import { TokenStorage } from '../common/TokenStorage';
 import { Task } from './Task';
+import { HttpClientService } from '../common/http-client.service';
+import { HttpClientModule } from '@angular/common/http';
+import { Tasks } from '../common/Tasks';
 
 describe('TaskService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ HttpModule ],
-      providers: [TaskService, HttpClient, TokenStorage]
+      imports: [HttpModule, HttpClientModule],
+      providers: [TaskService, HttpClient, HttpClientService, TokenStorage]
     });
   });
 
@@ -21,9 +24,12 @@ describe('TaskService', () => {
   }));
 
   it('should get task list', inject([TaskService], (service: TaskService) => {
-    const tasks: Task[] = [];
+    const tasks: Tasks = {
+      data: [],
+      status: 200
+    };
     for (let i = 0; i < 5; i++) {
-      tasks.push(
+      tasks.data.push(
         Task.create({
           id: i,
           title: `title_${i}`,
@@ -36,7 +42,7 @@ describe('TaskService', () => {
 
     const result = service.list();
     result.subscribe(subscribe => {
-      expect(subscribe.length).toEqual(5);
+      expect(subscribe.data.length).toEqual(5);
     });
   }));
 });

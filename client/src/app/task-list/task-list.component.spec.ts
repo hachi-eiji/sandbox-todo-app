@@ -13,6 +13,9 @@ import { LoadingComponent } from '../loading/loading.component';
 import { HttpClient } from '../common/HttpClient';
 import { TokenStorage } from '../common/TokenStorage';
 import { Task } from '../task/Task';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientService } from '../common/http-client.service';
+import { Tasks } from '../common/Tasks';
 
 describe('TaskListComponent', () => {
   class MockRouter {
@@ -27,11 +30,13 @@ describe('TaskListComponent', () => {
     mockRouter = new MockRouter();
     TestBed.configureTestingModule({
       imports: [
+        HttpClientModule,
         HttpModule,
       ],
       providers: [
         TaskService,
         HttpClient,
+        HttpClientService,
         TokenStorage,
         {provide: Router, useValue: mockRouter}
       ],
@@ -58,9 +63,12 @@ describe('TaskListComponent', () => {
   });
 
   it('should get my task list', async(() => {
-    const tasks: Task[] = [];
+    const tasks: Tasks = {
+      data: [],
+      status: 200
+    };
     for (let i = 0; i < 5; i++) {
-      tasks.push(
+      tasks.data.push(
         Task.create(
           {
             id: i,

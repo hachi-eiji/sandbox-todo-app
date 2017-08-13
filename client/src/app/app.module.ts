@@ -6,7 +6,6 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { TokenStorage } from './common/TokenStorage';
-import { HttpClient } from './common/HttpClient';
 import { AlertComponent } from './alert/alert.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TaskListComponent } from './task-list/task-list.component';
@@ -15,6 +14,8 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { LoginService } from './login-form/login.service';
 import { TokenService } from './common/token.service';
 import { TaskService } from './task/task.service';
+import { HttpClientService } from './common/http-client.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginFormComponent},
@@ -37,15 +38,15 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [
-    HttpClient,
     TokenService,
     TokenStorage,
     LoginService,
     TaskService,
-
+    HttpClientService,
   ],
   bootstrap: [AppComponent]
 })

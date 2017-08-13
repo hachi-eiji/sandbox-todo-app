@@ -7,13 +7,12 @@ import { AlertComponent } from '../alert/alert.component';
 import { TokenService } from '../common/token.service';
 import { LoginService } from './login.service';
 import { Login } from './login';
-import { ConnectionBackend, Http, HttpModule, Response, ResponseOptions } from '@angular/http';
-import { HttpClient } from '../common/HttpClient';
 import { TokenStorage } from '../common/TokenStorage';
 import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
-import { HttpResponseError } from '../common/HttpResponseError';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientService } from '../common/http-client.service';
 
 describe('LoginFormComponent', () => {
   class MockRouter {
@@ -29,13 +28,11 @@ describe('LoginFormComponent', () => {
   beforeEach(async(() => {
     mockRouter = new MockRouter();
     TestBed.configureTestingModule({
-      imports: [FormsModule, HttpModule],
+      imports: [FormsModule, HttpClientModule],
       providers: [
         TokenService,
         LoginService,
-        HttpClient,
-        Http,
-        ConnectionBackend,
+        HttpClientService,
         TokenStorage,
         {provide: Router, useValue: mockRouter}
       ],
@@ -62,8 +59,7 @@ describe('LoginFormComponent', () => {
   });
 
   it('should show login failed message', async(() => {
-    const val = Observable.throw(new HttpResponseError({message: 'ログイン失敗'}, new Response(new ResponseOptions()), 404));
-    spyOn(loginService, 'login').and.returnValue(val);
+    spyOn(loginService, 'login').and.returnValue(Observable.throw({message: 'ログイン失敗'}));
     component.model = new Login('user', 'pass');
     expect(component.model.loginId).toEqual('user');
     expect(component.model.password).toEqual('pass');
@@ -80,7 +76,7 @@ describe('LoginFormComponent', () => {
     component.model = new Login('user', 'pass');
     fixture.debugElement.nativeElement.querySelector('button').click();
     fixture.whenStable().then(() => {
-      expect(mockRouter.navigate).toHaveBeenCalledWith(['task']);
+      expect(mockRouter.navigate).toHaveBeenCalledWith(['tasks']);
     });
   }));
 });

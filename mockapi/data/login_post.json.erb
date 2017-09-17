@@ -4,7 +4,7 @@ require 'json'
 
 begin
 req = Rack::Request.new(env)
-d = JSON.parse(req.body.read)
+d = req.POST()
 rescue
 d = {}
 end

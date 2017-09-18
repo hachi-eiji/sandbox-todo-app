@@ -8,9 +8,16 @@ class Api::TasksController < Api::ApiController
     end
   end
 
+  def create
+    param   = task_params
+    user    = current_user
+    project = Project.personal(user.id)
+    Task.create!(param.merge({ creator_id: user.id, updater_id: user.id, project_id: project.id }))
+  end
+
   def update
     param = task_params
-    task = Task.find(params[:id])
+    task  = Task.find(param[:id])
     if param[:done]
       task.done
     else
@@ -29,6 +36,6 @@ class Api::TasksController < Api::ApiController
   private
 
   def task_params
-    params.require(:task).permit(:title, :due_date, :done)
+    params.permit(:title, :due_date, :done, :id)
   end
 end

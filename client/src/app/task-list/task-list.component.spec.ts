@@ -14,6 +14,8 @@ import { Task } from '../task/Task';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientService } from '../common/http-client.service';
 import { Tasks } from '../task/Tasks';
+import { TaskComponent } from '../task/task.component';
+import { FormsModule } from '@angular/forms';
 
 describe('TaskListComponent', () => {
   class MockRouter {
@@ -29,6 +31,7 @@ describe('TaskListComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
+        FormsModule
       ],
       providers: [
         TaskService,
@@ -41,6 +44,7 @@ describe('TaskListComponent', () => {
         AlertComponent,
         ConfirmModalComponent,
         LoadingComponent,
+        TaskComponent,
       ]
     })
     .compileComponents();
@@ -70,7 +74,7 @@ describe('TaskListComponent', () => {
             id: i,
             title: `title_${i}`,
             description: `description_${i}`,
-            due_date: new Date(2017, 2, 1)
+            due_date: '2017-02-01'
           }
         )
       );

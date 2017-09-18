@@ -16,6 +16,7 @@ import { TokenService } from './common/token.service';
 import { TaskService } from './task/task.service';
 import { HttpClientService } from './common/http-client.service';
 import { HttpClientModule } from '@angular/common/http';
+import { TaskComponent } from './task/task.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginFormComponent},
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
     TaskListComponent,
     LoadingComponent,
     ConfirmModalComponent,
+    TaskComponent,
   ],
   imports: [
     BrowserModule,

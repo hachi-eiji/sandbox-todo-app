@@ -2,8 +2,8 @@
   <h4 class="mdl-dialog__title">タスクを登録する</h4>
   <div class="mdl-dialog__content">
     <p>
-      <input type="text" name="title" [(ngModel)]="model.title">
-      <input type="text" name="due_date" [(ngModel)]="model.due_date">
+      タイトル&nbsp;<input type="text" name="title" [(ngModel)]="model.title" id="title" required> <br>
+      期限&nbsp;<input type="datetime-local" name="due_date" [(ngModel)]="model.due_date" id="due_date">
     </p>
   </div>
   <div class="mdl-dialog__actions">

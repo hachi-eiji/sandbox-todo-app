@@ -4,6 +4,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { HttpClientService } from '../common/http-client.service';
 import { Tasks } from './Tasks';
+import { Task } from './Task';
 
 @Injectable()
 export class TaskService {
@@ -17,5 +18,9 @@ export class TaskService {
 
   delete(id: number): Observable<Object> {
     return this.httpClient.delete(`/tasks/${id}`);
+  }
+
+  create(task: Task): Observable<Object> {
+    return this.httpClient.post('/task', task);
   }
 }

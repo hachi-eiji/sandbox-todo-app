@@ -4,6 +4,7 @@
     <div class="mdl-cell mdl-cell--4-col"><app-alert [alert]="alert"></app-alert></div>
   </div>
   <app-confirm-modal [modal]="confirmModal" *ngIf="confirmModal"></app-confirm-modal>
+  <app-task (buttonEvent)="createTaskCallback($event)" *ngIf="showCreateButton"></app-task>
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--1-col"></div>
     <div class="mdl-cell mdl-cell--7-col" *ngIf="showLoading">
@@ -16,7 +17,11 @@
       <table class="mdl-data-table mdl-js-data-table mdl-shadow--2d task-list">
         <thead>
           <tr>
-            <td></td>
+            <td>
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" (click)="createTask()">
+                <i class="material-icons">add</i>
+              </button>
+            </td>
             <td>your task</td>
             <td>deadline</td>
             <td></td>

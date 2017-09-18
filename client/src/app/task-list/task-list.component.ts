@@ -16,6 +16,8 @@ export class TaskListComponent implements OnInit {
   confirmModal: Modal;
   alert: Alert;
 
+  showCreateButton = false;
+
   constructor(private taskService: TaskService,
               private router: Router) {
   }
@@ -47,6 +49,23 @@ export class TaskListComponent implements OnInit {
 
   onDoneTask(task: Task, index: number) {
     this.fetch();
+  }
+
+  createTask() {
+    this.showCreateButton = true;
+  }
+
+  /**
+   * タスク作成のcallback
+   */
+  createTaskCallback(success: boolean) {
+    this.showCreateButton = false;
+    if (success === true) {
+      this.alert = new Alert('作成しました', 'success');
+      this.fetch();
+    } else if (success === false) {
+      this.alert = new Alert('削除に失敗しました');
+    }
   }
 
   private fetch() {

@@ -1,3 +1,13 @@
-<p>
-  task works!
-</p>
+<dialog class="mdl-dialog" open>
+  <h4 class="mdl-dialog__title">タスクを登録する</h4>
+  <div class="mdl-dialog__content">
+    <p>
+      <input type="text" name="title" [(ngModel)]="model.title">
+      <input type="text" name="due_date" [(ngModel)]="model.due_date">
+    </p>
+  </div>
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button" id="register" (click)="onCreateHandler()">登録する</button>
+    <button type="button" class="mdl-button close" id="cancel" (click)="onCancelHandler()">キャンセル</button>
+  </div>
+</dialog>

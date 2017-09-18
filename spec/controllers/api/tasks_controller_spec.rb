@@ -6,8 +6,8 @@ describe Api::TasksController do
       it 'タイトル更新' do
         task = create(:task)
 
-        params = {title: 'updated title'}
-        put :update, params: {id: task.id, task: params}, format: :jbuilder
+        params = { id: task.id, title: 'updated title' }
+        put :update, params: params, format: :jbuilder
 
         task.reload
 
@@ -18,8 +18,8 @@ describe Api::TasksController do
       it 'タスク期限更新' do
         task = create(:task)
 
-        params = {due_date: '2100-01-02'}
-        put :update, params: {id: task.id, task: params}, format: :jbuilder
+        params = { id: task.id, due_date: '2100-01-02' }
+        put :update, params: params, format: :jbuilder
 
         task.reload
 
@@ -32,8 +32,7 @@ describe Api::TasksController do
       it '完了フラグ更新' do
         task = create(:task)
 
-        params = {done: true}
-        put :update, params: {id: task.id, task: params}, format: :jbuilder
+        put :update, params: { id: task.id, done: true }, format: :jbuilder
 
         expect(response.status).to eq(200)
         expect(Task.find_by(id: task.id)).to be nil
@@ -65,6 +64,41 @@ describe Api::TasksController do
         delete :destroy, params: {id: task.id}, format: :jbuilder
 
         expect(response.status).to eq(404)
+      end
+    end
+  end
+
+  describe 'POST #create' do
+    let (:user) {create(:user)}
+    let (:project) {create(:project, user: user)}
+    before do
+      session[:user_id] = user.id
+      create(:project_member, project: project, user: user)
+    end
+
+    context 'タイトルが未入力の場合' do
+      it '作成エラーになる' do
+        post :create, params: { title: '', due_date: '2017-01-12 12:34:56' }, format: :jbuilder
+        expect(response.status).to eq(500)
+      end
+    end
+
+    context 'タイトルが100文字以上の場合' do
+      it '最大長エラーになる' do
+        post :create, params: { title: '1'*101, due_date: '2017-01-12 12:34:56' }, format: :jbuilder
+        expect(response.status).to eq(500)
+      end
+    end
+
+    context 'タイトル,日付ともに入力しているとき' do
+      it 'データが作成される' do
+        post :create, params: { title: 'テスト', due_date: '2017-01-12 12:34:56' }, format: :jbuilder
+        task = Task.first
+        expect(task.title).to eq('テスト')
+        expect(task.due_date).to eq('2017-01-12 12:34:56')
+        expect(task.creator_id).to eq(user.id)
+        expect(task.updater_id).to eq(user.id)
+        expect(response.status).to eq(200)
       end
     end
   end

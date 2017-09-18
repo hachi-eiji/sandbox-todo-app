@@ -4,7 +4,7 @@ class Task < ApplicationRecord
   has_many :task_notes, dependent: :destroy
 
   validates :project_id, presence: true
-  validates :title, presence: true
+  validates :title, presence: true, length: { in: 1..100 }
   validates :creator_id, presence: true
   validates :updater_id, presence: true
 

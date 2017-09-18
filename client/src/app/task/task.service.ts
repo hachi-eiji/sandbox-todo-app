@@ -21,6 +21,6 @@ export class TaskService {
   }
 
   create(task: Task): Observable<Object> {
-    return this.httpClient.post('/task', task);
+    return this.httpClient.post('/tasks', task);
   }
 }

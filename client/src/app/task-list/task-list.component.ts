@@ -64,7 +64,7 @@ export class TaskListComponent implements OnInit {
       this.alert = new Alert('作成しました', 'success');
       this.fetch();
     } else if (success === false) {
-      this.alert = new Alert('削除に失敗しました');
+      this.alert = new Alert('作成に失敗しました');
     }
   }
 

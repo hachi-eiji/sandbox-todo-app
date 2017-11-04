@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Task } from '../task/Task';
+import { Task } from '../task/task.model';
 import { Router } from '@angular/router';
-import { Modal } from '../confirm-modal/Modal';
-import { Alert } from '../alert/Alert';
+import { Modal } from '../confirm-modal/modal.model';
+import { Alert } from '../alert/alert.model';
 import { TaskService } from '../task/task.service';
 
 @Component({

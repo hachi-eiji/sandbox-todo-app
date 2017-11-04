@@ -6,8 +6,8 @@ import { AlertComponent } from '../alert/alert.component';
 
 import { TokenService } from '../common/token.service';
 import { LoginService } from './login.service';
-import { Login } from './login';
-import { TokenStorage } from '../common/TokenStorage';
+import { Login } from './login.model';
+import { TokenStorageService } from '../common/token-storage.service';
 import { Router } from '@angular/router';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
@@ -33,7 +33,7 @@ describe('LoginFormComponent', () => {
         TokenService,
         LoginService,
         HttpClientService,
-        TokenStorage,
+        TokenStorageService,
         {provide: Router, useValue: mockRouter}
       ],
       declarations: [LoginFormComponent, AlertComponent]

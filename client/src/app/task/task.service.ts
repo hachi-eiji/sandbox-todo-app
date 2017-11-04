@@ -3,8 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { HttpClientService } from '../common/http-client.service';
-import { Tasks } from './Tasks';
-import { Task } from './Task';
+import { Tasks } from './tasks.model';
+import { Task } from './task.model';
 
 @Injectable()
 export class TaskService {

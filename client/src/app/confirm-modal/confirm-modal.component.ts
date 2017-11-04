@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Modal } from './Modal';
+import { Modal } from './modal.model';
 
 @Component({
   selector: 'app-confirm-modal',

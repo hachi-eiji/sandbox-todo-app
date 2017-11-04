@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { HttpClientService } from '../common/http-client.service';
-import { LoginResult } from './login-result';
+import { LoginResult } from './login-result.model';
 
 @Injectable()
 export class LoginService {

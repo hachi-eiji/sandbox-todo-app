@@ -9,11 +9,11 @@ import { TaskListComponent } from './task-list.component';
 import { AlertComponent } from '../alert/alert.component';
 import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { LoadingComponent } from '../loading/loading.component';
-import { TokenStorage } from '../common/TokenStorage';
-import { Task } from '../task/Task';
+import { TokenStorageService } from '../common/token-storage.service';
+import { Task } from '../task/task.model';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientService } from '../common/http-client.service';
-import { Tasks } from '../task/Tasks';
+import { Tasks } from '../task/tasks.model';
 import { TaskComponent } from '../task/task.component';
 import { FormsModule } from '@angular/forms';
 
@@ -36,7 +36,7 @@ describe('TaskListComponent', () => {
       providers: [
         TaskService,
         HttpClientService,
-        TokenStorage,
+        TokenStorageService,
         {provide: Router, useValue: mockRouter}
       ],
       declarations: [

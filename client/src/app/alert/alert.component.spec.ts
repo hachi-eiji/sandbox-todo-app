@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlertComponent } from './alert.component';
-import { Alert } from './Alert';
+import { Alert } from './alert.model';
 import { By } from '@angular/platform-browser';
 
 describe('AlertComponent', () => {

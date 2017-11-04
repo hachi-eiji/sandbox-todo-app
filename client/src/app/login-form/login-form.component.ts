@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Login } from './login';
+import { Login } from './login.model';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { Alert } from '../alert/Alert';
+import { Alert } from '../alert/alert.model';
 import { TokenService } from '../common/token.service';
 import { LoginService } from './login.service';
-import { LoginResult } from './login-result';
+import { LoginResult } from './login-result.model';
 import { HttpError } from '../common/http-error.model';
 
 @Component({

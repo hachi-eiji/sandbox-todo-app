@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConfirmModalComponent } from './confirm-modal.component';
-import { Modal } from './Modal';
+import { Modal } from './modal.model';
 import { By } from '@angular/platform-browser';
 
 describe('ConfirmModalComponent', () => {

@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { TokenStorage } from './common/TokenStorage';
+import { TokenStorageService } from './common/token-storage.service';
 import { AlertComponent } from './alert/alert.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { TaskListComponent } from './task-list/task-list.component';
@@ -43,7 +43,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     TokenService,
-    TokenStorage,
+    TokenStorageService,
     LoginService,
     TaskService,
     HttpClientService,

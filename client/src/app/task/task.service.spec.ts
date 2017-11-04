@@ -3,17 +3,17 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 
 import { TaskService } from './task.service';
-import { TokenStorage } from '../common/TokenStorage';
-import { Task } from './Task';
+import { TokenStorageService } from '../common/token-storage.service';
+import { Task } from './task.model';
 import { HttpClientService } from '../common/http-client.service';
 import { HttpClientModule } from '@angular/common/http';
-import { Tasks } from './Tasks';
+import { Tasks } from './tasks.model';
 
 describe('TaskService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      providers: [TaskService, HttpClientService, TokenStorage]
+      providers: [TaskService, HttpClientService, TokenStorageService]
     });
   });
 

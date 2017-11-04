@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
 import { TokenService } from './token.service';
-import { TokenStorage } from './TokenStorage';
+import { TokenStorageService } from './token-storage.service';
 import { HttpClientService } from './http-client.service';
 
 describe('TokenService', () => {
@@ -14,7 +14,7 @@ describe('TokenService', () => {
         TokenService,
         HttpClient,
         HttpClientService,
-        TokenStorage,
+        TokenStorageService,
       ],
     });
   });

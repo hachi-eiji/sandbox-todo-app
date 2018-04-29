@@ -37,6 +37,8 @@ gem 'active_record_bulk_insert', '~> 1.2'
 
 gem 'rack-cors'
 
+gem 'bootsnap', require: false
+
 group :development, :test do
   gem 'rspec-rails', '3.5'
   gem 'factory_girl_rails'

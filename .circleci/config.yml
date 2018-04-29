@@ -1,0 +1,42 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4-node-browsers
+        environment:
+          MYSQL_USER: 'root'
+          MYSQL_PASSWORD: 'root'
+          MYSQL_HOST: 127.0.0.1
+          RAILS_ENV: test
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_ROOT_PASSWORD: 'root'
+          MYSQL_DATABASE: sandbox-todo-app_test
+    environment:
+      - RAILS_ENV: test
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - bundle-package-{{ checksum "Gemfile.lock"  }}
+      - run: bundle install -j 3 --path vendor/bundle
+      - save_cache:
+          name: Save Gem
+          key: bundle-package-{{ checksum "Gemfile.lock"  }}
+          paths:
+            - vendor/bundle
+      - run: cd client && yarn install --cache-folder ~/.cache/yarn
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "client/yarn.lock" }}
+          paths: ~/.cache/yarn
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+      - run: make reset_test_db
+      - type: shell
+        command: |
+          bin/rspec spec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      - type: shell
+        command: |
+          cd client && yarn test

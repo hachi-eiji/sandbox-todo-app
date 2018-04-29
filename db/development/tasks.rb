@@ -1,6 +1,6 @@
 Project.all.each do |project|
   5.times.each do |n|
-    task = project.tasks.build(
+    task = project.task.build(
       title:       "title #{n} in project #{project.id}",
       description: "description #{n} in project #{project.id}",
       due_date: Time.now,

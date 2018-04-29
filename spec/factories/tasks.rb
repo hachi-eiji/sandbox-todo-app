@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :task do
     title 'task_title'
     description 'task_description'

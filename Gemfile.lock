@@ -1,3 +1,12 @@
+GIT
+  remote: git@github.com:winebarrel/ridgepole.git
+  revision: 59b03a27ef463ffe3fcbef6ac8d528b6f9f6b1d7
+  branch: 0.7
+  specs:
+    ridgepole (0.7.2.beta)
+      activerecord (>= 5.0.1, < 6)
+      diffy
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -194,9 +203,6 @@ GEM
       redis-store (>= 1.2, < 2)
     redis-store (1.5.0)
       redis (>= 2.2, < 5)
-    ridgepole (0.7.1)
-      activerecord (>= 5.0.1, < 6)
-      diffy
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -271,7 +277,7 @@ DEPENDENCIES
   rack-cors
   rails (= 5.2.0)
   redis-rails
-  ridgepole
+  ridgepole (>= 0.7.2.beta)!
   rspec-rails (= 3.5)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

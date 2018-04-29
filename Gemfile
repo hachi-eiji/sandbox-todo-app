@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.1.2'
+gem 'rails', '5.2.0'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.13', '< 0.5'
 # Use SCSS for stylesheets
@@ -30,17 +30,19 @@ gem 'redis-rails'
 # configure
 gem 'config'
 
-gem 'ridgepole'
+gem 'ridgepole', '>= 0.7.2.beta', git: 'git@github.com:winebarrel/ridgepole.git', branch: '0.7'
 
 # bulk insert
 gem 'active_record_bulk_insert', '~> 1.2'
 
 gem 'rack-cors'
 
+gem 'bootsnap', require: false
+
 group :development, :test do
   gem 'rspec-rails', '3.5'
-  gem 'factory_girl_rails'
-  gem 'factory_girl'
+  gem 'factory_bot_rails'
+  gem 'factory_bot'
   gem 'faker'
   # データを自動的にけす(database_cleanerよりはやいらしい)
   gem 'database_rewinder'

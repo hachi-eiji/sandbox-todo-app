@@ -1,24 +1,5 @@
 version: "3"
 services:
-  rails:
-    build: .
-    command: ./entrypoint.sh
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/var/lib/sandbox-todo-app
-      - bundle_install:/var/lib/sandbox-todo-app/vendor/bundle
-      - bundle:/var/lib/sandbox-todo-app/.bundle
-    environment:
-      MYSQL_HOST: mysql
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      REDIS_HOST: redis
-    depends_on:
-      - mysql
-      - redis
-    tty: true
-    stdin_open: true
   mock_api:
     build: ./mockapi
     command: sh start_api_mock.sh
@@ -50,13 +31,7 @@ volumes:
     driver: local
   redis_data:
     driver: local
-  bundle_install:
-    driver: local
-  bundle:
-    driver: local
   mock_api_bundle:
     driver: local
   mock_api_bundle_install:
-    driver: local
-  node_modules:
     driver: local

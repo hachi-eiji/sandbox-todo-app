@@ -1,7 +1,9 @@
-create_table "done_task_notes", id: :integer, limit: 4, default: 0, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-  t.integer  "task_id",    limit: 5,   null: false
-  t.integer  "user_id",    limit: 5,   null: false
-  t.string   "note",       limit: 255, null: false
-  t.datetime "created_at",             null: false
-  t.datetime "updated_at",             null: false
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "done_task_notes", id: :integer, default: 0, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  t.bigint "task_id", null: false
+  t.bigint "user_id", null: false
+  t.string "note", null: false
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
 end

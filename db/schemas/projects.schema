@@ -1,8 +1,9 @@
-create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|
-  t.integer  "user_id",    limit: 5,   null: false
-  t.string   "name",       limit: 255, null: false
-  t.datetime "created_at",             null: false
-  t.datetime "updated_at",             null: false
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  t.bigint "user_id", null: false
+  t.string "name", null: false
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.index ["user_id"], name: "index_projects_on_user_id"
 end
-
-add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree

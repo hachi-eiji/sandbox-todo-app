@@ -32,6 +32,8 @@ gem 'config'
 
 gem 'ridgepole', '>= 0.7.2.beta', git: 'git@github.com:winebarrel/ridgepole.git', branch: '0.7'
 
+gem 'active_model_serializers', '~> 0.10.0'
+
 # bulk insert
 gem 'active_record_bulk_insert', '~> 1.2'
 

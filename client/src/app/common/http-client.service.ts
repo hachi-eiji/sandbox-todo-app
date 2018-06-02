@@ -1,14 +1,8 @@
-
-import {throwError as observableThrowError,  Observable } from 'rxjs';
-import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-
-import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
-
-
-
-
-import { environment } from '../../environments/environment';
+import {Observable, throwError} from 'rxjs';
+import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {environment} from '../../environments/environment';
+import {catchError} from 'rxjs/operators';
 
 @Injectable()
 export class HttpClientService {
@@ -29,8 +23,8 @@ export class HttpClientService {
     return params;
   }
 
-  private static handleError(err: HttpErrorResponse): ErrorObservable {
-    return observableThrowError(err.error);
+  private static handleError(err: HttpErrorResponse): Observable<never> {
+    return throwError(err.error);
   }
 
   constructor(private httpClient: HttpClient) {
@@ -43,7 +37,9 @@ export class HttpClientService {
       withCredentials: true
     };
     return this.httpClient.get<T>(environment.api.url + endPoint, options)
-      .catch(HttpClientService.handleError);
+      .pipe(
+        catchError(HttpClientService.handleError)
+      );
   }
 
   post<T>(endPoint: string, data?: {}): Observable<T> {
@@ -54,7 +50,9 @@ export class HttpClientService {
     };
     return this.httpClient
       .post<T>(environment.api.url + endPoint, params, options)
-      .catch(HttpClientService.handleError);
+      .pipe(
+        catchError(HttpClientService.handleError)
+      );
   }
 
   delete<T>(endPoint: string, data?: {}): Observable<T> {
@@ -65,6 +63,8 @@ export class HttpClientService {
     };
 
     return this.httpClient.delete<T>(environment.api.url + endPoint, options)
-      .catch(HttpClientService.handleError);
+      .pipe(
+        catchError(HttpClientService.handleError)
+      );
   }
 }

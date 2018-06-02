@@ -1,21 +1,20 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Router} from '@angular/router';
+import {of} from 'rxjs';
 
-import { TaskService } from '../task/task.service';
+import {TaskService} from '../task/task.service';
 
-import { TaskListComponent } from './task-list.component';
-import { AlertComponent } from '../alert/alert.component';
-import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
-import { LoadingComponent } from '../loading/loading.component';
-import { TokenStorageService } from '../common/token-storage.service';
-import { Task } from '../task/task.model';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClientService } from '../common/http-client.service';
-import { Tasks } from '../task/tasks.model';
-import { TaskComponent } from '../task/task.component';
-import { FormsModule } from '@angular/forms';
+import {TaskListComponent} from './task-list.component';
+import {AlertComponent} from '../alert/alert.component';
+import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
+import {LoadingComponent} from '../loading/loading.component';
+import {TokenStorageService} from '../common/token-storage.service';
+import {Task} from '../task/task.model';
+import {HttpClientModule} from '@angular/common/http';
+import {HttpClientService} from '../common/http-client.service';
+import {Tasks} from '../task/tasks.model';
+import {TaskComponent} from '../task/task.component';
+import {FormsModule} from '@angular/forms';
 
 describe('TaskListComponent', () => {
   class MockRouter {
@@ -79,7 +78,7 @@ describe('TaskListComponent', () => {
         )
       );
     }
-    spyOn(taskService, 'list').and.returnValue(Observable.of(tasks));
+    spyOn(taskService, 'list').and.returnValue(of(tasks));
     fixture.detectChanges();
 
     fixture.whenStable().then(() => {

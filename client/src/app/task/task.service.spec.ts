@@ -1,13 +1,12 @@
-import { inject, TestBed } from '@angular/core/testing';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import {inject, TestBed} from '@angular/core/testing';
+import {of} from 'rxjs';
 
-import { TaskService } from './task.service';
-import { TokenStorageService } from '../common/token-storage.service';
-import { Task } from './task.model';
-import { HttpClientService } from '../common/http-client.service';
-import { HttpClientModule } from '@angular/common/http';
-import { Tasks } from './tasks.model';
+import {TaskService} from './task.service';
+import {TokenStorageService} from '../common/token-storage.service';
+import {Task} from './task.model';
+import {HttpClientService} from '../common/http-client.service';
+import {HttpClientModule} from '@angular/common/http';
+import {Tasks} from './tasks.model';
 
 describe('TaskService', () => {
   beforeEach(() => {
@@ -36,7 +35,7 @@ describe('TaskService', () => {
         })
       );
     }
-    spyOn(service, 'list').and.returnValue(Observable.of(tasks));
+    spyOn(service, 'list').and.returnValue(of(tasks));
 
     const result = service.list();
     result.subscribe(subscribe => {

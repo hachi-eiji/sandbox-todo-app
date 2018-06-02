@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Login } from './login.model';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/map';
+
+
 import { Alert } from '../alert/alert.model';
 import { TokenService } from '../common/token.service';
 import { LoginService } from './login.service';

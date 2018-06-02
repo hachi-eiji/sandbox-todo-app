@@ -1,12 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+import {Observable, throwError} from 'rxjs';
 
-import { TaskComponent } from './task.component';
-import { TaskService } from './task.service';
-import { HttpClientService } from '../common/http-client.service';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
+import {TaskComponent} from './task.component';
+import {TaskService} from './task.service';
+import {HttpClientService} from '../common/http-client.service';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
 
 describe('TaskComponent', () => {
   let component: TaskComponent;
@@ -43,7 +43,7 @@ describe('TaskComponent', () => {
   });
 
   it('should event emmit false when an error occurred', () => {
-    spyOn(taskService, 'create').and.returnValue(Observable.throw('error'));
+    spyOn(taskService, 'create').and.returnValue(throwError('error'));
     component.buttonEvent.subscribe(actual => {
       expect(actual).toBeFalsy();
     });

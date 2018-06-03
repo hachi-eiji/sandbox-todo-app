@@ -1,0 +1,20 @@
+.login {
+  width: 50%;
+  margin: auto;
+
+  &-message {
+    margin-bottom: 10px;
+  }
+
+  &-input {
+    border: solid #eee 1px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    & > * {
+      margin: 10px 0;
+    }
+  }
+}

@@ -1,17 +1,26 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
+
+import {throwError} from 'rxjs/internal/observable/throwError';
+import {CoreModule} from '../core/core.module';
 
 import {LoginComponent} from './login.component';
-import {CoreModule} from '../core/core.module';
+import {LoginService} from './shared/login.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
+  let loginService;
 
   beforeEach(async(() => {
+    loginService = jasmine.createSpyObj('LoginService', ['login']);
+
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [FormsModule, CoreModule]
+      imports: [ReactiveFormsModule, CoreModule],
+      providers: [
+        {provide: LoginService, useValue: loginService}
+      ]
     })
     .compileComponents();
   }));
@@ -24,5 +33,39 @@ describe('LoginComponent', () => {
 
   it('should create component', () => {
     expect(component.message).toEqual(undefined);
+  });
+
+  it('should false form valid', () => {
+    expect(component.loginForm.valid).toBeFalsy();
+  });
+
+  it('should error message when a user not found', () => {
+    const e = {
+      status: 404,
+      error: {
+        message: 'not found'
+      }
+    };
+    loginService.login.and.returnValue(throwError(e));
+
+    component.loginForm.get('loginId').setValue('user');
+    component.loginForm.get('password').setValue('password');
+    fixture.debugElement.nativeElement.querySelector('button').click();
+
+    fixture.whenStable().then(() => {
+      expect(component.message).toEqual('not found');
+    });
+  });
+
+  it('should redirect task when a user found', () => {
+    loginService.login.and.returnValue({status: 200, message: 'ok'});
+
+    component.loginForm.get('loginId').setValue('user');
+    component.loginForm.get('password').setValue('password');
+    fixture.debugElement.nativeElement.querySelector('button').click();
+
+    fixture.whenStable().then(() => {
+      expect(component.message).toEqual(undefined);
+    });
   });
 });

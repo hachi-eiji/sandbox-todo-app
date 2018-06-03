@@ -1,20 +1,20 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
 import {FormsModule} from '@angular/forms';
-import {AppComponent} from './app.component';
-import {TokenStorageService} from './common/token-storage.service';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouterModule, Routes} from '@angular/router';
 import {AlertComponent} from './alert/alert.component';
+import {AppComponent} from './app.component';
+import {HttpClientService} from './common/http-client.service';
+import {TokenStorageService} from './common/token-storage.service';
+import {TokenService} from './common/token.service';
+import {ConfirmModalComponent} from './confirm-modal/confirm-modal.component';
+import {CoreModule} from './core/core.module';
+import {LoadingComponent} from './loading/loading.component';
+import {LoginModule} from './login/login.module';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {TaskListComponent} from './task-list/task-list.component';
-import {LoadingComponent} from './loading/loading.component';
-import {ConfirmModalComponent} from './confirm-modal/confirm-modal.component';
-import {TokenService} from './common/token.service';
-import {TaskService} from './task/task.service';
-import {HttpClientService} from './common/http-client.service';
 import {TaskComponent} from './task/task.component';
-import {LoginModule} from './login/login.module';
-import {CoreModule} from './core/core.module';
+import {TaskService} from './task/task.service';
 
 const appRoutes: Routes = [
   {path: 'tasks', component: TaskListComponent},

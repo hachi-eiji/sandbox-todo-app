@@ -1,9 +1,11 @@
 <div class="login">
   <div class="message error login-message" *ngIf="message">{{message}}</div>
-  <form #f="ngForm" (ngSubmit)="login(f)">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="login-input">
-      <input type="text" class="login-user_name" placeholder="ログインID" name="loginId" ngModel required/>
-      <input type="password" class="login-user_password" placeholder="パスワード" name="password" ngModel required/>
+      <input type="text" class="login-user_name" placeholder="ログインID" name="loginId" required
+             formControlName="loginId"/>
+      <input type="password" class="login-user_password" placeholder="パスワード" name="password" required
+             formControlName="password"/>
       <button class="button submit">ログイン</button>
     </div>
   </form>

@@ -3,7 +3,7 @@ import {inject, TestBed} from '@angular/core/testing';
 import {HttpService} from './http.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../environments/environment';
 
 describe('HttpService', () => {
   let httpClient: HttpClient;

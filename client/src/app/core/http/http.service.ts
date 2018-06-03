@@ -1,9 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/internal/Observable';
-import {environment} from '../../environments/environment';
-import {catchError} from 'rxjs/operators';
-import {throwError} from 'rxjs/internal/observable/throwError';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -29,22 +27,13 @@ export class HttpService {
     return params;
   }
 
-  private static handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      return throwError(error.error);
-    } else {
-      return throwError(error);
-    }
-  }
-
   get<T>(path: string, data?: {}): Observable<T> {
     const options = {
       headers: HttpService.getHeaders(),
       params: HttpService.createParams(data),
       withCredentials: true
     };
-    return this.httpClient.get<T>(environment.api.url + path, options)
-      .pipe(catchError(HttpService.handleError));
+    return this.httpClient.get<T>(environment.api.url + path, options);
   }
 
   post<T>(path: string, data?: {}): Observable<T> {
@@ -54,7 +43,6 @@ export class HttpService {
       withCredentials: true
     };
     return this.httpClient
-      .post<T>(environment.api.url + path, params, options)
-      .pipe(catchError(HttpService.handleError));
+      .post<T>(environment.api.url + path, params, options);
   }
 }

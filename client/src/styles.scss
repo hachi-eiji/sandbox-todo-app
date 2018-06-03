@@ -1,7 +1,4 @@
-$sp_size: 640px;
-$tablet_size: 768px;
-$pc_size: 1024px;
-
+@import "assets/variables";
 @import "assets/common/main";
 
 @media screen and (min-width: $tablet_size) {

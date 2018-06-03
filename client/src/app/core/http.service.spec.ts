@@ -72,4 +72,34 @@ describe('HttpService', () => {
     const e = new ErrorEvent('Network Error', {message: message});
     req.error(e);
   }));
+
+  it('should raise error when response 500 error at post', inject([HttpService], (service: HttpService) => {
+    const statusText = 'Internal server error';
+    const message = 'an error occurred';
+    const status = 500;
+    service.post('/test').subscribe(d => fail(d), (error: HttpErrorResponse) => {
+      expect(error.ok).toBeFalsy();
+      expect(error.error.message).toEqual(message);
+      expect(error.error.status).toEqual(status);
+    });
+    const req = httpTestingController.expectOne(`${url}/test`);
+    req.flush({
+      message: message,
+      status: status
+    }, {
+      status: status,
+      statusText: statusText
+    });
+  }));
+
+  it('should raise error when network error occurred at post', inject([HttpService], (service: HttpService) => {
+    const message = 'network error occurred';
+
+    service.post('/test').subscribe(d => fail(d), error => {
+      expect(error.message).toEqual(message);
+    });
+    const req = httpTestingController.expectOne(`${url}/test`);
+    const e = new ErrorEvent('Network Error', {message: message});
+    req.error(e);
+  }));
 });

@@ -29,6 +29,14 @@ export class HttpService {
     return params;
   }
 
+  private static handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      return throwError(error.error);
+    } else {
+      return throwError(error);
+    }
+  }
+
   get<T>(path: string, data?: {}): Observable<T> {
     const options = {
       headers: HttpService.getHeaders(),
@@ -36,16 +44,17 @@ export class HttpService {
       withCredentials: true
     };
     return this.httpClient.get<T>(environment.api.url + path, options)
-      .pipe(
-        catchError(this.handleError)
-      );
+      .pipe(catchError(HttpService.handleError));
   }
 
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      return throwError(error.error);
-    } else {
-      return throwError(error);
-    }
+  post<T>(path: string, data?: {}): Observable<T> {
+    const params = HttpService.createParams(data);
+    const options = {
+      headers: HttpService.getHeaders(),
+      withCredentials: true
+    };
+    return this.httpClient
+      .post<T>(environment.api.url + path, params, options)
+      .pipe(catchError(HttpService.handleError));
   }
 }

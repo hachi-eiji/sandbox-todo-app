@@ -1,25 +1,25 @@
+import {HttpClientModule} from '@angular/common/http';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {of} from 'rxjs';
+import {AlertComponent} from '../alert/alert.component';
+import {HttpClientService} from '../common/http-client.service';
+import {TokenStorageService} from '../common/token-storage.service';
+import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
+import {TaskComponent} from '../task/task.component';
+import {Task} from '../task/task.model';
 
 import {TaskService} from '../task/task.service';
+import {Tasks} from '../task/tasks.model';
 
 import {TaskListComponent} from './task-list.component';
-import {AlertComponent} from '../alert/alert.component';
-import {ConfirmModalComponent} from '../confirm-modal/confirm-modal.component';
-import {LoadingComponent} from '../loading/loading.component';
-import {TokenStorageService} from '../common/token-storage.service';
-import {Task} from '../task/task.model';
-import {HttpClientModule} from '@angular/common/http';
-import {HttpClientService} from '../common/http-client.service';
-import {Tasks} from '../task/tasks.model';
-import {TaskComponent} from '../task/task.component';
-import {FormsModule} from '@angular/forms';
 
 describe('TaskListComponent', () => {
   class MockRouter {
     navigate = jasmine.createSpy('navigate');
   }
+
   let component: TaskListComponent;
   let fixture: ComponentFixture<TaskListComponent>;
   let taskService: TaskService;
@@ -42,11 +42,10 @@ describe('TaskListComponent', () => {
         TaskListComponent,
         AlertComponent,
         ConfirmModalComponent,
-        LoadingComponent,
         TaskComponent,
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

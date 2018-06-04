@@ -9,7 +9,6 @@ import {TokenStorageService} from './common/token-storage.service';
 import {TokenService} from './common/token.service';
 import {ConfirmModalComponent} from './confirm-modal/confirm-modal.component';
 import {CoreModule} from './core/core.module';
-import {LoadingComponent} from './loading/loading.component';
 import {LoginModule} from './login/login.module';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {TaskListComponent} from './task-list/task-list.component';
@@ -28,7 +27,6 @@ const appRoutes: Routes = [
     AlertComponent,
     NotFoundComponent,
     TaskListComponent,
-    LoadingComponent,
     ConfirmModalComponent,
     TaskComponent,
   ],

@@ -6,7 +6,7 @@ import {LoginService} from './shared/login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss', 'login.sp.component.scss']
+  styleUrls: ['./login.component.scss', 'login.component.sp.scss']
 })
 export class LoginComponent implements OnInit {
   message: string;

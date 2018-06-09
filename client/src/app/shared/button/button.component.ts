@@ -9,7 +9,7 @@ export class ButtonComponent {
   @Input()
   text: string;
   @Input()
-  style: 'submit' ;
+  type: 'submit' ;
   @Output()
   onClick = new EventEmitter<any>();
   @Input()

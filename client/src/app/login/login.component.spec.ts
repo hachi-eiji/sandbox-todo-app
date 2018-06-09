@@ -1,30 +1,34 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ReactiveFormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
-import {throwError} from 'rxjs/internal/observable/throwError';
 import {Observable} from 'rxjs/internal/Observable';
+import {throwError} from 'rxjs/internal/observable/throwError';
 
 import {CoreModule} from '../core/core.module';
+import {SharedModule} from '../shared/shared.module';
 import {LoginComponent} from './login.component';
 import {LoginService} from './shared/login.service';
-import {SharedModule} from '../shared/shared.module';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let loginService;
+  let router: Router;
 
   beforeEach(async(() => {
     loginService = jasmine.createSpyObj('LoginService', ['login']);
+    router = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [ReactiveFormsModule, CoreModule, SharedModule],
       providers: [
-        {provide: LoginService, useValue: loginService}
+        {provide: LoginService, useValue: loginService},
+        {provide: Router, useValue: router}
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -68,6 +72,9 @@ describe('LoginComponent', () => {
 
     fixture.whenStable().then(() => {
       expect(component.message).toEqual(undefined);
+      const spy = router.navigate as jasmine.Spy;
+      const navArgs = spy.calls.first().args[0];
+      expect(navArgs).toEqual(['tasks']);
     });
   });
 

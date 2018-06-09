@@ -9,7 +9,9 @@ export class ButtonComponent {
   @Input()
   text: string;
   @Input()
-  buttonType: 'submit' ;
+  buttonType: string;
+  @Input()
+  buttonSize: string;
   @Output()
   onClick = new EventEmitter<any>();
   @Input()

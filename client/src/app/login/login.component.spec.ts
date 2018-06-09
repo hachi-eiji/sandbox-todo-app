@@ -70,4 +70,12 @@ describe('LoginComponent', () => {
       expect(component.message).toEqual(undefined);
     });
   });
+
+  it('should display message "input id, password', () => {
+    component.login();
+
+    fixture.whenStable().then(() => {
+      expect(component.message).toEqual('ログインIDもしくはパスワードを入力してください');
+    });
+  });
 });

@@ -1,7 +1,7 @@
 import {inject, TestBed} from '@angular/core/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 import {HttpService} from './http.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 
@@ -66,7 +66,7 @@ describe('HttpService', () => {
     const message = 'network error occurred';
 
     service.get('/test').subscribe(d => fail(d), error => {
-      expect(error.message).toEqual(message);
+      expect(error.error.message).toEqual(message);
     });
     const req = httpTestingController.expectOne(`${url}/test`);
     const e = new ErrorEvent('Network Error', {message: message});
@@ -96,7 +96,7 @@ describe('HttpService', () => {
     const message = 'network error occurred';
 
     service.post('/test').subscribe(d => fail(d), error => {
-      expect(error.message).toEqual(message);
+      expect(error.error.message).toEqual(message);
     });
     const req = httpTestingController.expectOne(`${url}/test`);
     const e = new ErrorEvent('Network Error', {message: message});

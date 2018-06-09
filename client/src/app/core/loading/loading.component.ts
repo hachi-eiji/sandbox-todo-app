@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LoadingService} from 'app/core/loading/loading.service';
 import {Subscription} from 'rxjs/internal/Subscription';
+import {LoadingService} from './loading.service';
 
 @Component({
   selector: 'app-loading',

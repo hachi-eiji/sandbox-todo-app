@@ -6,6 +6,7 @@ import {CoreModule} from '../core/core.module';
 
 import {LoginComponent} from './login.component';
 import {LoginService} from './shared/login.service';
+import {SharedModule} from '../shared/shared.module';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -17,7 +18,7 @@ describe('LoginComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
-      imports: [ReactiveFormsModule, CoreModule],
+      imports: [ReactiveFormsModule, CoreModule, SharedModule],
       providers: [
         {provide: LoginService, useValue: loginService}
       ]

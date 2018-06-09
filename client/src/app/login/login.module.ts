@@ -2,8 +2,8 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {CoreModule} from 'app/core/core.module';
 
+import {SharedModule} from '../shared/shared.module';
 import {LoginRoutingModule} from './login-routing.module';
 import {LoginComponent} from './login.component';
 
@@ -13,7 +13,7 @@ import {LoginComponent} from './login.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
-    CoreModule,
+    SharedModule,
     LoginRoutingModule
   ],
   declarations: [LoginComponent]

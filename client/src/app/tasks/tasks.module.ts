@@ -8,6 +8,7 @@ import { TasksComponent } from './tasks.component';
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     TasksRoutingModule
   ],
   declarations: [TasksComponent]

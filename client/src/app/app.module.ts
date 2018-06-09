@@ -10,6 +10,7 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { TasksModule } from './tasks/tasks.module';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/tasks', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const appRoutes: Routes = [
     CoreModule,
     FormsModule,
     LoginModule,
+    TasksModule,
     RouterModule.forRoot(appRoutes),
   ],
   providers: [

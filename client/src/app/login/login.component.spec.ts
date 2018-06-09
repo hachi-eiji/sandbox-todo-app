@@ -2,8 +2,9 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ReactiveFormsModule} from '@angular/forms';
 
 import {throwError} from 'rxjs/internal/observable/throwError';
-import {CoreModule} from '../core/core.module';
+import {Observable} from 'rxjs/internal/Observable';
 
+import {CoreModule} from '../core/core.module';
 import {LoginComponent} from './login.component';
 import {LoginService} from './shared/login.service';
 import {SharedModule} from '../shared/shared.module';
@@ -51,7 +52,7 @@ describe('LoginComponent', () => {
 
     component.loginForm.get('loginId').setValue('user');
     component.loginForm.get('password').setValue('password');
-    fixture.debugElement.nativeElement.querySelector('button').click();
+    component.login();
 
     fixture.whenStable().then(() => {
       expect(component.message).toEqual('not found');
@@ -59,11 +60,11 @@ describe('LoginComponent', () => {
   });
 
   it('should redirect task when a user found', () => {
-    loginService.login.and.returnValue({status: 200, message: 'ok'});
+    loginService.login.and.returnValue(Observable.create(o => o.next({status: 200, message: 'ok'})));
 
     component.loginForm.get('loginId').setValue('user');
     component.loginForm.get('password').setValue('password');
-    fixture.debugElement.nativeElement.querySelector('button').click();
+    component.login();
 
     fixture.whenStable().then(() => {
       expect(component.message).toEqual(undefined);

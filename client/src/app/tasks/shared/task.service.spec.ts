@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs/internal/observable/of';
 import { throwError } from 'rxjs/internal/observable/throwError';
 
 import { Task } from './task.model';
@@ -17,7 +17,7 @@ describe('TaskService', () => {
   });
 
   it('#getList should empty list when response is empty', () => {
-    httpServiceSpy.get.and.returnValue(Observable.create(s => s.next([])));
+    httpServiceSpy.get.and.returnValue(of([]));
     service.getList().subscribe(tasks => {
       expect(tasks.length).toBe(0);
     });
@@ -34,7 +34,7 @@ describe('TaskService', () => {
       });
     }
     const mock: Tasks = { status: 200, data: array };
-    httpServiceSpy.get.and.returnValue(Observable.create(s => s.next(mock)));
+    httpServiceSpy.get.and.returnValue(of(mock));
     service.getList().subscribe((tasks: Tasks) => {
       expect(tasks.status).toBe(200);
       expect(tasks.data.length).toBe(10);

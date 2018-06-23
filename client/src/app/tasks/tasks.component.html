@@ -1,7 +1,7 @@
-<table>
+<table class="l-tasks">
   <thead>
   <tr>
-    <td>done</td>
+    <td></td>
     <td>タイトル</td>
     <td>説明</td>
     <td>期限</td>
@@ -12,11 +12,11 @@
   <ng-container *ngIf="(tasks$ | async) as t">
     <ng-container *ngIf="t.data.length; else notFound">
       <tr *ngFor="let task of t.data">
-        <td><input type="radio"></td>
-        <td>{{task.title}}</td>
-        <td>{{task.description}}</td>
-        <td>{{task.due_date}}</td>
-        <td>
+        <td class="m-done"><input type="radio"></td>
+        <td class="m-title">{{task.title}}</td>
+        <td class="m-description">{{task.description}}</td>
+        <td class="m-due_date">{{task.due_date}}</td>
+        <td class="m-delete">
           <app-button text="削除" (onClick)="delete(task.id)" buttonSize="small" buttonType="danger"></app-button>
         </td>
       </tr>
@@ -27,4 +27,3 @@
   </ng-container>
   </tbody>
 </table>
-

@@ -1,0 +1,37 @@
+.l-tasks {
+  margin: auto;
+  table-layout: auto;
+  width: 80%;
+  border: 1px solid #cccc;
+
+  thead {
+    tr {
+      text-align: center;
+      background-color: gray;
+      color: white;
+    }
+  }
+
+  td {
+    border: 1px solid #cccc;
+    padding: 10px 0;
+  }
+
+  .m-done, .m-delete {
+    text-align: center;
+  }
+
+  .m-title {
+    white-space: nowrap;
+  }
+  .m-due_date {
+    text-align: right;
+    white-space: nowrap;
+  }
+  .m-description {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100px;
+  }
+}

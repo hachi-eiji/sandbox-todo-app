@@ -10,6 +10,8 @@ import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import {StoreModule} from '@ngrx/store';
+import {userReducer} from './shared/user/user.reducer';
 
 const appRoutes: Routes = [
   { path: 'tasks', loadChildren: 'app/tasks/tasks.module#TasksModule' },
@@ -29,6 +31,7 @@ const appRoutes: Routes = [
     CoreModule,
     FormsModule,
     LoginModule,
+    StoreModule.forRoot({user: userReducer}),
     RouterModule.forRoot(appRoutes),
   ],
   providers: [

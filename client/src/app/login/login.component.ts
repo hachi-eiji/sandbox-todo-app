@@ -1,12 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-
-import {Observable} from 'rxjs/internal/Observable';
-import {LoginService} from './shared/login.service';
-import {Store} from '@ngrx/store';
-import {User} from '../shared/user/user';
-import * as UserAction from '../shared/user/user.action';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { User } from '../shared/user/user';
+import { LoginService } from './shared/login.service';
 
 
 @Component({
@@ -39,9 +36,7 @@ export class LoginComponent implements OnInit {
     const form = this.loginForm;
     if (form.valid) {
       this.loginService.login(form.get('loginId').value, form.get('password').value)
-        .subscribe(
-          (result) => {
-            this.store.dispatch(new UserAction.Login(result.data));
+        .subscribe(() => {
             this.router.navigate(['tasks']);
           },
           error => {

@@ -4,6 +4,7 @@ import { StoreModule, Store } from '@ngrx/store';
 import { of, throwError } from 'rxjs';
 import { CoreModule } from '../../core/core.module';
 import { User } from './user';
+import * as UserAction from './user.action';
 import { userReducer } from './user.reducer';
 
 import { UserService } from './user.service';
@@ -44,6 +45,13 @@ describe('UserService', () => {
       expect(e.status).toBe(404);
       expect(e.error.message).toEqual('not found');
       store.select('user').subscribe(u => expect(u).toBeNull());
+    });
+  });
+
+  it('should get user when data stored', () => {
+    store.dispatch(new UserAction.Login({id: 1, name: 'test'}));
+    tester.get().subscribe(d => {
+      expect(d).toEqual({id: 1, name: 'test'});
     });
   });
 });

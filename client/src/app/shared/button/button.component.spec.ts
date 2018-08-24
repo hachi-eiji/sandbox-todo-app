@@ -36,4 +36,11 @@ describe('ButtonComponent', () => {
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.small')).not.toBeNull();
   });
+
+  it('set disable mode', () => {
+    component.disabled = true;
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.is-disabled')).not.toBeNull();
+    expect(fixture.nativeElement.querySelector('[disabled]')).not.toBeNull();
+  });
 });

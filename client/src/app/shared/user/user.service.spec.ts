@@ -10,7 +10,7 @@ import { userReducer } from './user.reducer';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
-  let httpClientSpy: { post: jasmine.Spy; };
+  const httpServiceSpy = jasmine.createSpyObj('HttpService', ['get', 'post']);
   let store: Store<User>;
   let tester: UserService;
 
@@ -22,13 +22,12 @@ describe('UserService', () => {
     });
     store = TestBed.get(Store);
     spyOn(store, 'dispatch').and.callThrough();
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['post']);
-    tester = new UserService(<any>httpClientSpy, store);
+    tester = new UserService(httpServiceSpy, store);
   });
 
   it('should store user when can get user', () => {
     const data = {id: 100, name: 'test'};
-    httpClientSpy.post.and.returnValue(of({id: 1, message: 'ok', data: data}));
+    httpServiceSpy.post.and.returnValue(of({id: 1, message: 'ok', data: data}));
     tester.login('user', 'pass').subscribe(d => {
       expect(d.data).toEqual(data);
       store.select('user').subscribe(u => expect(u).toEqual(data));
@@ -40,7 +39,7 @@ describe('UserService', () => {
       error: {message: 'not found'},
       status: 404
     });
-    httpClientSpy.post.and.returnValue(throwError(error));
+    httpServiceSpy.post.and.returnValue(throwError(error));
     tester.login('not found user', 'pass').subscribe(d => fail(d), (e: HttpErrorResponse) => {
       expect(e.status).toBe(404);
       expect(e.error.message).toEqual('not found');

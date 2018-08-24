@@ -19,7 +19,9 @@ describe('ButtonComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('set text in button', () => {
+    component.text = 'test';
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toEqual('test');
   });
 });

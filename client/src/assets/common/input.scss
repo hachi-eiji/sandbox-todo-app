@@ -1,0 +1,8 @@
+input[type = "text"], input[type = "password"] {
+  border-style: none;
+  border-bottom-style: inset;
+
+  &:focus {
+    outline: 0;
+  }
+}

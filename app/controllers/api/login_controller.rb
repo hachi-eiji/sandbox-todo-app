@@ -8,17 +8,17 @@ class Api::LoginController < Api::ApiController
     if auth
       session[:user_id] = auth.id
       @body = {
-        id:      'ok',
+        id: 'ok',
         message: 'user_exists',
-        status:  status
-        }
+        status: status
+      }
     else
-      status  = 404
-        @body = {
-          id:      'login_failed',
-          message: 'ログインID・パスワードが間違っています',
-          status: status
-        }
+      status = 404
+      @body = {
+        id: 'login_failed',
+        message: 'ログインID・パスワードが間違っています',
+        status: status
+      }
     end
     render 'api/login/show', status: status
   end
@@ -26,21 +26,21 @@ class Api::LoginController < Api::ApiController
 
   def activate
     param = login_params
-    user  = User.find_by(email: param[:loginId])
+    user = User.find_by(email: param[:loginId])
     is_auth = user && user.activate(param[:password], param[:code])
 
     status = 200
     if is_auth
       session[:user_id] = user.id
       @body = {
-        id:      'ok',
+        id: 'ok',
         message: 'user_exists',
-        status:  status
+        status: status
       }
     else
-      status  = 404
+      status = 404
       @body = {
-        id:      'login_failed',
+        id: 'login_failed',
         message: 'ログインID・パスワード・アクティベートコードが間違っています',
         status: status
       }

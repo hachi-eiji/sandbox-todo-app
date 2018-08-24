@@ -1,4 +1,10 @@
-.test {
-  margin-top: 10px;
-  font-style: italic;
+@import "assets/variables";
+@import "assets/common/main";
+
+@media screen and (min-width: $tablet_size) {
+  @import "assets/pc/layout";
+}
+
+@media screen and (max-width: $sp_size) {
+  @import "assets/sp/layout";
 }

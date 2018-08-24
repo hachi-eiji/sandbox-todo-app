@@ -21,6 +21,7 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "node_modules/normalize.css/normalize.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -82,6 +83,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
+              "node_modules/normalize.css/normalize.css",
               "src/styles.scss"
             ],
             "assets": [
@@ -105,7 +107,7 @@
       }
     },
     "client-e2e": {
-      "root": "",
+      "root": "e2e/",
       "sourceRoot": "",
       "projectType": "application",
       "architect": {

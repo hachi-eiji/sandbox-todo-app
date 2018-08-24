@@ -3,19 +3,19 @@ import { StoreModule } from '@ngrx/store';
 import { CoreModule } from '../../core/core.module';
 import { userReducer } from '../../shared/user/user.reducer';
 
-import { LoginService } from './login.service';
+import { UserService } from './user.service';
 
-describe('LoginService', () => {
+describe('UserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [LoginService],
+      providers: [UserService],
       imports: [CoreModule,
-        StoreModule.forRoot({ user: userReducer })
+        StoreModule.forRoot({user: userReducer})
       ]
     });
   });
 
-  it('should be created', inject([LoginService], (service: LoginService) => {
+  it('should be created', inject([UserService], (service: UserService) => {
     expect(service).toBeTruthy();
   }));
 });

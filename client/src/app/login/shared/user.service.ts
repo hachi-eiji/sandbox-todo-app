@@ -11,7 +11,7 @@ import { LoginResult } from './login-result.model';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class UserService {
 
   constructor(private httpService: HttpService, private store: Store<User>) {
   }

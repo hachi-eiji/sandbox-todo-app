@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { User } from '../shared/user/user';
-import { LoginService } from './shared/login.service';
+import { UserService } from './shared/user.service';
 
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private store: Store<User>,
-    private loginService: LoginService,
+    private userService: UserService,
     private fb: FormBuilder,
     private router: Router
   ) {
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
   login() {
     const form = this.loginForm;
     if (form.valid) {
-      this.loginService.login(form.get('loginId').value, form.get('password').value)
+      this.userService.login(form.get('loginId').value, form.get('password').value)
         .subscribe(() => {
             this.router.navigate(['tasks']);
           },

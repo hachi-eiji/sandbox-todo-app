@@ -9,7 +9,7 @@ import {throwError} from 'rxjs/internal/observable/throwError';
 import {CoreModule} from '../core/core.module';
 import {SharedModule} from '../shared/shared.module';
 import {LoginComponent} from './login.component';
-import {LoginService} from './shared/login.service';
+import {UserService} from './shared/user.service';
 import {User} from '../shared/user/user';
 import * as UserAction from '../shared/user/user.action';
 
@@ -21,14 +21,14 @@ describe('LoginComponent', () => {
   let store: Store<User>;
 
   beforeEach(async(() => {
-    loginService = jasmine.createSpyObj('LoginService', ['login']);
+    loginService = jasmine.createSpyObj('UserService', ['login']);
     router = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [ReactiveFormsModule, CoreModule, SharedModule, StoreModule.forRoot({})],
       providers: [
-        {provide: LoginService, useValue: loginService},
+        {provide: UserService, useValue: loginService},
         {provide: Router, useValue: router}
       ]
     })

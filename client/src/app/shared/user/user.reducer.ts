@@ -1,7 +1,14 @@
-import {User} from './user';
-import {UserActionTypes, UserActionTypesUnion} from './user.action';
+import { User } from './user';
+import { UserActionTypes, UserActionTypesUnion } from './user.action';
 
-export function userReducer(state: User, action: UserActionTypesUnion) {
+
+export interface UserState {
+  user: User;
+}
+
+export const selectUser = (state: UserState) => state.user;
+
+export function userReducer(state: User, action: UserActionTypesUnion): User {
   switch (action.type) {
     case UserActionTypes.LOGIN:
       return action.payload;

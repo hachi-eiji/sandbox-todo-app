@@ -9,7 +9,7 @@ export class ButtonComponent {
   @Input()
   text: string;
   @Input()
-  buttonType: string;
+  buttonType: 'submit' | 'danger';
   @Input()
   buttonSize: string;
   @Output()

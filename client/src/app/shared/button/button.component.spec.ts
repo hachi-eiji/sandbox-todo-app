@@ -8,7 +8,7 @@ describe('ButtonComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ButtonComponent ]
+      declarations: [ButtonComponent]
     })
     .compileComponents();
   }));
@@ -23,5 +23,11 @@ describe('ButtonComponent', () => {
     component.text = 'test';
     fixture.detectChanges();
     expect(fixture.nativeElement.textContent).toEqual('test');
+  });
+
+  it('set button type', () => {
+    component.buttonType = 'danger';
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.danger')).not.toBeNull();
   });
 });

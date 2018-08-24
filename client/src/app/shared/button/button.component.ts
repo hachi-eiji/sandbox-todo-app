@@ -11,7 +11,7 @@ export class ButtonComponent {
   @Input()
   buttonType: 'submit' | 'danger';
   @Input()
-  buttonSize: string;
+  buttonSize: 'small';
   @Output()
   onClick = new EventEmitter<any>();
   @Input()

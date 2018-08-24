@@ -30,4 +30,10 @@ describe('ButtonComponent', () => {
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('.danger')).not.toBeNull();
   });
+
+  it('set button size', () => {
+    component.buttonSize = 'small';
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.small')).not.toBeNull();
+  });
 });

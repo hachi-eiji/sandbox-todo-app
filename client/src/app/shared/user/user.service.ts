@@ -4,9 +4,9 @@ import { Observable } from 'rxjs/internal/Observable';
 import { tap } from 'rxjs/operators';
 
 import { HttpService } from '../../core/http/http.service';
-import { User } from '../../shared/user/user';
-import * as UserAction from '../../shared/user/user.action';
-import { LoginResult } from './login-result.model';
+import { User } from './user';
+import * as UserAction from './user.action';
+import { LoginResult } from '../../login/shared/login-result.model';
 
 @Injectable({
   providedIn: 'root'

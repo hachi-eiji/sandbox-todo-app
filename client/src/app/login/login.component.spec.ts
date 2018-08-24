@@ -9,7 +9,7 @@ import {throwError} from 'rxjs/internal/observable/throwError';
 import {CoreModule} from '../core/core.module';
 import {SharedModule} from '../shared/shared.module';
 import {LoginComponent} from './login.component';
-import {UserService} from './shared/user.service';
+import {UserService} from '../shared/user/user.service';
 import {User} from '../shared/user/user';
 import * as UserAction from '../shared/user/user.action';
 

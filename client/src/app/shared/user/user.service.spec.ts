@@ -1,7 +1,7 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 import { CoreModule } from '../../core/core.module';
-import { userReducer } from '../../shared/user/user.reducer';
+import { userReducer } from './user.reducer';
 
 import { UserService } from './user.service';
 

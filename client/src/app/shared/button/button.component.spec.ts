@@ -1,3 +1,4 @@
+import {EventEmitter} from '@angular/core';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ButtonComponent} from './button.component';
@@ -42,5 +43,12 @@ describe('ButtonComponent', () => {
     fixture.detectChanges();
     expect(fixture.debugElement.nativeElement.querySelector('.is-disabled')).not.toBeNull();
     expect(fixture.debugElement.nativeElement.querySelector('[disabled]')).not.toBeNull();
+  });
+
+  it('should call click event', function () {
+    const spy = jasmine.createSpyObj('EventEmitter', ['emit']);
+    component.onClick = spy;
+    fixture.debugElement.nativeElement.querySelector('button').click();
+    expect(spy.emit.calls.count()).toBe(1);
   });
 });

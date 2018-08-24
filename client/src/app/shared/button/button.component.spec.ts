@@ -22,25 +22,25 @@ describe('ButtonComponent', () => {
   it('set text in button', () => {
     component.text = 'test';
     fixture.detectChanges();
-    expect(fixture.nativeElement.textContent).toEqual('test');
+    expect(fixture.debugElement.nativeElement.textContent).toEqual('test');
   });
 
   it('set button type', () => {
     component.buttonType = 'danger';
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.danger')).not.toBeNull();
+    expect(fixture.debugElement.nativeElement.querySelector('.danger')).not.toBeNull();
   });
 
   it('set button size', () => {
     component.buttonSize = 'small';
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.small')).not.toBeNull();
+    expect(fixture.debugElement.nativeElement.querySelector('.small')).not.toBeNull();
   });
 
   it('set disable mode', () => {
     component.disabled = true;
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.is-disabled')).not.toBeNull();
-    expect(fixture.nativeElement.querySelector('[disabled]')).not.toBeNull();
+    expect(fixture.debugElement.nativeElement.querySelector('.is-disabled')).not.toBeNull();
+    expect(fixture.debugElement.nativeElement.querySelector('[disabled]')).not.toBeNull();
   });
 });

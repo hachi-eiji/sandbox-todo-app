@@ -1,0 +1,7 @@
+linter:
+  tslint:
+    root_dir: 'client'
+    options:
+      config: 'tslint.json'
+      project: 'tsconfig.json'
+      type-check: true

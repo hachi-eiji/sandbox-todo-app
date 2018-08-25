@@ -24,7 +24,7 @@ jobs:
       - run: make reset_test_db
       - type: shell
         command: |
-          bin/rspec spec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+          bin/rspec spec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
       - type: shell
         command: |
           cd client && npm test

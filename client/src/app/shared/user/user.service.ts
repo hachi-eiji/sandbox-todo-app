@@ -27,7 +27,7 @@ export class UserService {
     return this.store.pipe(
       select(UserReducer.selectUser),
       mergeMap((u: User) => {
-        return u ? of(u) : this.httpService.get<User>('/user');
+        return u ? of(u) : this.httpService.get<User>('/users/me');
       })
     );
   }

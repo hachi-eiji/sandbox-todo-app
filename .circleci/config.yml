@@ -12,11 +12,20 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: 'root'
           MYSQL_DATABASE: sandbox-todo-app_test
+      - image: redis
     environment:
       - RAILS_ENV: test
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1
       - run: bundle install -j 3 --path vendor/bundle
+      - save_cache:
+          key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
+          paths:
+          - vendor/bundle
       - run: cd client && npm install
       - run:
           name: Wait for DB
@@ -24,7 +33,7 @@ jobs:
       - run: make reset_test_db
       - type: shell
         command: |
-          bin/rspec spec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+          bin/rspec spec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
       - type: shell
         command: |
           cd client && npm test

@@ -50,6 +50,10 @@ RSpec.describe User, type: :model do
         # see https://github.com/thoughtbot/factory_girl/issues/931
         User.skip_callback(:create, :before, :initialize_activate, raise: false)
       end
+      after do
+        User.set_callback(:create, :before, :initialize_activate)
+      end
+
       let(:params) { {} }
       let(:user) do
         create(:user, params)

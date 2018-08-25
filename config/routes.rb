@@ -6,6 +6,11 @@ Rails.application.routes.draw do
     post 'reset', to: 'login#reset'
     get 'token', to: 'tokens#index'
     resources :tasks
+
+    namespace :users do
+      get 'me', to: 'me#index'
+    end
+
     # fetchはOPTIONSが飛んでくるのでとりあえず200を返す
     match '*anything', to: 'api#handle_options_method', via: :options
   end

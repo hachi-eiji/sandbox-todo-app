@@ -11,4 +11,8 @@ module RequestHelper
     # 200のチェックをしてログイン成功していることを担保する
     expect(response).to have_http_status(200)
   end
+
+  def json
+    @___json___ ||= JSON.parse(response.body, { symbolize_names: true })
+  end
 end

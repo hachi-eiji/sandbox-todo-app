@@ -65,4 +65,8 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseRewinder.clean
   end
+
+  # load helper
+  Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+  config.include RequestHelper, type: :request
 end

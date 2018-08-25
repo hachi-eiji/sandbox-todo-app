@@ -12,6 +12,7 @@ jobs:
         environment:
           MYSQL_ROOT_PASSWORD: 'root'
           MYSQL_DATABASE: sandbox-todo-app_test
+      - image: redis
     environment:
       - RAILS_ENV: test
     steps:

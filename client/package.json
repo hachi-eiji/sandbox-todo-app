@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --aot",
-    "mock-start": "ng serve --aot -c=mock",
+    "start": "ng serve",
+    "mock-start": "ng serve -c=mock",
     "build": "ng build",
     "mock-build": "echo 'build to dist dir'; ng build",
     "test": "ng test",

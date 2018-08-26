@@ -1,4 +1,5 @@
 <div class="l-main">
+  <app-header *ngIf="!hideHeader"></app-header>
   <router-outlet></router-outlet>
   <app-loading></app-loading>
 </div>

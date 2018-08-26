@@ -1,23 +1,25 @@
-import {CommonModule} from '@angular/common';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {NgModule, Optional, SkipSelf} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { HeaderComponent } from './header/header.component';
 
-import {HttpRequestInterceptor} from './http/http-request-interceptor';
-import {HttpService} from './http/http.service';
-import {LoadingComponent} from './loading/loading.component';
+import { HttpRequestInterceptor } from './http/http-request-interceptor';
+import { HttpService } from './http/http.service';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
   ],
-  declarations: [LoadingComponent],
+  declarations: [LoadingComponent, HeaderComponent],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true},
     HttpService,
   ],
   exports: [
-    LoadingComponent
+    LoadingComponent,
+    HeaderComponent,
   ]
 })
 export class CoreModule {

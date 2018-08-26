@@ -1,17 +1,18 @@
 require 'rails_helper'
 
-describe Api::LoginController, :type => :controller do
-  describe 'POST #show' do
+RSpec.describe 'Api::Login', type: :request do
+  include RequestHelper
+
+  describe 'POST /api/login' do
     context 'すでにアクティベート済み' do
-      it 'ログインIDパスワードが正しい' do
+      it 'works! (now write some real specs)' do
         u        = create(:user, email: 'test@example.com')
         u.active = true
         u.save
         params = { loginId: 'test@example.com', password: 'test' }
-        post :show, params: params, format: :jbuilder
-        expect(response.status).to eq(200)
+        post api_login_path, params: params, headers: header
+        expect(response).to have_http_status 200
       end
-
 
       it 'ログインIDパスワードが正しくない' do
         create(:user, email: 'test@example.com')
@@ -19,8 +20,8 @@ describe Api::LoginController, :type => :controller do
         u.active = true
         u.save
         params = { loginId: 'test@example.com', password: 'wrong' }
-        post :show, params: params, format: :jbuilder
-        expect(response.status).to eq(404)
+        post api_login_path, params: params, headers: header
+        expect(response).to have_http_status 404
       end
     end
 
@@ -28,14 +29,14 @@ describe Api::LoginController, :type => :controller do
       it 'ログインIDパスワードが正しい' do
         create(:user, email: 'test@example.com')
         params = { loginId: 'test@example.com', password: 'test' }
-        post :show, params: params, format: :jbuilder
-        expect(response.status).to eq(404)
+        post api_login_path, params: params, headers: header
+        expect(response).to have_http_status 404
       end
     end
   end
 
 
-  describe 'POST #activate' do
+  describe 'POST /api/activate' do
     context 'すでにアクティベート済み' do
       it 'ログインIDパスワードが正しい' do
         u                  = create(:user, email: 'test@example.com')
@@ -44,13 +45,12 @@ describe Api::LoginController, :type => :controller do
         u.save
 
         params = { loginId: 'test@example.com', password: 'test', code: 'test' }
-        post :activate, params: params, format: :jbuilder
+        post api_activate_path, params: params, headers: header
         u.reload
-        expect(response.status).to eq(404)
+        expect(response).to have_http_status 404
         expect(u.active?).to eq(true)
       end
     end
-
 
     context '未アクティベート' do
       it 'ログインIDパスワードが正しい' do
@@ -59,12 +59,11 @@ describe Api::LoginController, :type => :controller do
         u.save
 
         params = { loginId: 'test@example.com', password: 'test', code: 'test' }
-        post :activate, params: params, format: :jbuilder
+        post api_activate_path, params: params, headers: header
         u.reload
-        expect(response.status).to eq(200)
+        expect(response).to have_http_status 200
         expect(u.active?).to eq(true)
       end
-
 
       it 'ログインIDパスワードが正しくない' do
         u                  = create(:user, email: 'test@example.com')
@@ -72,11 +71,10 @@ describe Api::LoginController, :type => :controller do
         u.save
 
         params = { loginId: 'test@example.com', password: 'test2', code: 'test' }
-        post :activate, params: params, format: :jbuilder
-        expect(response.status).to eq(404)
+        post api_activate_path, params: params, headers: header
+        expect(response).to have_http_status 404
         expect(u.active?).to eq(false)
       end
-
 
       it 'アクティベートコードが未入力' do
         u                  = create(:user, email: 'test@example.com')
@@ -84,8 +82,8 @@ describe Api::LoginController, :type => :controller do
         u.save
 
         params = { loginId: 'test@example.com', password: 'test' }
-        post :activate, params: params, format: :jbuilder
-        expect(response.status).to eq(404)
+        post api_activate_path, params: params, headers: header
+        expect(response).to have_http_status 404
         expect(u.active?).to eq(false)
       end
     end

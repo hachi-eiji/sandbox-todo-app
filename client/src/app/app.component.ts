@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, Event, NavigationStart } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -14,14 +15,11 @@ export class AppComponent {
   ];
 
   constructor(private router: Router) {
-    router.events.subscribe((event: Event) => {
-      if (event instanceof NavigationStart) {
-        this.hideHeader = this.isHideHeader(event.url);
-      }
-    });
+    this.router.events.pipe(filter(e => e instanceof NavigationStart))
+      .subscribe((e: NavigationStart) => this.hideHeader = this.isInvisibleHeader(e.url));
   }
 
-  private isHideHeader(url: string): boolean {
+  private isInvisibleHeader(url: string): boolean {
     return this.HIDE_HEADER_URLS.includes(url);
   }
 }

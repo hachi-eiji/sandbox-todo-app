@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { Router, NavigationStart, ActivatedRoute, Event, NavigationEnd, Data } from '@angular/router';
+import { filter, map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +10,24 @@ import { filter } from 'rxjs/operators';
 export class AppComponent {
   hideHeader: boolean;
 
-  private readonly HIDE_HEADER_URLS = [
-    '/login'
-  ];
-
-  constructor(private router: Router) {
-    this.router.events.pipe(filter(e => e instanceof NavigationStart))
-      .subscribe((e: NavigationStart) => this.hideHeader = this.isInvisibleHeader(e.url));
-  }
-
-  private isInvisibleHeader(url: string): boolean {
-    return this.HIDE_HEADER_URLS.includes(url);
+  constructor(router: Router, activatedRoute: ActivatedRoute) {
+    router.events.pipe(
+      filter((e: Event) => e instanceof NavigationEnd),
+      map(() => {
+        let route = activatedRoute.firstChild;
+        let child = route;
+        while (child) {
+          if (child.firstChild) {
+            child = child.firstChild;
+            route = child;
+          } else {
+            child = null;
+          }
+        }
+        return route;
+      }),
+      mergeMap(route => route.data),
+    )
+    .subscribe((d: Data) => this.hideHeader = d && !!d.isInvisibleHeader);
   }
 }

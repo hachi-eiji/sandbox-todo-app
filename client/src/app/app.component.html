@@ -1,5 +1,9 @@
-<div class="l-main">
-  <app-header *ngIf="!hideHeader"></app-header>
-  <router-outlet></router-outlet>
-  <app-loading></app-loading>
+<div class="l-container">
+  <div class="l-header">
+    <app-header *ngIf="!hideHeader"></app-header>
+  </div>
+  <div class="l-main">
+    <router-outlet></router-outlet>
+    <app-loading></app-loading>
+  </div>
 </div>

@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { tap, mergeMap } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 
 import { HttpService } from '../../core/http/http.service';
-import { LoginResult } from '../../login/shared/login-result.model';
 import { User } from './user';
 import * as UserAction from './user.action';
 import * as UserReducer from './user.reducer';
@@ -18,9 +17,8 @@ export class UserService {
   constructor(private httpService: HttpService, private store: Store<User>) {
   }
 
-  login(id: string, password: string): Observable<LoginResult> {
-    return this.httpService.post<LoginResult>('/login', { loginId: id, password: password })
-      .pipe(tap(result => this.store.dispatch(new UserAction.Login({user: result.data}))));
+  login(loginId: string, password: string) {
+    this.store.dispatch(new UserAction.Login({loginId, password}));
   }
 
   get(): Observable<User> {

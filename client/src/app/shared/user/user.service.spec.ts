@@ -28,29 +28,12 @@ describe('UserService', () => {
   });
 
   it('should store user when can get user', () => {
-    const data = {id: 100, name: 'test'};
-    httpServiceSpy.post.and.returnValue(of({id: 1, message: 'ok', data: data}));
-    tester.login('user', 'pass').subscribe(d => {
-      expect(d.data).toEqual(data);
-      store.select('user').subscribe(u => expect(u).toEqual(data));
-    }, e => fail(e));
-  });
-
-  it('should not store when an error occurred', () => {
-    const error = new HttpErrorResponse({
-      error: {message: 'not found'},
-      status: 404
-    });
-    httpServiceSpy.post.and.returnValue(throwError(error));
-    tester.login('not found user', 'pass').subscribe(d => fail(d), (e: HttpErrorResponse) => {
-      expect(e.status).toBe(404);
-      expect(e.error.message).toEqual('not found');
-      store.select('user').subscribe(u => expect(u).toBeNull());
-    });
+    tester.login('user', 'pass');
+    expect(store.dispatch).toHaveBeenCalledWith(new UserAction.Login({loginId: 'user', password: 'pass'}));
   });
 
   it('should get user when data stored', () => {
-    store.dispatch(new UserAction.Login({user: {id: 1, name: 'test'}}));
+    store.dispatch(new UserAction.LoginSuccess({user: {id: 1, name: 'test'}}));
     tester.get().subscribe(d => {
       expect(d).toEqual({id: 1, name: 'test'});
     });

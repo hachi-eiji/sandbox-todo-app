@@ -1,26 +1,41 @@
+import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { of } from 'rxjs';
+import { Router } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule, Store } from '@ngrx/store';
+import { AuthSuccessAction } from '../../shared/user/auth.action';
 import { User } from '../../shared/user/user';
-import { UserService } from '../../shared/user/user.service';
+import { UserEffect } from '../../shared/user/user.effect';
+import { userReducer } from '../../shared/user/user.reducer';
 
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-  let userService;
+  let store: Store<User>;
+  let router: Router;
 
   beforeEach(async(() => {
-    userService = jasmine.createSpyObj('UserService', ['get']);
+    router = jasmine.createSpyObj('Router', ['navigate']);
     TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule, StoreModule.forRoot({user: userReducer}),
+        EffectsModule.forRoot([UserEffect]),
+      ],
       declarations: [HeaderComponent],
-      providers: [{provide: UserService, useValue: userService}]
+      providers: [
+        {provide: Router, useValue: router}
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
+    store = TestBed.get(Store);
+    spyOn(store, 'dispatch').and.callThrough();
+
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
   });
@@ -31,10 +46,8 @@ describe('HeaderComponent', () => {
   });
 
   it('should get user name', () => {
-    const user: User = {id: 1, name: 'mike'};
-    const spy = userService.get.and.returnValue(of(user));
+    store.dispatch(new AuthSuccessAction({user: {id: 1, name: 'mike'}}));
     fixture.detectChanges();
-    expect(spy.calls.count()).toEqual(1);
     expect(fixture.debugElement.query(By.css('header')).nativeElement.textContent).toEqual('mike');
   });
 });

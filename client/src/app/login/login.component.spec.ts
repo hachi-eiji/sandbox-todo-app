@@ -6,22 +6,20 @@ import { Store, StoreModule } from '@ngrx/store';
 
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
+import * as UserAction from '../shared/user//user.action';
 import { User } from '../shared/user/user';
 import { UserEffect } from '../shared/user/user.effect';
 import { userReducer } from '../shared/user/user.reducer';
-import { UserService } from '../shared/user/user.service';
 import { LoginComponent } from './login.component';
 
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let loginService;
   let router: Router;
   let store: Store<User>;
 
   beforeEach(async(() => {
-    loginService = jasmine.createSpyObj('UserService', ['login']);
     router = jasmine.createSpyObj('Router', ['navigate']);
 
     TestBed.configureTestingModule({
@@ -32,7 +30,6 @@ describe('LoginComponent', () => {
         EffectsModule.forRoot([UserEffect]),
       ],
       providers: [
-        {provide: UserService, useValue: loginService},
         {provide: Router, useValue: router}
       ]
     })
@@ -59,7 +56,8 @@ describe('LoginComponent', () => {
     component.loginForm.get('loginId').setValue('user');
     component.loginForm.get('password').setValue('password');
     component.login();
-    expect(loginService.login).toHaveBeenCalledWith('user', 'password');
+    const action = new UserAction.Login({loginId: 'user', password: 'password'});
+    expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 
   it('should display message "input id, password', () => {

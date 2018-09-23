@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
+import * as UserAction from '../shared/user//user.action';
 import { User } from '../shared/user/user';
 import * as UserReducer from '../shared/user/user.reducer';
-import { UserService } from '../shared/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private store: Store<User>,
-    private userService: UserService,
     private fb: FormBuilder,
   ) {
     this.loginForm = this.fb.group(
@@ -37,7 +36,9 @@ export class LoginComponent implements OnInit {
   login() {
     const form = this.loginForm;
     if (form.valid) {
-      this.userService.login(form.get('loginId').value, form.get('password').value);
+      this.store.dispatch(new UserAction.Login(
+        {loginId: form.get('loginId').value, password: form.get('password').value}
+      ));
     } else {
       this.message = 'ログインIDもしくはパスワードを入力してください';
     }

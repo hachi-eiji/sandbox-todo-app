@@ -20,7 +20,7 @@ export class UserService {
 
   login(id: string, password: string): Observable<LoginResult> {
     return this.httpService.post<LoginResult>('/login', { loginId: id, password: password })
-      .pipe(tap(result => this.store.dispatch(new UserAction.Login(result.data))));
+      .pipe(tap(result => this.store.dispatch(new UserAction.Login({user: result.data}))));
   }
 
   get(): Observable<User> {

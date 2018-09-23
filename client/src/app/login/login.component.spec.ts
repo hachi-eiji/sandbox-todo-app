@@ -1,17 +1,17 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {ReactiveFormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store, StoreModule } from '@ngrx/store';
 
-import {Observable} from 'rxjs/internal/Observable';
-import {throwError} from 'rxjs/internal/observable/throwError';
+import { Observable } from 'rxjs/internal/Observable';
+import { throwError } from 'rxjs/internal/observable/throwError';
 
-import {CoreModule} from '../core/core.module';
-import {SharedModule} from '../shared/shared.module';
-import {LoginComponent} from './login.component';
-import {UserService} from '../shared/user/user.service';
-import {User} from '../shared/user/user';
+import { CoreModule } from '../core/core.module';
+import { SharedModule } from '../shared/shared.module';
+import { User } from '../shared/user/user';
 import * as UserAction from '../shared/user/user.action';
+import { UserService } from '../shared/user/user.service';
+import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -80,7 +80,7 @@ describe('LoginComponent', () => {
       expect(component.message).toEqual(undefined);
       const spy = router.navigate as jasmine.Spy;
       const navArgs = spy.calls.first().args[0];
-      const action = new UserAction.Login({id: 1, name: 'foo'});
+      const action = new UserAction.Login({user: {id: 1, name: 'foo'}});
       store.dispatch(action);
       expect(navArgs).toEqual(['tasks']);
     });

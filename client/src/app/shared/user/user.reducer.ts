@@ -11,7 +11,7 @@ export const selectUser = (state: UserState) => state.user;
 export function userReducer(state: User, action: UserActionTypesUnion): User {
   switch (action.type) {
     case UserActionTypes.LOGIN:
-      return action.payload;
+      return action.payload.user;
     default:
       return null;
   }

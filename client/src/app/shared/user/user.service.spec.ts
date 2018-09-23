@@ -50,7 +50,7 @@ describe('UserService', () => {
   });
 
   it('should get user when data stored', () => {
-    store.dispatch(new UserAction.Login({id: 1, name: 'test'}));
+    store.dispatch(new UserAction.Login({user: {id: 1, name: 'test'}}));
     tester.get().subscribe(d => {
       expect(d).toEqual({id: 1, name: 'test'});
     });

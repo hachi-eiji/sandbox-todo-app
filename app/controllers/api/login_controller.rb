@@ -10,7 +10,11 @@ class Api::LoginController < Api::ApiController
       @body = {
         id: 'ok',
         message: 'user_exists',
-        status: status
+        status: status,
+        data: {
+          id: auth.id,
+          name: user.name
+        }
       }
     else
       status = 404

@@ -1,3 +1,4 @@
+import { createSelector, createFeatureSelector } from '@ngrx/store';
 import { User } from './user';
 import { UserActionTypes, UserActionTypesUnion } from './user.action';
 
@@ -6,13 +7,17 @@ export interface UserState {
   user: User;
 }
 
-export const selectUser = (state: UserState) => state.user;
+const userFeature = createFeatureSelector<UserState>('user');
+export const selectUser = createSelector(userFeature, (state) => state ? state.user : null);
 
-export function userReducer(state: User, action: UserActionTypesUnion): User {
+export function userReducer(state: UserState, action: UserActionTypesUnion): UserState {
   switch (action.type) {
     case UserActionTypes.LOGIN:
-      return action.payload.user;
+      return {
+        ...state,
+        user: action.payload.user
+      };
     default:
-      return null;
+      return state;
   }
 }

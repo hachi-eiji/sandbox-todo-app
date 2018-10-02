@@ -1,5 +1,6 @@
-import { Login, LoginSuccess } from './user.action';
+import { Login, LoginSuccess, LoginFailure } from './user.action';
 import * as userReducer from './user.reducer';
+import { UserState } from './user.reducer';
 
 describe('UserReducer', () => {
   describe('LOGIN', () => {
@@ -16,6 +17,23 @@ describe('UserReducer', () => {
       const user = {id: 100, name: 'login success user'};
       const loginAction = new LoginSuccess({user});
       expect(userReducer.userReducer(state, loginAction)).toEqual({user, error: null});
+    });
+  });
+
+  describe('LOGIN_FAILURE', () => {
+    let actual: UserState;
+    beforeEach(() => {
+      const state = {user: {id: 1, name: 'test'}, error: null};
+      const loginAction = new LoginFailure({error: 'some error'});
+      actual = userReducer.userReducer(state, loginAction);
+    });
+
+    it('should user is null', () => {
+      expect(actual.user).toBeNull();
+    });
+
+    it('should error is not null', () => {
+      expect(actual.error).toEqual('some error');
     });
   });
 });

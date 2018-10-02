@@ -1,3 +1,4 @@
+import { AuthSuccessAction } from './auth.action';
 import { Login, LoginSuccess, LoginFailure } from './user.action';
 import * as userReducer from './user.reducer';
 import { UserState } from './user.reducer';
@@ -34,6 +35,24 @@ describe('UserReducer', () => {
 
     it('should error is not null', () => {
       expect(actual.error).toEqual('some error');
+    });
+  });
+
+  describe('AUTH_SUCCESS', () => {
+    let actual: UserState;
+    const user = {id: 100, name: 'auth success user'};
+    beforeEach(() => {
+      const state = {user, error: null};
+      const loginAction = new AuthSuccessAction({user});
+      actual = userReducer.userReducer(state, loginAction);
+    });
+
+    it('should user is not null', () => {
+      expect(actual.user).toEqual(user);
+    });
+
+    it('should error is null', () => {
+      expect(actual.error).toBeNull();
     });
   });
 });

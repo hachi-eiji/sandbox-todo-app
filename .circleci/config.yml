@@ -68,14 +68,16 @@ jobs:
     steps:
       - checkout
       - *restore_npm_cache
-      - run: cd client && npm install
+      - run:
+          working_directory: client
+          command: npm install
       - save_cache:
           key: *cached_npm_name
           paths:
             - client/node_modules
-      - type: shell
-        command: |
-          cd client && npm test
+      - run:
+          working_directory: client
+          command: npm test
       - persist_to_workspace:
           root: .
           paths:
@@ -107,4 +109,3 @@ workflows:
           requires:
             - server_test
             - client_build
-

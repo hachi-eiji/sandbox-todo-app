@@ -1,6 +1,23 @@
 version: 2
 
 jobs:
+  deploy:
+    docker:
+      - image: circleci/ruby:2.4-node-browsers
+    environment:
+      - RAILS_ENV: production
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - restore_cache:
+          keys:
+            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1
+      - run: bundle install -j 3 --path vendor/bundle
+      - run:
+          command: ls -l public # ここは確認用
+
   server_test:
     docker:
       - image: circleci/ruby:2.4-node-browsers
@@ -52,12 +69,35 @@ jobs:
       - type: shell
         command: |
           cd client && npm test
+      - persist_to_workspace:
+          root: .
+          paths:
+            - client
+  client_build:
+    docker:
+      - image: circleci/node:8.12-browsers
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          working_directory: client
+          command: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - public
 
 workflows:
   version: 2
-  server:
+  build_and_deploy:
     jobs:
       - server_test
-  client:
-    jobs:
       - client_test
+      - client_build:
+          requires:
+            - client_test
+      - deploy:
+          requires:
+            - server_test
+            - client_build
+

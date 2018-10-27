@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-button',
-  templateUrl: './button.component.html',
+  templateUrl: './button.component.pug',
   styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent {

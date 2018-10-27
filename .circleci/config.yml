@@ -1,5 +1,21 @@
 version: 2
 
+references:
+  cached_gem_name: &cached_gem_name
+    gem-cache-v1-{{ checksum "Gemfile.lock" }}
+  restore_bundle_cache: &restore_bundle_cache
+    restore_cache:
+      keys:
+        - *cached_gem_name
+        - gem-cache-v1
+  cached_npm_name: &cached_npm_name
+    npm-cache-v1-{{ checksum "client/package-lock.json" }}
+  restore_npm_cache: &restore_npm_cache
+    restore_cache:
+      keys:
+        - *cached_npm_name
+        - npm-cache-v1
+
 jobs:
   deploy:
     docker:
@@ -10,10 +26,7 @@ jobs:
       - checkout
       - attach_workspace:
           at: .
-      - restore_cache:
-          keys:
-            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v1
+      - *restore_bundle_cache
       - run: bundle install -j 3 --path vendor/bundle
       - run:
           command: ls -l public # ここは確認用
@@ -35,13 +48,10 @@ jobs:
       - RAILS_ENV: test
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - gem-cache-v1-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v1
+      - *restore_bundle_cache
       - run: bundle install -j 3 --path vendor/bundle
       - save_cache:
-          key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
+          key: *cached_gem_name
           paths:
             - vendor/bundle
       - run:
@@ -57,13 +67,10 @@ jobs:
       - image: circleci/node:8.12-browsers
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - npm-cache-v1-{{ checksum "client/package-lock.json" }}
-            - npm-cache-v1
+      - *restore_npm_cache
       - run: cd client && npm install
       - save_cache:
-          key: npm-cache-v1-{{ checksum "client/package-lock.json" }}
+          key: *cached_npm_name
           paths:
             - client/node_modules
       - type: shell

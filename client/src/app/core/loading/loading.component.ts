@@ -4,7 +4,7 @@ import {LoadingService} from './loading.service';
 
 @Component({
   selector: 'app-loading',
-  templateUrl: './loading.component.html',
+  templateUrl: './loading.component.pug',
   styleUrls: ['./loading.component.scss']
 })
 export class LoadingComponent implements OnInit, OnDestroy {

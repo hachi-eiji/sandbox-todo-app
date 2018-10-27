@@ -5,7 +5,7 @@ import { Tasks } from './shared/tasks.model';
 
 @Component({
   selector: 'app-tasks',
-  templateUrl: './tasks.component.html',
+  templateUrl: './tasks.component.pug',
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {

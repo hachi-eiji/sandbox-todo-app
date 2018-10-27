@@ -1,0 +1,21 @@
+table.l-tasks
+  thead
+    tr
+      td
+      td タイトル
+      td 説明
+      td 期限
+      td 削除
+  tbody
+    ng-container(*ngIf="(tasks$ | async) as t")
+      ng-container(*ngIf="t.data.length; else notFound")
+        tr(*ngFor="let task of t.data")
+          td.m-done
+            input(type="radio")
+          td.m-title {{task.title}}
+          td.m-description {{task.description}}
+          td.m-due_date {{task.due_date}}
+          td.m-delete
+            app-button(text="削除", (onClick)="delete(task.id)", buttonSize="small", buttonType="danger")
+    ng-template(#notFound)
+      td.no-task-message(colspan="4") data not found

@@ -25,7 +25,7 @@ describe('AlertComponent', () => {
     fixture.detectChanges();
     const de = fixture.debugElement.query(By.css('div'));
     const el = de.nativeElement;
-    expect(el.className).toContain('alert__error');
+    expect(el.className).toContain('alert alert__error');
     expect(el.textContent).toEqual('error message');
   });
 
@@ -34,7 +34,7 @@ describe('AlertComponent', () => {
     fixture.detectChanges();
     const de = fixture.debugElement.query(By.css('div'));
     const el = de.nativeElement;
-    expect(el.className).toContain('alert__success');
+    expect(el.className).toContain('alert alert__success');
     expect(el.textContent).toEqual('success message');
   });
 });

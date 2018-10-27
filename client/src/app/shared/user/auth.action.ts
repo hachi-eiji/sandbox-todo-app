@@ -2,9 +2,9 @@ import { Action } from '@ngrx/store';
 import { User } from './user';
 
 export enum AuthActionTypes {
-  AUTH = 'auth',
-  AUTH_SUCCESS = 'auth_success',
-  AUTH_FAILURE = 'auth_failure'
+  AUTH = '[Auth Page] auth',
+  AUTH_SUCCESS = '[Auth API] auth_success',
+  AUTH_FAILURE = '[Auth API] auth_failure'
 }
 
 export class AuthAction implements Action {

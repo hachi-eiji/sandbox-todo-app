@@ -8,7 +8,7 @@ import { User } from './shared/user/user';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  templateUrl: './app.component.pug',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {

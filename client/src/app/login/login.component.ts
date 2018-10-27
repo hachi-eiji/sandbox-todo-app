@@ -7,7 +7,7 @@ import * as UserReducer from '../shared/user/user.reducer';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
+  templateUrl: './login.component.pug',
   styleUrls: ['./login.component.scss', 'login.component.sp.scss']
 })
 export class LoginComponent implements OnInit {

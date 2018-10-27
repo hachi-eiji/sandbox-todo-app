@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
+import * as UserAction from '../shared/user//user.action';
 import { User } from '../shared/user/user';
-import { UserService } from '../shared/user/user.service';
-
+import * as UserReducer from '../shared/user/user.reducer';
 
 @Component({
   selector: 'app-login',
@@ -12,14 +11,12 @@ import { UserService } from '../shared/user/user.service';
   styleUrls: ['./login.component.scss', 'login.component.sp.scss']
 })
 export class LoginComponent implements OnInit {
-  message: string;
   loginForm: FormGroup;
+  message: string;
 
   constructor(
     private store: Store<User>,
-    private userService: UserService,
     private fb: FormBuilder,
-    private router: Router
   ) {
     this.loginForm = this.fb.group(
       {
@@ -27,6 +24,10 @@ export class LoginComponent implements OnInit {
         password: ['', Validators.required]
       }
     );
+
+    this.store.pipe(select(UserReducer.loginError)).subscribe(message => {
+      this.message = message;
+    });
   }
 
   ngOnInit() {
@@ -35,15 +36,9 @@ export class LoginComponent implements OnInit {
   login() {
     const form = this.loginForm;
     if (form.valid) {
-      this.userService.login(form.get('loginId').value, form.get('password').value)
-        .subscribe(() => {
-            this.router.navigate(['tasks']);
-          },
-          error => {
-            if (error.status === 404) {
-              this.message = error.error.message;
-            }
-          });
+      this.store.dispatch(new UserAction.Login(
+        {loginId: form.get('loginId').value, password: form.get('password').value}
+      ));
     } else {
       this.message = 'ログインIDもしくはパスワードを入力してください';
     }

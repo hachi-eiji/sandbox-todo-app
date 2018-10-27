@@ -64,7 +64,7 @@ jobs:
 
   client_test:
     docker:
-      - image: circleci/node:8.12-browsers
+      - image: circleci/node:10.12-browsers
     steps:
       - checkout
       - *restore_npm_cache
@@ -84,7 +84,7 @@ jobs:
             - client
   client_build:
     docker:
-      - image: circleci/node:8.12-browsers
+      - image: circleci/node:10.12-browsers
     steps:
       - attach_workspace:
           at: .

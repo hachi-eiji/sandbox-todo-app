@@ -1,6 +1,7 @@
 version: 2
+
 jobs:
-  build:
+  server_test:
     docker:
       - image: circleci/ruby:2.4-node-browsers
         environment:
@@ -26,15 +27,6 @@ jobs:
           key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
-      - restore_cache:
-          keys:
-          - npm-cache-v1-{{ checksum "client/package-lock.json" }}
-          - npm-cache-v1
-      - run: cd client && npm install
-      - save_cache:
-          key: npm-cache-v1-{{ checksum "client/package-lock.json" }}
-          paths:
-            - client/node_modules
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
@@ -42,6 +34,30 @@ jobs:
       - type: shell
         command: |
           bin/rspec spec $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings --timings-type=filename)
+
+  client_test:
+    docker:
+      - image: circleci/node:8.12-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - npm-cache-v1-{{ checksum "client/package-lock.json" }}
+            - npm-cache-v1
+      - run: cd client && npm install
+      - save_cache:
+          key: npm-cache-v1-{{ checksum "client/package-lock.json" }}
+          paths:
+            - client/node_modules
       - type: shell
         command: |
           cd client && npm test
+
+workflows:
+  version: 2
+  server:
+    jobs:
+      - server_test
+  client:
+    jobs:
+      - client_test

@@ -14,13 +14,13 @@ export class AuthEffect {
     ofType(AuthActionTypes.AUTH),
     exhaustMap(() => {
       return this.httpService.get<User>('/users/me').pipe(
-        map((user) => new AuthSuccessAction({user})),
-        catchError((error) => of(new AuthFailureAction({error: error.error})))
+        map(user => new AuthSuccessAction({ user })),
+        catchError(error => of(new AuthFailureAction({ error: error.error })))
       );
     })
   );
 
-  @Effect({dispatch: false})
+  @Effect({ dispatch: false })
   authFailure$ = this.actions$.pipe(
     ofType(AuthActionTypes.AUTH_FAILURE),
     tap(() => {
@@ -30,6 +30,5 @@ export class AuthEffect {
     })
   );
 
-  constructor(private actions$: Actions, private httpService: HttpService, private router: Router) {
-  }
+  constructor(private actions$: Actions, private httpService: HttpService, private router: Router) {}
 }

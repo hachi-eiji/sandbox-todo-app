@@ -16,7 +16,5 @@ export class HeaderComponent implements OnInit {
     this.user$ = store.pipe(select(UserReducer.selectUser));
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

@@ -24,7 +24,7 @@ const appRoutes: Routes = [
 
 // console.log all actions
 export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
-  return function (state, action) {
+  return function(state, action) {
     console.log('state', state);
     console.log('action', action);
     return reducer(state, action);
@@ -33,28 +33,18 @@ export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
 
 export const metaReducers: MetaReducer<any>[] = [debug];
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    AlertComponent,
-    NotFoundComponent,
-    ConfirmModalComponent
-  ],
+  declarations: [AppComponent, AlertComponent, NotFoundComponent, ConfirmModalComponent],
   imports: [
     BrowserModule,
     CoreModule,
     FormsModule,
     LoginModule,
-    StoreModule.forRoot({user: userReducer}, {metaReducers}),
+    StoreModule.forRoot({ user: userReducer }, { metaReducers }),
     EffectsModule.forRoot([UserEffect, AuthEffect]),
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [
-    TokenService,
-    TokenStorageService,
-  ],
+  providers: [TokenService, TokenStorageService],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule {}

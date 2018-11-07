@@ -7,9 +7,7 @@ import { Tasks } from './tasks.model';
   providedIn: 'root'
 })
 export class TaskService {
-
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
   getList(): Observable<Tasks> {
     return this.httpService.get<Tasks>('/tasks');

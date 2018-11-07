@@ -14,31 +14,25 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   message: string;
 
-  constructor(
-    private store: Store<User>,
-    private fb: FormBuilder,
-  ) {
-    this.loginForm = this.fb.group(
-      {
-        loginId: ['', Validators.required],
-        password: ['', Validators.required]
-      }
-    );
+  constructor(private store: Store<User>, private fb: FormBuilder) {
+    this.loginForm = this.fb.group({
+      loginId: ['', Validators.required],
+      password: ['', Validators.required]
+    });
 
     this.store.pipe(select(UserReducer.loginError)).subscribe(message => {
       this.message = message;
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   login() {
     const form = this.loginForm;
     if (form.valid) {
-      this.store.dispatch(new UserAction.Login(
-        {loginId: form.get('loginId').value, password: form.get('password').value}
-      ));
+      this.store.dispatch(
+        new UserAction.Login({ loginId: form.get('loginId').value, password: form.get('password').value })
+      );
     } else {
       this.message = 'ログインIDもしくはパスワードを入力してください';
     }

@@ -10,25 +10,19 @@ export enum AuthActionTypes {
 export class AuthAction implements Action {
   readonly type = AuthActionTypes.AUTH;
 
-  constructor() {
-  }
+  constructor() {}
 }
 
 export class AuthSuccessAction implements Action {
   readonly type = AuthActionTypes.AUTH_SUCCESS;
 
-  constructor(public payload: { user: User }) {
-  }
+  constructor(public payload: { user: User }) {}
 }
 
 export class AuthFailureAction implements Action {
   readonly type = AuthActionTypes.AUTH_FAILURE;
 
-  constructor(public payload: { error: any }) {
-  }
+  constructor(public payload: { error: any }) {}
 }
 
-export type AuthActionTypesUnion = AuthAction
-  | AuthSuccessAction
-  | AuthFailureAction
-  ;
+export type AuthActionTypesUnion = AuthAction | AuthSuccessAction | AuthFailureAction;

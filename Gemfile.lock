@@ -1,6 +1,6 @@
 GIT
-  remote: git@github.com:winebarrel/ridgepole.git
-  revision: 3f9a231f1b1d2915ba5075db19483da841664577
+  remote: https://github.com/winebarrel/ridgepole
+  revision: 1e21c303e1591366bafc9f0ddfe8d9082dca70f2
   branch: 0.7
   specs:
     ridgepole (0.7.4)
@@ -267,4 +267,4 @@ DEPENDENCIES
   spring
 
 BUNDLED WITH
-   1.16.4
+   1.17.1

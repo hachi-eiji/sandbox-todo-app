@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TokenStorageService {
   private TOKEN_KEY = 'token';
 
   constructor() {
-    if (('sessionStorage' in window) && (window.sessionStorage !== null)) {
+    if ('sessionStorage' in window && window.sessionStorage !== null) {
     } else {
       console.warn('can not user session storage');
     }

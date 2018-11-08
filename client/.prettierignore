@@ -1,0 +1,6 @@
+src/environments/*
+src/**/*.spec.ts
+src/test.ts
+src/polyfills.ts
+src/main.ts
+src/typings.d.ts

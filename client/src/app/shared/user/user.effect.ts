@@ -7,7 +7,6 @@ import { HttpService } from '../../core/http/http.service';
 import { LoginResult } from '../../login/shared/login-result.model';
 import * as UserAction from './user.action';
 
-
 @Injectable()
 export class UserEffect {
   @Effect()
@@ -15,20 +14,18 @@ export class UserEffect {
     ofType(UserAction.UserActionTypes.LOGIN),
     map((action: UserAction.Login) => action.payload),
     exhaustMap(payload => {
-      return this.httpService.post<LoginResult>('/login', payload)
-        .pipe(
-          map(result => new UserAction.LoginSuccess({user: result.data})),
-          catchError(error => of(new UserAction.LoginFailure({error: error.error})))
-        );
+      return this.httpService.post<LoginResult>('/login', payload).pipe(
+        map(result => new UserAction.LoginSuccess({ user: result.data })),
+        catchError(error => of(new UserAction.LoginFailure({ error: error.error })))
+      );
     })
   );
 
-  @Effect({dispatch: false})
+  @Effect({ dispatch: false })
   $loginSuccess = this.actions$.pipe(
     ofType(UserAction.UserActionTypes.LOGIN_SUCCESS),
     tap(() => this.router.navigate(['tasks']))
   );
 
-  constructor(private actions$: Actions, private httpService: HttpService, private router: Router) {
-  }
+  constructor(private actions$: Actions, private httpService: HttpService, private router: Router) {}
 }

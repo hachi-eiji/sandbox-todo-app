@@ -5,7 +5,6 @@ import { filter, map, mergeMap } from 'rxjs/operators';
 import * as AuthAction from './shared/user/auth.action';
 import { User } from './shared/user/user';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.pug',
@@ -15,11 +14,13 @@ export class AppComponent {
   hideHeader: boolean;
 
   constructor(router: Router, private activatedRoute: ActivatedRoute, store: Store<User>) {
-    router.events.pipe(
-      filter((e: Event) => e instanceof NavigationEnd),
-      map(() => this.getCurrentActivatedRoute()),
-      mergeMap(route => route.data)
-    ).subscribe((data: Data) => this.handleSubscribe(data));
+    router.events
+      .pipe(
+        filter((e: Event) => e instanceof NavigationEnd),
+        map(() => this.getCurrentActivatedRoute()),
+        mergeMap(route => route.data)
+      )
+      .subscribe((data: Data) => this.handleSubscribe(data));
     store.dispatch(new AuthAction.AuthAction());
   }
 

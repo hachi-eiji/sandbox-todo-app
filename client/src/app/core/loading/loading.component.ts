@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs/internal/Subscription';
-import {LoadingService} from './loading.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/internal/Subscription';
+import { LoadingService } from './loading.service';
 
 @Component({
   selector: 'app-loading',
@@ -17,8 +17,7 @@ export class LoadingComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

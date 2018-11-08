@@ -1,4 +1,4 @@
-import {User} from '../../shared/user/user';
+import { User } from '../../shared/user/user';
 
 export interface LoginResult {
   id: string;

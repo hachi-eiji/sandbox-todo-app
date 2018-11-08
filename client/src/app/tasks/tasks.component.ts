@@ -11,8 +11,7 @@ import { Tasks } from './shared/tasks.model';
 export class TasksComponent implements OnInit {
   tasks$: Observable<Tasks>;
 
-  constructor(private taskService: TaskService) {
-  }
+  constructor(private taskService: TaskService) {}
 
   ngOnInit() {
     this.fetch();

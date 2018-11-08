@@ -6,8 +6,12 @@ export class Modal {
   okMessage = 'OK';
   cancelMessage = 'キャンセル';
 
-  constructor(message: string, okCallback: () => void, cancelCallback: () => void,
-              options?: { title?: string, okMessage?: string, cancelMessage?: string }) {
+  constructor(
+    message: string,
+    okCallback: () => void,
+    cancelCallback: () => void,
+    options?: { title?: string; okMessage?: string; cancelMessage?: string }
+  ) {
     this.message = message;
     this.okCallback = okCallback;
     this.cancelCallback = cancelCallback;

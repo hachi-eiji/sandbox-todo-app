@@ -2,7 +2,7 @@
   background-image: linear-gradient(180deg, #000000 0%, #000000 100%);
 }
 
-input [type = "button"] {
+input [type='button'] {
   cursor: pointer;
   &:focus {
     outline: 0;
@@ -20,7 +20,7 @@ input [type = "button"] {
   }
 
   &.submit {
-    background-image: linear-gradient(-180deg, #573BE1 0%, #2C1CC0 100%);
+    background-image: linear-gradient(-180deg, #573be1 0%, #2c1cc0 100%);
     color: #fff;
   }
   &.danger {
@@ -33,4 +33,3 @@ input [type = "button"] {
     width: 5em;
   }
 }
-

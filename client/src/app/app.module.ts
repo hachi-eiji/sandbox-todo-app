@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule, MetaReducer, ActionReducer } from '@ngrx/store';
 import { AppComponent } from './app.component';
-import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -31,7 +30,7 @@ export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
 export const metaReducers: MetaReducer<any>[] = [debug];
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent, ConfirmModalComponent],
+  declarations: [AppComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     CoreModule,

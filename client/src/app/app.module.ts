@@ -4,11 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule, MetaReducer, ActionReducer } from '@ngrx/store';
-import { AlertComponent } from './alert/alert.component';
 import { AppComponent } from './app.component';
-import { TokenStorageService } from './common/token-storage.service';
-import { TokenService } from './common/token.service';
-import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 import { CoreModule } from './core/core.module';
 import { LoginModule } from './login/login.module';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -34,7 +30,7 @@ export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
 export const metaReducers: MetaReducer<any>[] = [debug];
 
 @NgModule({
-  declarations: [AppComponent, AlertComponent, NotFoundComponent, ConfirmModalComponent],
+  declarations: [AppComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     CoreModule,
@@ -44,7 +40,6 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     EffectsModule.forRoot([UserEffect, AuthEffect]),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [TokenService, TokenStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Modal } from './modal.model';
 
 @Component({
@@ -9,12 +9,16 @@ import { Modal } from './modal.model';
 export class ConfirmModalComponent {
   @Input()
   modal: Modal;
+  @Output()
+  okButton = new EventEmitter();
+  @Output()
+  cancelButton = new EventEmitter();
 
   onOkButton() {
-    this.modal.okCallback();
+    this.okButton.emit();
   }
 
   onCancelButton() {
-    this.modal.cancelCallback();
+    this.cancelButton.emit();
   }
 }

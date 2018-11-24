@@ -5,7 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { metaReducers } from '../ngrx-debug';
 import { SharedModule } from '../shared/shared.module';
 import { TaskEffect } from './shared/task.effect';
-import { taskReducer } from './shared/task.reducer';
+import { tasksReducer } from './shared/tasks.reducer';
 
 import { TasksRoutingModule } from './tasks-routing.module';
 import { TasksComponent } from './tasks.component';
@@ -15,7 +15,7 @@ import { TasksComponent } from './tasks.component';
     CommonModule,
     SharedModule,
     TasksRoutingModule,
-    StoreModule.forFeature('task', taskReducer, { metaReducers }),
+    StoreModule.forFeature('tasks', tasksReducer, { metaReducers }),
     EffectsModule.forFeature([TaskEffect])
   ],
   declarations: [TasksComponent]

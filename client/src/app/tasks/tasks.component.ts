@@ -3,9 +3,9 @@ import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
 import * as TaskAction from './shared/task.action';
 import { Task } from './shared/task.model';
-import * as TaskReducer from './shared/task.reducer';
 import { TaskService } from './shared/task.service';
 import { Tasks } from './shared/tasks.model';
+import * as TaskReducer from './shared/tasks.reducer';
 
 @Component({
   selector: 'app-tasks',

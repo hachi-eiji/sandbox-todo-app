@@ -10,7 +10,9 @@ import { LoginModule } from './login/login.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthEffect } from './shared/user/auth.effect';
 import { UserEffect } from './shared/user/user.effect';
+import { TaskEffect } from './tasks/shared/task.effect';
 import { userReducer } from './shared/user/user.reducer';
+import { taskReducer } from './tasks/shared/task.reducer';
 
 const appRoutes: Routes = [
   { path: 'tasks', loadChildren: 'app/tasks/tasks.module#TasksModule' },
@@ -36,8 +38,8 @@ export const metaReducers: MetaReducer<any>[] = [debug];
     CoreModule,
     FormsModule,
     LoginModule,
-    StoreModule.forRoot({ user: userReducer }, { metaReducers }),
-    EffectsModule.forRoot([UserEffect, AuthEffect]),
+    StoreModule.forRoot({ user: userReducer, task: taskReducer }, { metaReducers }),
+    EffectsModule.forRoot([UserEffect, AuthEffect, TaskEffect]),
     RouterModule.forRoot(appRoutes)
   ],
   bootstrap: [AppComponent]

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { TaskActionUnion, TaskActionTypes } from './task.action';
+import { TasksActionUnion, TaskActionTypes } from './tasks.actions';
 import { Tasks } from './tasks.model';
 
 export interface TaskState {
@@ -15,7 +15,7 @@ const initialState: TaskState = {
   tasks: null
 };
 
-export function tasksReducer(state = initialState, action: TaskActionUnion): TaskState {
+export function tasksReducer(state = initialState, action: TasksActionUnion): TaskState {
   console.log(action.type, state);
   switch (action.type) {
     case TaskActionTypes.FETCH_SUCCESS:

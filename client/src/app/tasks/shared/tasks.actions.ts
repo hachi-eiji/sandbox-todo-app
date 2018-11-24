@@ -18,4 +18,4 @@ export class FetchSuccessAction implements Action {
   constructor(public payload: { tasks: Tasks }) {}
 }
 
-export type TaskActionUnion = FetchTasksAction | FetchSuccessAction;
+export type TasksActionUnion = FetchTasksAction | FetchSuccessAction;

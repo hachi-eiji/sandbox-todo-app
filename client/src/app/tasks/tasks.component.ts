@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs/internal/Observable';
-import { TaskService } from './shared/task.service';
+import { Task } from './shared/task.model';
+import * as TasksActions from './shared/tasks.actions';
 import { Tasks } from './shared/tasks.model';
+import * as TasksReducer from './shared/tasks.reducer';
 
 @Component({
   selector: 'app-tasks',
@@ -11,17 +14,14 @@ import { Tasks } from './shared/tasks.model';
 export class TasksComponent implements OnInit {
   tasks$: Observable<Tasks>;
 
-  constructor(private taskService: TaskService) {}
+  constructor(private store: Store<Task>) {}
 
   ngOnInit() {
-    this.fetch();
+    this.tasks$ = this.store.pipe(select(TasksReducer.getTasks));
+    this.store.dispatch(new TasksActions.FetchTasksAction());
   }
 
   delete(id: number) {
     console.log(id);
-  }
-
-  private fetch() {
-    this.tasks$ = this.taskService.getList();
   }
 }

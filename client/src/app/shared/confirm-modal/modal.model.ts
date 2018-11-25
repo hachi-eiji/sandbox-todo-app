@@ -4,10 +4,7 @@ export class Modal {
   okMessage = 'OK';
   cancelMessage = 'キャンセル';
 
-  constructor(
-    message: string,
-    options?: { title?: string; okMessage?: string; cancelMessage?: string }
-  ) {
+  constructor(message: string, options?: { title?: string; okMessage?: string; cancelMessage?: string }) {
     this.message = message;
     if (options) {
       this.title = options.title;

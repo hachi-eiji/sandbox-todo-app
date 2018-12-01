@@ -5,7 +5,6 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
-require 'database_rewinder'
 require 'ridgepole'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -57,14 +56,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-
-  # テスト毎に消す
-  config.before(:suite) do
-    DatabaseRewinder.clean_all
-  end
-  config.after(:each) do
-    DatabaseRewinder.clean
-  end
 
   # load helper
   Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }

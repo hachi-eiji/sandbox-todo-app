@@ -4,7 +4,7 @@ FactoryBot.define do
     email { Faker::Internet.safe_email }
     password { 'test' }
     password_confirmation { 'test' }
-    created_at { Time.now }
-    updated_at { Time.now }
+    created_at { Time.current }
+    updated_at { Time.current }
   end
 end

@@ -45,8 +45,6 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'factory_bot'
   gem 'faker'
-  # データを自動的にけす(database_cleanerよりはやいらしい)
-  gem 'database_rewinder'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'

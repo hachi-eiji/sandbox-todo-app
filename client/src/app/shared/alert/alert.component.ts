@@ -3,7 +3,7 @@ import { Alert } from './alert.model';
 
 @Component({
   selector: 'app-alert',
-  templateUrl: './alert.component.pug',
+  templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss']
 })
 export class AlertComponent {

@@ -8,7 +8,7 @@ import * as TasksReducer from './shared/tasks.reducer';
 
 @Component({
   selector: 'app-tasks',
-  templateUrl: './tasks.component.pug',
+  templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {

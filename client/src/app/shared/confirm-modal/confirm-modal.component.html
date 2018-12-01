@@ -1,0 +1,10 @@
+<dialog class="mdl-dialog" open>
+  <h4 class="mdl-dialog__title">{{modal.title}}</h4>
+  <div class="mdl-dialog__content">
+    <p>{{modal.message}}</p>
+  </div>
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button" (click)="onOkButton()">{{modal.okMessage}}</button>
+    <button type="button" class="mdl-button close" (click)="onCancelButton()">{{modal.cancelMessage}}</button>
+  </div>
+</dialog>

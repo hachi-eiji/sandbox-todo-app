@@ -3,7 +3,7 @@ import { Modal } from './modal.model';
 
 @Component({
   selector: 'app-confirm-modal',
-  templateUrl: './confirm-modal.component.pug',
+  templateUrl: './confirm-modal.component.html',
   styleUrls: ['./confirm-modal.component.scss']
 })
 export class ConfirmModalComponent {

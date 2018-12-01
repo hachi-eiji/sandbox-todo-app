@@ -6,7 +6,7 @@ import * as UserReducer from '../../shared/user/user.reducer';
 
 @Component({
   selector: 'app-header',
-  templateUrl: './header.component.pug',
+  templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {

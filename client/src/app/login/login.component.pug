@@ -1,7 +1,0 @@
-.login
-  .message.error.login-message(*ngIf="message") {{message}}
-  form([formGroup]="loginForm")
-    .login-input
-      input.login-user_name(type="text" placeholder="ログインID" name="loginId" required formControlName="loginId")
-      input.login-user_password(type="password" placeholder="パスワード" name="password" required formControlName="password")
-      app-button(text="ログイン", buttonType="submit", (onClick)="login()")

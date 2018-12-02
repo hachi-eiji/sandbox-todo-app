@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.5.3'
+ruby '2.6.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.2.1'
@@ -30,7 +30,7 @@ gem 'redis-rails'
 # configure
 gem 'config'
 
-gem 'ridgepole', '>= 0.7.2.beta', git: 'https://github.com/winebarrel/ridgepole', branch: '0.7'
+gem 'ridgepole', '0.7.4'
 
 # bulk insert
 gem 'active_record_bulk_insert', '~> 1.2'

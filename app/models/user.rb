@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   has_many :task_assigns, dependent: :destroy
   has_many :tasks, through: :task_assigns
+
+  has_many :credentials, dependent: :destroy
   has_secure_password
 
   validates :name, presence: true

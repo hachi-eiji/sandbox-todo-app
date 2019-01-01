@@ -1,5 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+require 'credentials.schema'
 require 'done_task_assigns.schema'
 require 'done_task_notes.schema'
 require 'done_tasks.schema'

@@ -48,6 +48,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
 end
 
 group :development do

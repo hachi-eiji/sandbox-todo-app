@@ -28,3 +28,5 @@ config/environments/*.local.yml
 
 mockapi/vendor/bundle
 public/
+
+/.env

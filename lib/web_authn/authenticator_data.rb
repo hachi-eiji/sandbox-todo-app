@@ -4,6 +4,8 @@ module WebAuthn
     FLAGS_LENGTH = 1
     COUNTER_LENGTH = 4
 
+    attr_reader :data
+
     def initialize(data)
       @data = data
     end

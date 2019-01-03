@@ -4,17 +4,25 @@ describe WebAuthn::AuthenticatorAssertionResponse do
   describe '#valid?' do
     let(:authenticator) { WebAuthn::Fake::Create.new(challenge: origin_challenge, options: options) }
     let(:origin_challenge) { SecureRandom.random_bytes(32) }
-    let(:client_data_json) { authenticator.encode_client_data_json }
-    let(:attestation_object) { authenticator.encode_attestation_object }
+    let(:encode_client_data_json) { authenticator.encode_client_data_json }
+    let(:encode_attestation_object) { authenticator.encode_attestation_object }
     let(:options) { {} } # あまりよくないけど上書き用
     let(:rp_id) { nil } # あまりよくないけど上書き用
     let(:response) {
       WebAuthn::AuthenticatorAssertionResponse.new(
-        client_data_json: client_data_json,
-        attestation_object: attestation_object
+        client_data_json: encode_client_data_json,
+        attestation_object: encode_attestation_object
       )
     }
     subject { response.valid?(current_challenge: current_challenge, origin_url: origin_url, rp_id: rp_id) }
+
+    before do
+      authenticator_data = WebAuthn::AuthenticatorData.new(authenticator.authenticator_data)
+      attestation_statement = instance_double(WebAuthn::AttestationStatement::Packed)
+      allow(attestation_statement).to receive(:valid?).with(authenticator_data, encode_client_data_json).and_return(true)
+      allow(response).to receive(:authenticator_data).and_return(authenticator_data)
+      allow(response).to receive(:attestation_statement).and_return(attestation_statement)
+    end
 
     context 'rp_id is nil and the data is valid' do
       let(:origin_url) { 'http://localhost' }

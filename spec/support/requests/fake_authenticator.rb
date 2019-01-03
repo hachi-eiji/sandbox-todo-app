@@ -18,6 +18,14 @@ module WebAuthn
         Base64.strict_encode64(attestation_object)
       end
 
+      def attestation_object
+        CBOR.encode({ fmt: 'packed', attStmt: {}, authData: authenticator_data })
+      end
+
+      def authenticator_data
+        @authenticator_data ||= rp_id_hash + flags + raw_sign_count + attested_credential_data
+      end
+
       private
 
       attr_reader :options
@@ -31,17 +39,10 @@ module WebAuthn
         }.to_json
       end
 
-      def attestation_object
-        CBOR.encode({ fmt: 'packed', attStmt: {}, authData: authenticator_data })
-      end
-
       def fake_challenge
         SecureRandom.random_bytes(32)
       end
 
-      def authenticator_data
-        @authenticator_data ||= rp_id_hash + flags + raw_sign_count + attested_credential_data
-      end
 
       def rp_id_hash
         OpenSSL::Digest::SHA256.digest(@rp_id)

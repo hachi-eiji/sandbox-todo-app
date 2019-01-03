@@ -2,16 +2,17 @@ module WebAuthn
   class AuthenticatorAssertionResponse
     def initialize(attestation_object:, client_data_json:)
       @attestation_object = CBOR.decode(Base64.strict_decode64(attestation_object))
-      @client_data_json = Base64.strict_decode64(client_data_json)
+      @client_data_json = client_data_json
     end
 
     # https://www.w3.org/TR/2018/CR-webauthn-20180807/#registering-a-new-credential
     def valid?(current_challenge:, origin_url:, rp_id: nil)
-      valid_origin?(origin_url) &&
+      return false unless valid_origin?(origin_url) &&
         valid_challenge?(current_challenge) &&
         valid_type? &&
         valid_flag? &&
         valid_rp_id?(rp_id || rp_id_from_origin(origin_url))
+      attestation_statement.valid?(authenticator_data, @client_data_json)
     end
 
     private
@@ -42,11 +43,15 @@ module WebAuthn
     end
 
     def client_data
-      @client_data ||= JSON.parse(@client_data_json)
+      @client_data ||= JSON.parse(Base64.strict_decode64(@client_data_json))
     end
 
     def authenticator_data
       @authenticator_data ||= AuthenticatorData.new(@attestation_object['authData'])
+    end
+
+    def attestation_statement
+      WebAuthn::AttestationStatement::Packed.new(@attestation_object['attStmt'])
     end
 
     def rp_id_from_origin(origin_url)

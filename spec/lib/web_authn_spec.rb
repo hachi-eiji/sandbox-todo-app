@@ -1,6 +1,7 @@
 require 'rails_helper'
+require 'web_authn'
 
-describe WebAuthn::WebAuthn do
+describe WebAuthn do
   describe 'credential_options' do
     let(:user_name) { 'john doe' }
     let(:display_name) { "display #{user_name}" }

@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe 'Api::Users::Me', type: :request do
+RSpec.describe 'Api::Me::Session', type: :request do
   include RequestHelper
 
   let(:user) { create(:user) }
 
-  describe 'GET /api/users/me' do
+  describe 'GET /api/me/session' do
     context 'have a user' do
       before do
         sign_in user
-        get api_users_me_path, headers: header
+        get api_me_session_path, headers: header
       end
 
       it 'should status code is 200' do

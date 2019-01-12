@@ -7,8 +7,8 @@ Rails.application.routes.draw do
     get 'token', to: 'tokens#index'
     resources :tasks
 
-    namespace :users do
-      get 'me', to: 'me#index'
+    namespace :me do
+      get 'session', to: 'session#index'
     end
 
     # fetchはOPTIONSが飛んでくるのでとりあえず200を返す

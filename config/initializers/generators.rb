@@ -7,4 +7,5 @@ Rails.application.config.generators do |g|
                    controller_specs: false,
                    request_specs: true
   g.fixture_replacement :factory_bot, dir: 'spec/factories'
+  g.orm :active_record, migration: false
 end

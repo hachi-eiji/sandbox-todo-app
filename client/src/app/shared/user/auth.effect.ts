@@ -13,7 +13,7 @@ export class AuthEffect {
   auth$ = this.actions$.pipe(
     ofType(AuthActionTypes.AUTH),
     exhaustMap(() => {
-      return this.httpService.get<User>('/users/me').pipe(
+      return this.httpService.get<User>('/me/session').pipe(
         map(user => new AuthSuccessAction({ user })),
         catchError(error => of(new AuthFailureAction({ error: error.error })))
       );
@@ -30,5 +30,6 @@ export class AuthEffect {
     })
   );
 
-  constructor(private actions$: Actions, private httpService: HttpService, private router: Router) {}
+  constructor(private actions$: Actions, private httpService: HttpService, private router: Router) {
+  }
 }

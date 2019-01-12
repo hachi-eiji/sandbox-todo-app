@@ -12,7 +12,7 @@ module RequestHelper
     expect(response).to have_http_status(200)
   end
 
-  def json
+  def body
     @___json___ ||= JSON.parse(response.body, { symbolize_names: true })
   end
 end

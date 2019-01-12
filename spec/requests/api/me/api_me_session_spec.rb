@@ -17,8 +17,8 @@ RSpec.describe 'Api::Me::Session', type: :request do
       end
 
       it 'should response body contain id and name' do
-        expect(json[:id]).to eq user.id
-        expect(json[:name]).to eq user.name
+        expect(body[:id]).to eq user.id
+        expect(body[:name]).to eq user.name
       end
     end
   end

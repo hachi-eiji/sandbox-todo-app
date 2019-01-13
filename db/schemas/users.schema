@@ -3,7 +3,6 @@
 create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
   t.string "name", null: false
   t.string "email", null: false
-  t.string "password_digest", null: false
   t.boolean "active", default: false, null: false
   t.string "activate_hash_id", null: false
   t.string "current_challenge", comment: "WebAuthnで使う現在のchallenge文字列"

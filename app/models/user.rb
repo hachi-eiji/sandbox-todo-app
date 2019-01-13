@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :tasks, through: :task_assigns
 
   has_one :password_authentication
-  has_many :credentials, dependent: :destroy
+  has_many :webauthn_credentials, dependent: :destroy
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }

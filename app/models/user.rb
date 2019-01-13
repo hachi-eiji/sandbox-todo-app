@@ -5,13 +5,15 @@ class User < ApplicationRecord
   has_many :task_assigns, dependent: :destroy
   has_many :tasks, through: :task_assigns
 
+  has_one :password_authentication
   has_many :credentials, dependent: :destroy
-  has_secure_password
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
   before_create :initialize_activate
+
+  delegate :password, to: :password_authentication
 
   # アクティベート処理を行う
   #
@@ -20,7 +22,7 @@ class User < ApplicationRecord
   # @return [true,false] 成功時はtrue
   def activate(password, activate_hash_id)
     return false if self.active?
-    return false unless authenticate(password)
+    return false unless authenticate_using_password(password)
     return false if activate_hash_id.blank? || self.activate_hash_id != activate_hash_id
     return false if self.activate_expired_at < Time.current
     update!(active: true)
@@ -28,7 +30,7 @@ class User < ApplicationRecord
   end
 
   def login(password)
-    self.active? && authenticate(password)
+    self.active? && authenticate_using_password(password)
   end
 
   private
@@ -37,5 +39,9 @@ class User < ApplicationRecord
     self.active              = false
     self.activate_expired_at = Time.current + 7.days
     self.activate_hash_id    = SecureRandom.uuid
+  end
+
+  def authenticate_using_password(password)
+    password_authentication.authenticate password
   end
 end

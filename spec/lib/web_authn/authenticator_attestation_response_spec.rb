@@ -6,7 +6,7 @@ describe WebAuthn::AuthenticatorAttestationResponse do
     let(:origin_challenge) { SecureRandom.random_bytes(32) }
     let(:encode_client_data_json) { authenticator.encode_client_data_json }
     let(:encode_attestation_object) { authenticator.encode_attestation_object }
-    let(:options) { {} } # あまりよくないけど上書き用
+    let(:options) { { sign_count: 1 } } # あまりよくないけど上書き用
     let(:rp_id) { nil } # あまりよくないけど上書き用
     let(:response) {
       WebAuthn::AuthenticatorAttestationResponse.new(
@@ -28,6 +28,8 @@ describe WebAuthn::AuthenticatorAttestationResponse do
       let(:origin_url) { 'http://localhost' }
       let(:current_challenge) { origin_challenge }
       it { is_expected.to be_truthy }
+      it { expect(response.credential).not_to be_nil }
+      it { expect(response.signature_count).to eq options[:sign_count] }
     end
 
     context 'rp_id is not nil and the data is valid' do

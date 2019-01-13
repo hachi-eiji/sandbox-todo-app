@@ -17,6 +17,14 @@ module WebAuthn
       attestation_statement.valid?(authenticator_data, @client_data_json)
     end
 
+    def credential
+      authenticator_data.attested_cred_data.credential
+    end
+
+    def signature_count
+      authenticator_data.signature_count
+    end
+
     private
 
     # originの検証
@@ -49,7 +57,7 @@ module WebAuthn
     end
 
     def authenticator_data
-      @authenticator_data ||= AuthenticatorData.new(@attestation_object['authData'])
+      @authenticator_data ||= WebAuthn::AuthenticatorData.new(@attestation_object['authData'])
     end
 
     def attestation_statement

@@ -26,6 +26,10 @@ module WebAuthn
         @authenticator_data ||= rp_id_hash + flags + raw_sign_count + attested_credential_data
       end
 
+      def flags
+        ["#{options[:up_flag] || 1}0#{options[:uv_flag] || 1}000#{attested_credential_data.empty? ? 0 : 1}0"].pack('b*')
+      end
+
       private
 
       attr_reader :options
@@ -46,10 +50,6 @@ module WebAuthn
 
       def rp_id_hash
         OpenSSL::Digest::SHA256.digest(@rp_id)
-      end
-
-      def flags
-        ["#{options[:up_flag] || 1}0#{options[:uv_flag] || 1}000#{attested_credential_data.empty? ? 0 : 1}0"].pack('b*')
       end
 
       def raw_sign_count

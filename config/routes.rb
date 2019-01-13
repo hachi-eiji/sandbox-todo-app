@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     namespace :me do
       get 'session', to: 'session#index'
+      resources :account, only: [:create]
     end
 
     # fetchはOPTIONSが飛んでくるのでとりあえず200を返す

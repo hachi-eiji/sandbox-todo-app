@@ -2,6 +2,7 @@ module WebAuthn
   class << self
     def credential_options(user_id:, user_name:, display_name: user_name)
       {
+        challenge: SecureRandom.base64(32),
         pubKeyCredParams: [{ type: 'public-key', alg: -7 }],
         rp: {
           id: Settings.webauthn.rp.id, name: Settings.webauthn.rp.name

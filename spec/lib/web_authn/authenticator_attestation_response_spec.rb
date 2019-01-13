@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe WebAuthn::AuthenticatorAssertionResponse do
+describe WebAuthn::AuthenticatorAttestationResponse do
   describe '#valid?' do
     let(:authenticator) { WebAuthn::Fake::Create.new(challenge: origin_challenge, options: options) }
     let(:origin_challenge) { SecureRandom.random_bytes(32) }
@@ -9,7 +9,7 @@ describe WebAuthn::AuthenticatorAssertionResponse do
     let(:options) { {} } # あまりよくないけど上書き用
     let(:rp_id) { nil } # あまりよくないけど上書き用
     let(:response) {
-      WebAuthn::AuthenticatorAssertionResponse.new(
+      WebAuthn::AuthenticatorAttestationResponse.new(
         client_data_json: encode_client_data_json,
         attestation_object: encode_attestation_object
       )

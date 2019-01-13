@@ -1,5 +1,5 @@
 module WebAuthn
-  class AuthenticatorAssertionResponse
+  class AuthenticatorAttestationResponse
     # @param [String] attestation_object encoded by BASE64 and CBOR
     # @param [String] client_data_json encoded by BASE64 and CBOR
     def initialize(attestation_object:, client_data_json:)

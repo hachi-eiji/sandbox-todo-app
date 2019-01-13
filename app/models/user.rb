@@ -5,8 +5,11 @@ class User < ApplicationRecord
   has_many :task_assigns, dependent: :destroy
   has_many :tasks, through: :task_assigns
 
+  # TODO: この辺はモジュール化したほうが良さそう
   has_one :password_authentication
-  has_many :webauthn_credentials, dependent: :destroy
+
+  has_one :web_authn_current_challenge, dependent: :destroy
+  has_many :web_authn_credentials, dependent: :destroy
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: { case_sensitive: false }

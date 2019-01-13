@@ -6,7 +6,7 @@ create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :
   t.string "password_digest", null: false
   t.boolean "active", default: false, null: false
   t.string "activate_hash_id", null: false
-  t.string "current_challenge", null: true, comment: 'WebAuthnで使う現在のchallenge文字列'
+  t.string "current_challenge", comment: "WebAuthnで使う現在のchallenge文字列"
   t.datetime "activate_expired_at", null: false
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
@@ -14,6 +14,7 @@ create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :
 end
 
 add_foreign_key "credentials", "users", name: "credential_users"
+add_foreign_key "password_authentications", "users", name: "password_authentications_users"
 add_foreign_key "project_members", "projects", name: "fk_project_members_projects"
 add_foreign_key "project_members", "users", name: "fk_project_members_users"
 add_foreign_key "projects", "users", name: "projects_users"

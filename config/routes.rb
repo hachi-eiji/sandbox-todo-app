@@ -9,6 +9,9 @@ Rails.application.routes.draw do
 
     namespace :me do
       get 'session', to: 'session#index'
+    end
+
+    namespace :web_authn do
       resources :account, only: [:create]
     end
 

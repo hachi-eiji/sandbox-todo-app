@@ -1,4 +1,4 @@
-class Api::Me::AccountController < ApplicationController
+class Api::WebAuthn::AccountController < ApplicationController
   def create
     account = account_params
     unless valid?(account[:name], account[:email])

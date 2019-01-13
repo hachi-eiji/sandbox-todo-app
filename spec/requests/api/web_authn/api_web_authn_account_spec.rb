@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe 'Api::Me::Account', type: :request do
+RSpec.describe 'Api::WebAuthn:Account', type: :request do
   include RequestHelper
   let!(:rp_id) { Settings.webauthn.rp.id }
   let(:rp_name) { Settings.webauthn.rp.name }
   let(:icon) { Settings.webauthn.user.icon }
 
-  describe 'POST /api/me/account' do
+  describe 'POST /api/web_authn/account' do
     before do
-      post api_me_account_index_path, headers: header, params: { name: name, email: email }
+      post api_web_authn_account_index_path, headers: header, params: { name: name, email: email }
     end
 
     context 'name is empty' do

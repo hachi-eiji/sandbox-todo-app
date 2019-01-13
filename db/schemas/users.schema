@@ -5,7 +5,6 @@ create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :
   t.string "email", null: false
   t.boolean "active", default: false, null: false
   t.string "activate_hash_id", null: false
-  t.string "current_challenge", comment: "WebAuthnで使う現在のchallenge文字列"
   t.datetime "activate_expired_at", null: false
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false

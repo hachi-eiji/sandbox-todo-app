@@ -10,14 +10,3 @@ create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :
   t.datetime "updated_at", null: false
   t.index ["email"], name: "index_users_on_email", unique: true
 end
-
-add_foreign_key "credentials", "users", name: "credential_users"
-add_foreign_key "password_authentications", "users", name: "password_authentications_users"
-add_foreign_key "project_members", "projects", name: "fk_project_members_projects"
-add_foreign_key "project_members", "users", name: "fk_project_members_users"
-add_foreign_key "projects", "users", name: "projects_users"
-add_foreign_key "task_assigns", "tasks", name: "task_assigns_tasks"
-add_foreign_key "task_assigns", "users", name: "task_assigns_users"
-add_foreign_key "task_notes", "tasks", name: "task_notes_tasks"
-add_foreign_key "task_notes", "users", name: "task_notes_users"
-add_foreign_key "tasks", "projects", name: "tasks_projects"

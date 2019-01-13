@@ -1,6 +1,5 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
-require 'credentials.schema'
 require 'done_task_assigns.schema'
 require 'done_task_notes.schema'
 require 'done_tasks.schema'
@@ -10,5 +9,6 @@ require 'projects.schema'
 require 'task_assigns.schema'
 require 'task_notes.schema'
 require 'tasks.schema'
-require 'user_current_challenges.schema'
 require 'users.schema'
+require 'webauthn_credentials.schema'
+require 'webauthn_current_challenges.schema'

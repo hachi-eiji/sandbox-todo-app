@@ -1,0 +1,21 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "webauthn_current_challenges", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  t.bigint "user_id", null: false
+  t.string "current_challenges", null: false
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.index ["user_id", "current_challenges"], name: "user_id_2"
+  t.index ["user_id"], name: "user_id", unique: true
+end
+
+add_foreign_key "password_authentications", "users", name: "password_authentications_users"
+add_foreign_key "project_members", "projects", name: "fk_project_members_projects"
+add_foreign_key "project_members", "users", name: "fk_project_members_users"
+add_foreign_key "projects", "users", name: "projects_users"
+add_foreign_key "task_assigns", "tasks", name: "task_assigns_tasks"
+add_foreign_key "task_assigns", "users", name: "task_assigns_users"
+add_foreign_key "task_notes", "tasks", name: "task_notes_tasks"
+add_foreign_key "task_notes", "users", name: "task_notes_users"
+add_foreign_key "tasks", "projects", name: "tasks_projects"
+add_foreign_key "webauthn_credentials", "users", name: "credential_users"

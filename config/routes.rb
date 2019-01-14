@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
     namespace :web_authn do
       resources :account, only: [:create]
+      resources :credentials, only: [:create]
     end
 
     # fetchはOPTIONSが飛んでくるのでとりあえず200を返す

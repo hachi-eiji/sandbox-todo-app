@@ -12,6 +12,14 @@ module RequestHelper
     expect(response).to have_http_status(200)
   end
 
+  # @param [String] name
+  # @param [String] email
+  def register_web_authn_user(name, email)
+    post api_web_authn_account_index_path, params: { name: name, email: email }, headers: header
+    # 200のチェックをしてログイン成功していることを担保する
+    expect(response).to have_http_status(200)
+  end
+
   def body
     @___json___ ||= JSON.parse(response.body, { symbolize_names: true })
   end

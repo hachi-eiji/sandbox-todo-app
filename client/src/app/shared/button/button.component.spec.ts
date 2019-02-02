@@ -45,9 +45,9 @@ describe('ButtonComponent', () => {
     expect(fixture.debugElement.nativeElement.querySelector('[disabled]')).not.toBeNull();
   });
 
-  it('should call click event', function () {
+  it('should call click event', () => {
     const spy = jasmine.createSpyObj('EventEmitter', ['emit']);
-    component.onClick = spy;
+    component.click = spy;
     fixture.debugElement.nativeElement.querySelector('button').click();
     expect(spy.emit.calls.count()).toBe(1);
   });

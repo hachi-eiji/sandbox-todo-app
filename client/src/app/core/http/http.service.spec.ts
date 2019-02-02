@@ -54,11 +54,11 @@ describe('HttpService', () => {
     });
     const req = httpTestingController.expectOne(`${url}/test`);
     req.flush({
-      message: message,
-      status: status
+      message,
+      status
     }, {
-      status: status,
-      statusText: statusText
+      status,
+      statusText
     });
   }));
 
@@ -69,7 +69,7 @@ describe('HttpService', () => {
       expect(error.error.message).toEqual(message);
     });
     const req = httpTestingController.expectOne(`${url}/test`);
-    const e = new ErrorEvent('Network Error', {message: message});
+    const e = new ErrorEvent('Network Error', {message});
     req.error(e);
   }));
 
@@ -84,11 +84,11 @@ describe('HttpService', () => {
     });
     const req = httpTestingController.expectOne(`${url}/test`);
     req.flush({
-      message: message,
-      status: status
+      message,
+      status
     }, {
-      status: status,
-      statusText: statusText
+      status,
+      statusText
     });
   }));
 
@@ -99,7 +99,7 @@ describe('HttpService', () => {
       expect(error.error.message).toEqual(message);
     });
     const req = httpTestingController.expectOne(`${url}/test`);
-    const e = new ErrorEvent('Network Error', {message: message});
+    const e = new ErrorEvent('Network Error', {message});
     req.error(e);
   }));
 });

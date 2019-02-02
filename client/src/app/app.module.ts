@@ -14,7 +14,7 @@ import { UserEffect } from './shared/user/user.effect';
 import { userReducer } from './shared/user/user.reducer';
 
 const appRoutes: Routes = [
-  { path: 'tasks', loadChildren: 'app/tasks/tasks.module#TasksModule' },
+  { path: 'tasks', loadChildren: './tasks/tasks.module#TasksModule' },
   { path: '', redirectTo: '/tasks', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
 ];

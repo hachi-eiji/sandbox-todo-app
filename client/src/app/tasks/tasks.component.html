@@ -17,7 +17,7 @@
         <td class="m-description">{{task.description}}</td>
         <td class="m-due_date">{{task.due_date}}</td>
         <td class="m-delete">
-          <app-button text="削除" (onClick)="delete(task.id)" buttonSize="small" buttonType="danger"></app-button>
+          <app-button text="削除" (click)="delete(task.id)" buttonSize="small" buttonType="danger"></app-button>
         </td>
       </tr>
     </ng-container>

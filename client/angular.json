@@ -11,6 +11,9 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "sass"
+        },
+        "@ngrx/schematics:component": {
+          "styleext": "scss"
         }
       },
       "architect": {
@@ -149,5 +152,8 @@
       }
     }
   },
-  "defaultProject": "client"
+  "defaultProject": "client",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

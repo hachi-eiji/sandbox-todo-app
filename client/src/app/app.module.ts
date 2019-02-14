@@ -15,6 +15,7 @@ import { userReducer } from './shared/user/user.reducer';
 
 const appRoutes: Routes = [
   { path: 'tasks', loadChildren: './tasks/tasks.module#TasksModule' },
+  { path: 'user', loadChildren: './user/user.module#UserModule' },
   { path: '', redirectTo: '/tasks', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent }
 ];

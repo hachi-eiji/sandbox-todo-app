@@ -11,6 +11,11 @@ Rails.application.routes.draw do
       get 'session', to: 'session#index'
     end
 
+    namespace :web_authn do
+      resources :account, only: [:create]
+      resources :credentials, only: [:create]
+    end
+
     # fetchはOPTIONSが飛んでくるのでとりあえず200を返す
     match '*anything', to: 'api#handle_options_method', via: :options
   end

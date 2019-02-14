@@ -1,0 +1,9 @@
+<div class="l-register">
+  <div class="message error register-message" *ngIf="message">{{message}}</div>
+  <form [formGroup]="registerForm">
+    <div class="register-input">
+      <input type="text" class="register-user_name" placeholder="ログインID" name="loginId" required formControlName="loginId">
+      <app-button text="登録" buttonType="submit" class="register-submit" (click)="register()"></app-button>
+    </div>
+  </form>
+</div>

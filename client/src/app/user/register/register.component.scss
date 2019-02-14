@@ -1,0 +1,42 @@
+@import '../../../assets/variables';
+
+.l-register {
+  width: 40%;
+  margin: 24px auto auto;
+
+
+  @media screen and (max-width: $sp_size) {
+    width: 80%;
+    margin: 12px auto auto;
+  }
+}
+
+.register {
+  &-message {
+    margin-bottom: 10px;
+  }
+
+  &-input {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-user_name {
+    margin-bottom: 12px;
+  }
+
+  &-submit {
+    margin-left: auto;
+  }
+
+
+  @media screen and (max-width: $sp_size) {
+    &-user_name {
+      margin-bottom: 24px;
+    }
+
+    &-submit {
+      margin: auto;
+    }
+  }
+}

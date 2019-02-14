@@ -40,14 +40,20 @@ gem 'rack-cors'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# for WebAuthn
+gem 'cbor', '~> 0.5.9.1'
+gem 'cose', '~> 0.1.0'
+gem 'openssl', '~> 2.1', '>= 2.1.2'
+
 group :development, :test do
-  gem 'rspec-rails', '3.5'
+  gem 'rspec-rails', '~> 3.8'
   gem 'factory_bot_rails'
   gem 'factory_bot'
   gem 'faker'
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+  gem 'dotenv-rails', require: 'dotenv/rails-now'
 end
 
 group :development do

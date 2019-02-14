@@ -1,0 +1,8 @@
+webauthn:
+  rp:
+    id: <%= ENV['WEB_AUTHN_RP_ID'] %>
+    name: <%= ENV['WEB_AUTHN_RP_NAME'] || ENV['WEB_AUTHN_RP_ID'] %>
+  user:
+    icon: <%= ENV['WEB_AUTHN_USER_ICON'] || '' %>
+  attestation: <%= ENV['WEB_AUTHN_ATTESTATION'] %>
+  timeout_ms: <%= ENV['WEB_AUTHN_TIMEOUT_MS'] || 60000 %> # 1min

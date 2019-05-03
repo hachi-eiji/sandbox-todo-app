@@ -1,28 +1,21 @@
-import { Action } from '@ngrx/store';
+import { union, createAction } from '@ngrx/store';
 import { User } from './user';
 
-export enum AuthActionTypes {
-  AUTH = '[Auth Page] auth',
-  AUTH_SUCCESS = '[Auth API] auth_success',
-  AUTH_FAILURE = '[Auth API] auth_failure'
-}
+export const auth = createAction('[Auth Page] auth');
 
-export class AuthAction implements Action {
-  readonly type = AuthActionTypes.AUTH;
+export const authSuccess = createAction(
+  '[Auth API] auth_success',
+  (payload: { user: User }) => ({ payload })
+);
 
-  constructor() {}
-}
+export const authFailure = createAction(
+  '[Auth API] auth_failure',
+  (payload: { error: any }) => ({ payload })
+);
 
-export class AuthSuccessAction implements Action {
-  readonly type = AuthActionTypes.AUTH_SUCCESS;
-
-  constructor(public payload: { user: User }) {}
-}
-
-export class AuthFailureAction implements Action {
-  readonly type = AuthActionTypes.AUTH_FAILURE;
-
-  constructor(public payload: { error: any }) {}
-}
-
-export type AuthActionTypesUnion = AuthAction | AuthSuccessAction | AuthFailureAction;
+const actions = union({
+  auth,
+  authSuccess,
+  authFailure
+});
+export type AuthActionTypes = typeof actions;

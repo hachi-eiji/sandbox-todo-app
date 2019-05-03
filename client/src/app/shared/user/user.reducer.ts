@@ -1,5 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { AuthActionTypesUnion, AuthActionTypes } from './auth.action';
+import { AuthActionTypes, authSuccess } from './auth.action';
 import { User } from './user';
 import { UserActions, login, loginSuccess, loginFailure } from './user.action';
 
@@ -12,11 +12,11 @@ const userFeature = createFeatureSelector<UserState>('user');
 export const selectUser = createSelector(userFeature, state => (state ? state.user : null));
 export const loginError = createSelector(userFeature, state => (state && state.error ? state.error.message : null));
 
-export function userReducer(state: UserState, action: UserActions | AuthActionTypesUnion): UserState {
+export function userReducer(state: UserState, action: UserActions | AuthActionTypes): UserState {
   switch (action.type) {
     case login.type:
       return { user: null, error: null };
-    case AuthActionTypes.AUTH_SUCCESS:
+    case authSuccess.type:
       return { ...state, user: action.payload.user };
     case loginSuccess.type:
       return { ...state, user: action.payload.user };

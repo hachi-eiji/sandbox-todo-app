@@ -1,4 +1,4 @@
-import { AuthSuccessAction } from './auth.action';
+import * as AuthActions from './auth.action';
 import * as UserActions from './user.action';
 import * as userReducer from './user.reducer';
 import { UserState } from './user.reducer';
@@ -43,7 +43,7 @@ describe('UserReducer', () => {
     const user = {id: 100, name: 'auth success user'};
     beforeEach(() => {
       const state = {user, error: null};
-      const loginAction = new AuthSuccessAction({user});
+      const loginAction = AuthActions.authSuccess({ user });
       actual = userReducer.userReducer(state, loginAction);
     });
 

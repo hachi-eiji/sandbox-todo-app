@@ -18,7 +18,7 @@ export class TasksComponent implements OnInit {
 
   ngOnInit() {
     this.tasks$ = this.store.pipe(select(TasksReducer.getTasks));
-    this.store.dispatch(new TasksActions.FetchTasksAction());
+    this.store.dispatch(TasksActions.taskFetch());
   }
 
   delete(id: number) {

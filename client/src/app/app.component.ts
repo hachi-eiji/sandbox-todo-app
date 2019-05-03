@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Event, NavigationEnd, Data } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, map, mergeMap } from 'rxjs/operators';
-import * as AuthAction from './shared/user/auth.action';
+import * as AuthActions from './shared/user/auth.action';
 import { User } from './shared/user/user';
 
 @Component({
@@ -21,7 +21,7 @@ export class AppComponent {
         mergeMap(route => route.data)
       )
       .subscribe((data: Data) => this.handleSubscribe(data));
-    store.dispatch(new AuthAction.AuthAction());
+    store.dispatch(AuthActions.auth);
   }
 
   private getCurrentActivatedRoute(): ActivatedRoute {

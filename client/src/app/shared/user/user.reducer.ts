@@ -1,7 +1,7 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { AuthActionTypesUnion, AuthActionTypes } from './auth.action';
+import { AuthActionTypes, authSuccess } from './auth.action';
 import { User } from './user';
-import { UserActionTypes, UserActionTypesUnion } from './user.action';
+import { UserActions, login, loginSuccess, loginFailure } from './user.action';
 
 export interface UserState {
   user: User | null;
@@ -12,15 +12,15 @@ const userFeature = createFeatureSelector<UserState>('user');
 export const selectUser = createSelector(userFeature, state => (state ? state.user : null));
 export const loginError = createSelector(userFeature, state => (state && state.error ? state.error.message : null));
 
-export function userReducer(state: UserState, action: UserActionTypesUnion | AuthActionTypesUnion): UserState {
+export function userReducer(state: UserState, action: UserActions | AuthActionTypes): UserState {
   switch (action.type) {
-    case UserActionTypes.LOGIN:
+    case login.type:
       return { user: null, error: null };
-    case AuthActionTypes.AUTH_SUCCESS:
+    case authSuccess.type:
       return { ...state, user: action.payload.user };
-    case UserActionTypes.LOGIN_SUCCESS:
+    case loginSuccess.type:
       return { ...state, user: action.payload.user };
-    case UserActionTypes.LOGIN_FAILURE:
+    case loginFailure.type:
       return { user: null, error: action.payload.error };
     default:
       return state;

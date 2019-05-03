@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule, Store } from '@ngrx/store';
-import { AuthSuccessAction } from '../../shared/user/auth.action';
+import * as AuthActionTypes from '../../shared/user/auth.action';
 import { User } from '../../shared/user/user';
 import { UserEffect } from '../../shared/user/user.effect';
 import { userReducer } from '../../shared/user/user.reducer';
@@ -46,7 +46,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should get user name', () => {
-    store.dispatch(new AuthSuccessAction({user: {id: 1, name: 'mike'}}));
+    store.dispatch(AuthActionTypes.authSuccess({ user: { id: 1, name: 'mike' } }));
     fixture.detectChanges();
     expect(fixture.debugElement.query(By.css('header')).nativeElement.textContent).toEqual('mike');
   });

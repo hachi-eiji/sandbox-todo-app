@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import * as UserAction from '../shared/user//user.action';
+import * as UserActions from '../shared/user/user.action';
 import { User } from '../shared/user/user';
 import * as UserReducer from '../shared/user/user.reducer';
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     const form = this.loginForm;
     if (form.valid) {
       this.store.dispatch(
-        new UserAction.Login({ loginId: form.get('loginId').value, password: form.get('password').value })
+        UserActions.login({ loginId: form.get('loginId').value, password: form.get('password').value })
       );
     } else {
       this.message = 'ログインIDもしくはパスワードを入力してください';

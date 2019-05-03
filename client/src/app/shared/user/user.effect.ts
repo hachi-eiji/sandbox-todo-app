@@ -1,31 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, ofType, Effect } from '@ngrx/effects';
-import { of } from 'rxjs';
+import { scheduled, asapScheduler } from 'rxjs';
 import { tap, map, exhaustMap, catchError } from 'rxjs/operators';
 import { HttpService } from '../../core/http/http.service';
 import { LoginResult } from '../../login/shared/login-result.model';
-import * as UserAction from './user.action';
+import { UserActions, login, loginSuccess, loginFailure } from './user.action';
 
 @Injectable()
 export class UserEffect {
   @Effect()
   login$ = this.actions$.pipe(
-    ofType(UserAction.UserActionTypes.LOGIN),
-    map((action: UserAction.Login) => action.payload),
+    ofType(login.type),
+    map(action => action.payload),
     exhaustMap(payload => {
       return this.httpService.post<LoginResult>('/login', payload).pipe(
-        map(result => new UserAction.LoginSuccess({ user: result.data })),
-        catchError(error => of(new UserAction.LoginFailure({ error: error.error })))
+        map(result => loginSuccess({ user: result.data })),
+        catchError(error => scheduled([loginFailure({ error: error.error })], asapScheduler))
       );
     })
   );
 
   @Effect({ dispatch: false })
   $loginSuccess = this.actions$.pipe(
-    ofType(UserAction.UserActionTypes.LOGIN_SUCCESS),
+    ofType(loginSuccess.type),
     tap(() => this.router.navigate(['tasks']))
   );
 
-  constructor(private actions$: Actions, private httpService: HttpService, private router: Router) {}
+  constructor(private actions$: Actions<UserActions>, private httpService: HttpService, private router: Router) {
+  }
 }

@@ -1,21 +1,18 @@
-import { Action } from '@ngrx/store';
+import { union, createAction } from '@ngrx/store';
 import { Tasks } from './tasks.model';
 
-export enum TaskActionTypes {
-  FETCH = '[Task Page] List',
-  FETCH_SUCCESS = '[Task API] fetch_success'
-}
+export const taskFetch = createAction(
+  '[Task Page] List',
+  (payload?) => ({ payload })
+);
 
-export class FetchTasksAction implements Action {
-  type = TaskActionTypes.FETCH;
+export const taskFetchSuccess = createAction(
+  '[Task API] fetch_success',
+  (payload: { tasks: Tasks }) => ({ payload })
+);
 
-  constructor(public payload?) {}
-}
-
-export class FetchSuccessAction implements Action {
-  type = TaskActionTypes.FETCH_SUCCESS;
-
-  constructor(public payload: { tasks: Tasks }) {}
-}
-
-export type TasksActionUnion = FetchTasksAction | FetchSuccessAction;
+const actions = union({
+  taskFetch,
+  taskFetchSuccess
+});
+export type TaskActions = typeof actions;

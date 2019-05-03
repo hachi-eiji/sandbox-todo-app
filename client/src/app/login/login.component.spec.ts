@@ -6,8 +6,8 @@ import { Store, StoreModule } from '@ngrx/store';
 
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
-import * as UserAction from '../shared/user//user.action';
 import { User } from '../shared/user/user';
+import * as UserActions from '../shared/user/user.action';
 import { UserEffect } from '../shared/user/user.effect';
 import { userReducer } from '../shared/user/user.reducer';
 import { LoginComponent } from './login.component';
@@ -56,7 +56,7 @@ describe('LoginComponent', () => {
     component.loginForm.get('loginId').setValue('user');
     component.loginForm.get('password').setValue('password');
     component.login();
-    const action = new UserAction.Login({loginId: 'user', password: 'password'});
+    const action = UserActions.login({ loginId: 'user', password: 'password' });
     expect(store.dispatch).toHaveBeenCalledWith(action);
   });
 

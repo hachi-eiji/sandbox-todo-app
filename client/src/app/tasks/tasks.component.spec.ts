@@ -38,7 +38,7 @@ describe('TasksComponent', () => {
 
   it('should show empty message when no task', () => {
     const tasks: Tasks = { data: [], status: 200 };
-    const action = new TasksAction.FetchSuccessAction({ tasks });
+    const action = TasksAction.taskFetchSuccess({ tasks });
     store.dispatch(action);
 
     fixture.detectChanges(); // onInit()
@@ -56,7 +56,7 @@ describe('TasksComponent', () => {
         { id: 1, title: 'test title', description: 'description', due_date: null }
       ], status: 200
     };
-    const action = new TasksAction.FetchSuccessAction({ tasks });
+    const action = TasksAction.taskFetchSuccess({ tasks });
     store.dispatch(action);
 
     fixture.detectChanges(); // onInit()

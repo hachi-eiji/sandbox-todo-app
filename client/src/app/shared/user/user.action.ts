@@ -1,28 +1,24 @@
-import { Action } from '@ngrx/store';
+import { union, createAction } from '@ngrx/store';
 import { User } from './user';
 
-export enum UserActionTypes {
-  LOGIN = '[Login Page] login',
-  LOGIN_SUCCESS = '[Login API] success',
-  LOGIN_FAILURE = '[Login API] failure'
-}
+export const login = createAction(
+  '[Login Page] login',
+  (payload: { loginId: string; password: string }) => ({ payload })
+);
 
-export class Login implements Action {
-  readonly type = UserActionTypes.LOGIN;
+export const loginSuccess = createAction(
+  '[Login API] success',
+  (payload: { user: User }) => ({ payload })
+);
 
-  constructor(public payload: { loginId: string; password: string }) {}
-}
+export const loginFailure = createAction(
+  '[Login API] failure',
+  (payload: { error: any }) => ({ payload })
+);
 
-export class LoginSuccess implements Action {
-  readonly type = UserActionTypes.LOGIN_SUCCESS;
-
-  constructor(public payload: { user: User }) {}
-}
-
-export class LoginFailure implements Action {
-  readonly type = UserActionTypes.LOGIN_FAILURE;
-
-  constructor(public payload: { error: any }) {}
-}
-
-export type UserActionTypesUnion = Login | LoginSuccess | LoginFailure;
+const actions = union({
+  login,
+  loginSuccess,
+  loginFailure
+});
+export type UserActions = typeof actions;

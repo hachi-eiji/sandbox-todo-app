@@ -40,9 +40,6 @@ describe('TasksComponent', () => {
     };
     taskFacadeSpy.getList.and.returnValue(of(tasks));
     fixture.detectChanges(); // onInit()
-    component.tasks$.subscribe(data => {
-      expect(data.data.length).toEqual(0);
-    });
     expect(fixture.debugElement.query(By.css('.no-task-message'))).not.toBeNull();
     expect(fixture.debugElement.query(By.css('.m-done'))).toBeNull();
   });
@@ -57,9 +54,6 @@ describe('TasksComponent', () => {
 
     taskFacadeSpy.getList.and.returnValue(of(tasks));
     fixture.detectChanges(); // onInit()
-    component.tasks$.subscribe(data => {
-      expect(data.data.length).toEqual(2);
-    });
     expect(fixture.debugElement.query(By.css('.no-task-message'))).toBeNull();
     expect(fixture.debugElement.query(By.css('.m-done'))).not.toBeNull();
   });

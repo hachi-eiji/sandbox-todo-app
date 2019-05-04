@@ -12,7 +12,7 @@ import { TasksComponent } from './tasks.component';
 describe('TasksComponent', () => {
   let component: TasksComponent;
   let fixture: ComponentFixture<TasksComponent>;
-  let taskFacadeSpy = jasmine.createSpyObj('TaskFacade', ['getList']);
+  const taskFacadeSpy = jasmine.createSpyObj('TaskFacade', ['getList']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

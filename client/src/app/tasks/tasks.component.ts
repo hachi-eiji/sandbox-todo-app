@@ -12,10 +12,11 @@ export class TasksComponent implements OnInit {
   tasks$: Observable<Tasks>;
 
   constructor(private taskFacade: TaskFacade) {
+    this.tasks$ = taskFacade.tasks$;
   }
 
   ngOnInit() {
-    this.tasks$ = this.taskFacade.getList();
+    this.taskFacade.fetchList();
   }
 
   delete(id: number) {

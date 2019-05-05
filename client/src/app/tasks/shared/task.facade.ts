@@ -1,23 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { Task } from './task.model';
+import { TaskService } from './task.service';
 import * as TasksActions from './tasks.actions';
-import { Tasks } from './tasks.model';
 import * as TasksReducer from './tasks.reducer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskFacade {
-  private tasks$: Observable<Tasks>;
+  private tasks = this.store.pipe(select(TasksReducer.getTasks));
 
-  constructor(private store: Store<Task>) {
+  constructor(private store: Store<Task>,
+              private taskService: TaskService) {
   }
 
-  getList(): Observable<Tasks> {
-    this.store.dispatch(TasksActions.taskFetch());
-    this.tasks$ = this.store.pipe(select(TasksReducer.getTasks));
-    return this.tasks$;
+  get tasks$() {
+    return this.tasks;
+  }
+
+  fetchList() {
+    this.taskService.getList().subscribe((tasks) => {
+      this.store.dispatch(TasksActions.taskFetchSuccess({ tasks }));
+    });
   }
 }

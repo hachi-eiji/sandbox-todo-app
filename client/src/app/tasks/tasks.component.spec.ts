@@ -12,7 +12,7 @@ import { TasksComponent } from './tasks.component';
 describe('TasksComponent', () => {
   let component: TasksComponent;
   let fixture: ComponentFixture<TasksComponent>;
-  const taskFacadeSpy = jasmine.createSpyObj('TaskFacade', ['getList']);
+  const taskFacadeSpy = jasmine.createSpyObj('TaskFacade', ['fetchList']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -35,10 +35,10 @@ describe('TasksComponent', () => {
   });
 
   it('should show empty message when no task', () => {
-    const tasks: Tasks = {
-      data: [], status: 200
-    };
-    taskFacadeSpy.getList.and.returnValue(new Observable((observer) => { observer.next(tasks); }));
+    const tasks: Tasks = { data: [], status: 200 };
+
+    component.tasks$ = (new Observable((observer) => { observer.next(tasks); }));
+    taskFacadeSpy.fetchList.and.callFake(() => { });
     fixture.detectChanges(); // onInit()
     expect(fixture.debugElement.query(By.css('.no-task-message'))).not.toBeNull();
     expect(fixture.debugElement.query(By.css('.m-done'))).toBeNull();
@@ -52,7 +52,8 @@ describe('TasksComponent', () => {
       ], status: 200
     };
 
-    taskFacadeSpy.getList.and.returnValue(new Observable((observer) => { observer.next(tasks); }));
+    component.tasks$ = (new Observable((observer) => { observer.next(tasks); }));
+    taskFacadeSpy.fetchList.and.callFake(() => { });
     fixture.detectChanges(); // onInit()
     expect(fixture.debugElement.query(By.css('.no-task-message'))).toBeNull();
     expect(fixture.debugElement.query(By.css('.m-done'))).not.toBeNull();

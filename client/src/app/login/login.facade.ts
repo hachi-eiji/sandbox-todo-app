@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { switchMap, catchError } from 'rxjs/operators';
 import { AuthService } from '../shared/user/auth.service';
 import { User } from '../shared/user/user';
-import { loginSuccess, loginFailure } from '../shared/user/user.action';
 import * as UserReducer from '../shared/user/user.reducer';
+import { LoginResult } from './shared/login-result.model';
 
 @Injectable({ providedIn: 'root' })
 export class LoginFacade {
@@ -19,10 +19,12 @@ export class LoginFacade {
     return this.loginError;
   }
 
-  login(loginId: string, password: string) {
-    this.authService.login(loginId, password).pipe(
-      map(result => loginSuccess({ user: result.data })),
-      catchError(err => new Observable((observable) => observable.next(loginFailure({ error: err.error }))))
+  login(loginId: string, password: string): Observable<{}> {
+    return this.authService.login(loginId, password).pipe(
+      switchMap((result: LoginResult) => new Observable(o => o.next(result.data))),
+      catchError(err => {
+        throw err.error;
+      })
     );
   }
 }

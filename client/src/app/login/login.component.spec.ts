@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
@@ -45,6 +46,7 @@ describe('LoginComponent', () => {
   });
 
   it('should call login method', () => {
+    loginFacadeSpyObj.login.and.returnValue(new Observable((o) => o.next({ id: 1, name: 'user' })));
     component.loginForm.get('loginId').setValue('user');
     component.loginForm.get('password').setValue('password');
     component.login();

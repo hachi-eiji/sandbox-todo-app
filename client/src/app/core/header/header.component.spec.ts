@@ -2,11 +2,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
 import { StoreModule, Store } from '@ngrx/store';
 import * as AuthActionTypes from '../../shared/user/auth.action';
 import { User } from '../../shared/user/user';
-import { UserEffect } from '../../shared/user/user.effect';
 import { userReducer } from '../../shared/user/user.reducer';
 
 import { HeaderComponent } from './header.component';
@@ -21,8 +19,7 @@ describe('HeaderComponent', () => {
     router = jasmine.createSpyObj('Router', ['navigate']);
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule, StoreModule.forRoot({user: userReducer}),
-        EffectsModule.forRoot([UserEffect]),
+        HttpClientModule, StoreModule.forRoot({user: userReducer})
       ],
       declarations: [HeaderComponent],
       providers: [

@@ -10,7 +10,6 @@ import { LoginModule } from './login/login.module';
 import { metaReducers } from './ngrx-debug';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthEffect } from './shared/user/auth.effect';
-import { UserEffect } from './shared/user/user.effect';
 import { userReducer } from './shared/user/user.reducer';
 
 const appRoutes: Routes = [
@@ -27,7 +26,7 @@ const appRoutes: Routes = [
     FormsModule,
     LoginModule,
     StoreModule.forRoot({ user: userReducer }, { metaReducers }),
-    EffectsModule.forRoot([UserEffect, AuthEffect]),
+    EffectsModule.forRoot([AuthEffect]),
     RouterModule.forRoot(appRoutes)
   ],
   bootstrap: [AppComponent]

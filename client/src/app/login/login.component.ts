@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
-import * as UserActions from '../shared/user/user.action';
-import { User } from '../shared/user/user';
-import * as UserReducer from '../shared/user/user.reducer';
+import { Observable } from 'rxjs';
+import { LoginFacade } from './login.facade';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +10,17 @@ import * as UserReducer from '../shared/user/user.reducer';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  message: string;
+  message$: Observable<string>;
 
-  constructor(private store: Store<User>, private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private loginFacade: LoginFacade
+  ) {
     this.loginForm = this.fb.group({
       loginId: ['', Validators.required],
       password: ['', Validators.required]
     });
 
-    this.store.pipe(select(UserReducer.loginError)).subscribe(message => {
-      this.message = message;
-    });
+    this.message$ = loginFacade.loginError$;
   }
 
   ngOnInit() {}
@@ -30,11 +28,9 @@ export class LoginComponent implements OnInit {
   login() {
     const form = this.loginForm;
     if (form.valid) {
-      this.store.dispatch(
-        UserActions.login({ loginId: form.get('loginId').value, password: form.get('password').value })
-      );
+      this.loginFacade.login(form.get('loginId').value, form.get('password').value);
     } else {
-      this.message = 'ログインIDもしくはパスワードを入力してください';
+      this.message$ = new Observable<string>(o => o.next('ログインIDもしくはパスワードを入力してください'));
     }
   }
 }

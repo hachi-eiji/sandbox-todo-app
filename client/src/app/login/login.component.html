@@ -1,5 +1,5 @@
 <div class="login">
-  <div class="message error login-message" *ngIf="message">{{message}}</div>
+  <div class="message error login-message" *ngIf="(message$ | async) as message">{{message}}</div>
   <form [formGroup]="loginForm">
     <div class="login-input">
       <input type="text" class="login-user_name" placeholder="ログインID" name="loginId" required

@@ -1,19 +1,18 @@
 import { CommonModule } from '@angular/common';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Store, StoreModule } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
-import * as TasksAction from './shared/tasks.actions';
+import { TaskFacade } from './shared/task.facade';
 import { Tasks } from './shared/tasks.model';
-import { tasksReducer } from './shared/tasks.reducer';
 
 import { TasksComponent } from './tasks.component';
 
 describe('TasksComponent', () => {
   let component: TasksComponent;
   let fixture: ComponentFixture<TasksComponent>;
-  let store: Store<Tasks>;
+  const taskFacadeSpy = jasmine.createSpyObj('TaskFacade', ['fetchList']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,29 +21,25 @@ describe('TasksComponent', () => {
         CoreModule,
         CommonModule,
         SharedModule,
-        StoreModule.forRoot({}),
-        StoreModule.forFeature('tasks', tasksReducer)
-      ]
+      ],
+      providers: [{
+        provide: TaskFacade, useValue: taskFacadeSpy
+      }]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    store = TestBed.get(Store);
-    spyOn(store, 'dispatch').and.callThrough();
     fixture = TestBed.createComponent(TasksComponent);
     component = fixture.componentInstance;
   });
 
   it('should show empty message when no task', () => {
     const tasks: Tasks = { data: [], status: 200 };
-    const action = TasksAction.taskFetchSuccess({ tasks });
-    store.dispatch(action);
 
+    component.tasks$ = (new Observable((observer) => { observer.next(tasks); }));
+    taskFacadeSpy.fetchList.and.callFake(() => { });
     fixture.detectChanges(); // onInit()
-    component.tasks$.subscribe(data => {
-      expect(data.data.length).toEqual(0);
-    });
     expect(fixture.debugElement.query(By.css('.no-task-message'))).not.toBeNull();
     expect(fixture.debugElement.query(By.css('.m-done'))).toBeNull();
   });
@@ -56,13 +51,10 @@ describe('TasksComponent', () => {
         { id: 1, title: 'test title', description: 'description', due_date: null }
       ], status: 200
     };
-    const action = TasksAction.taskFetchSuccess({ tasks });
-    store.dispatch(action);
 
+    component.tasks$ = (new Observable((observer) => { observer.next(tasks); }));
+    taskFacadeSpy.fetchList.and.callFake(() => { });
     fixture.detectChanges(); // onInit()
-    component.tasks$.subscribe(data => {
-      expect(data.data.length).toEqual(2);
-    });
     expect(fixture.debugElement.query(By.css('.no-task-message'))).toBeNull();
     expect(fixture.debugElement.query(By.css('.m-done'))).not.toBeNull();
   });

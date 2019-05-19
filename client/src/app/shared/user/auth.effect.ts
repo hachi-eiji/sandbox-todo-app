@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, ofType, Effect } from '@ngrx/effects';
-import { scheduled, asapScheduler } from 'rxjs';
+import { Observable } from 'rxjs';
 import { exhaustMap, map, catchError, tap } from 'rxjs/operators';
 import { HttpService } from '../../core/http/http.service';
 import { AuthActionTypes, auth, authSuccess, authFailure } from './auth.action';
@@ -15,7 +15,7 @@ export class AuthEffect {
     exhaustMap(() => {
       return this.httpService.get<User>('/me/session').pipe(
         map(user => authSuccess({ user })),
-        catchError(error => scheduled([authFailure({ error: error.error })], asapScheduler))
+        catchError(err => new Observable((observable) => observable.next(authFailure({ error: err.error }))))
       );
     })
   );

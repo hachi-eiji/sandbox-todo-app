@@ -40,6 +40,9 @@ gem 'rack-cors'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# log formatter
+gem 'lograge'
+
 group :development, :test do
   gem 'rspec-rails', '3.5'
   gem 'factory_bot_rails'

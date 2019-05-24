@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { switchMap, catchError } from 'rxjs/operators';
 import { AuthService } from '../shared/user/auth.service';
 import { User } from '../shared/user/user';
@@ -19,11 +19,11 @@ export class LoginFacade {
     return this.loginError;
   }
 
-  login(loginId: string, password: string): Observable<{}> {
+  login(loginId: string, password: string): Observable<User | any> {
     return this.authService.login(loginId, password).pipe(
       switchMap((result: LoginResult) => new Observable(o => o.next(result.data))),
       catchError(err => {
-        throw err.error;
+        return throwError(err.error);
       })
     );
   }

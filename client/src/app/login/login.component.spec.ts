@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
@@ -12,12 +12,10 @@ import { LoginFacade } from './login.facade';
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let router: Router;
+  const router = jasmine.createSpyObj<Router>('Router', ['navigate']);
   const loginFacadeSpyObj = jasmine.createSpyObj<LoginFacade>('LoginFacade', ['login']);
 
   beforeEach(async(() => {
-    router = jasmine.createSpyObj('Router', ['navigate']);
-
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [
@@ -45,12 +43,28 @@ describe('LoginComponent', () => {
     expect(component.loginForm.valid).toBeFalsy();
   });
 
-  it('should call login method', () => {
+  it('should navigate login page', () => {
     loginFacadeSpyObj.login.and.returnValue(new Observable((o) => o.next({ id: 1, name: 'user' })));
     component.loginForm.get('loginId').setValue('user');
     component.loginForm.get('password').setValue('password');
     component.login();
-    expect(loginFacadeSpyObj.login).toHaveBeenCalledWith('user', 'password');
+    const routerSpy = router.navigate as jasmine.Spy;
+    const navArgs = routerSpy.calls.first().args[0];
+    expect(navArgs).toEqual(['tasks']);
+  });
+
+  it('should show error message when login failed', () => {
+    loginFacadeSpyObj.login.and.callFake(() => {
+      return throwError({ message: 'user not found' });
+    });
+    component.loginForm.get('loginId').setValue('user');
+    component.loginForm.get('password').setValue('password');
+    component.login();
+    fixture.detectChanges();
+    fixture.whenStable().then(() => {
+      const element: HTMLElement = fixture.debugElement.nativeElement;
+      expect(element.querySelector('.message').textContent).toEqual('user not found');
+    });
   });
 
   it('should display message "input id, password', () => {

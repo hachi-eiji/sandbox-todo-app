@@ -68,7 +68,9 @@ jobs:
       - *restore_npm_cache
       - run:
           working_directory: client
-          command: npm install
+          command: |
+            echo '{ "version": 1, "cli": { "analytics": false }}' > $HOME/.angular-config.json
+            npm install
       - save_cache:
           key: *cached_npm_name
           paths:

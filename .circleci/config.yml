@@ -69,7 +69,8 @@ jobs:
       - run:
           working_directory: client
           command: |
-            echo '{ "version": 1, "cli": { "analytics": false }}' > $HOME/.angular-config.json
+            sudo npm install -g @angular/cli@8.0.0
+            ng config --global cli.analytics false
             npm install
       - save_cache:
           key: *cached_npm_name

@@ -1,19 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
+import { HeaderComponent } from './core/header/header.component';
+import { LoadingComponent } from './core/loading/loading.component';
 import { userReducer } from './shared/user/user.reducer';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        LoadingComponent,
+        HeaderComponent,
         AppComponent
       ],
       imports: [
-        RouterTestingModule, CoreModule, StoreModule.forRoot({user: userReducer})
+        CommonModule,
+        RouterTestingModule, StoreModule.forRoot({ user: userReducer })
       ],
     }).compileComponents();
   }));

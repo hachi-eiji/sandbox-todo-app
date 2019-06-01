@@ -1,4 +1,5 @@
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,8 +7,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
+import { HeaderComponent } from './core/header/header.component';
 import { HttpRequestInterceptor } from './core/http/http-request-interceptor';
+import { LoadingComponent } from './core/loading/loading.component';
 import { LoginModule } from './login/login.module';
 import { metaReducers } from './ngrx-debug';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -25,10 +27,16 @@ const httpInterceptor = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, NotFoundComponent],
+  declarations: [
+    AppComponent,
+    NotFoundComponent,
+    LoadingComponent,
+    HeaderComponent
+  ],
   imports: [
     BrowserModule,
-    CoreModule,
+    CommonModule,
+    HttpClientModule,
     FormsModule,
     LoginModule,
     StoreModule.forRoot({ user: userReducer }, { metaReducers }),

@@ -2,8 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
-
-import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from './login.component';
 import { LoginFacade } from './login.facade';
@@ -19,7 +17,7 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [
-        ReactiveFormsModule, CoreModule, SharedModule,
+        ReactiveFormsModule, SharedModule
       ],
       providers: [
         { provide: Router, useValue: router },

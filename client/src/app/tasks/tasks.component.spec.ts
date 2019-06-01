@@ -1,8 +1,6 @@
-import { CommonModule } from '@angular/common';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
-import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 import { TaskFacade } from './shared/task.facade';
 import { Tasks } from './shared/tasks.model';
@@ -18,8 +16,6 @@ describe('TasksComponent', () => {
     TestBed.configureTestingModule({
       declarations: [TasksComponent],
       imports: [
-        CoreModule,
-        CommonModule,
         SharedModule,
       ],
       providers: [{

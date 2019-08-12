@@ -1,7 +1,7 @@
 <div class="login">
   <div class="message error login-message" *ngIf="(message$ | async) as message">{{message}}</div>
   <form [formGroup]="loginForm">
-    <div class="login-input">
+    <div class="login-input" fxLayout="column" fxFlexFill>
       <input type="text" class="login-user_name" placeholder="ログインID" name="loginId" required
              formControlName="loginId"/>
       <input type="password" class="login-user_password" placeholder="パスワード" name="password" required

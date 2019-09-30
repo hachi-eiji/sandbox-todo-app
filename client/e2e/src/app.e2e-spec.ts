@@ -7,8 +7,10 @@ describe('client App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('ログインID,passwordが空で表示される', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    const loginForm = page.getLoginForm();
+    expect(loginForm.loginId.getText()).toEqual('');
+    expect(loginForm.password.getText()).toEqual('');
   });
 });

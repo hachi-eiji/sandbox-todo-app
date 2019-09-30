@@ -8,9 +8,14 @@ export class AppPage {
   getLoginForm() {
     return {
       loginId: element(by.name('loginId')),
-      password: element(by.name('password'))
+      password: element(by.name('password')),
+      form: element(by.binding('loginForm'))
     };
   }
+  getErrorMessage(){
+    return element(by.css('login-message'));
+  }
+
   getParagraphText() {
     return element(by.css('app-root h1')).getText();
   }

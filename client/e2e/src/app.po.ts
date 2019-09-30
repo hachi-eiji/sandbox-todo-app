@@ -9,11 +9,11 @@ export class AppPage {
     return {
       loginId: element(by.name('loginId')),
       password: element(by.name('password')),
-      form: element(by.binding('loginForm'))
+      loginButton: element(by.css('button'))
     };
   }
   getErrorMessage(){
-    return element(by.css('login-message'));
+    return element(by.css('.message'));
   }
 
   getParagraphText() {

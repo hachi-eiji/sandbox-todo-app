@@ -14,4 +14,18 @@ describe('client App', () => {
     expect(loginForm.loginId.getAttribute('value')).toEqual('');
     expect(loginForm.password.getAttribute('value')).toEqual('');
   });
+
+  it('パスワードが未入力の場合必須エラーが表示される', () => {
+    loginForm.loginId.sendKeys('some user');
+    loginForm.loginButton.click();
+
+    expect(page.getErrorMessage().getText()).toEqual('ログインIDもしくはパスワードを入力してください');
+  });
+
+  it('ログインIDが未入力の場合必須エラーが表示される', () => {
+    loginForm.password.sendKeys('some user');
+    loginForm.loginButton.click();
+
+    expect(page.getErrorMessage().getText()).toEqual('ログインIDもしくはパスワードを入力してください');
+  });
 });

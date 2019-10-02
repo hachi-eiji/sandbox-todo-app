@@ -1,6 +1,18 @@
 import { browser, by, element } from 'protractor';
 
 export class AppPage {
+  get baseUrl() {
+    return browser.baseUrl;
+  }
+
+  get taskPageUrl() {
+    return `${this.baseUrl}tasks`;
+  }
+
+  get loginPageUrl() {
+    return `${this.baseUrl}login`;
+  }
+
   navigateTo() {
     return browser.get('/');
   }

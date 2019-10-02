@@ -39,11 +39,16 @@ describe('client App', () => {
     expect(page.getErrorMessage().getText()).toEqual('ログインID・パスワードが間違っています');
   });
 
+  it('ログイン無しでタスク画面に遷移したときにログイン画面に戻される', () => {
+    browser.get(page.taskPageUrl);
+    expect(page.currentUrl).toBe(page.loginPageUrl);
+  });
+
   it('ID,PasswordがDBと符合する場合タスク一覧画面に遷移する', () => {
     loginForm.loginId.sendKeys('test0@example.com');
     loginForm.password.sendKeys('test');
     loginForm.loginButton.click();
 
-    expect(page.currentUrl).toBe(`${browser.baseUrl}tasks`);
+    expect(page.currentUrl).toBe(page.taskPageUrl);
   });
 });

@@ -1,3 +1,4 @@
+import { browser } from 'protractor';
 import { AppPage } from './app.po';
 
 describe('client App', () => {
@@ -27,5 +28,22 @@ describe('client App', () => {
     loginForm.loginButton.click();
 
     expect(page.getErrorMessage().getText()).toEqual('ログインIDもしくはパスワードを入力してください');
+  });
+
+  it('ID,PasswordがDBと符合しない場合ログイン画面を表示する', () => {
+    loginForm.loginId.sendKeys('test0@example.com');
+    loginForm.password.sendKeys('mistake it');
+    loginForm.loginButton.click();
+
+    expect(page.currentUrl).toBe(`${browser.baseUrl}login`);
+    expect(page.getErrorMessage().getText()).toEqual('ログインID・パスワードが間違っています');
+  });
+
+  it('ID,PasswordがDBと符合する場合タスク一覧画面に遷移する', () => {
+    loginForm.loginId.sendKeys('test0@example.com');
+    loginForm.password.sendKeys('test');
+    loginForm.loginButton.click();
+
+    expect(page.currentUrl).toBe(`${browser.baseUrl}tasks`);
   });
 });

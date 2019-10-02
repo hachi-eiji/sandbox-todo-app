@@ -19,4 +19,8 @@ export class AppPage {
   getParagraphText() {
     return element(by.css('app-root h1')).getText();
   }
+
+  get currentUrl() {
+    return browser.getCurrentUrl();
+  }
 }

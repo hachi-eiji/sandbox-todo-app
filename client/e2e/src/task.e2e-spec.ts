@@ -1,10 +1,11 @@
+import { $$, by } from 'protractor';
 import { AppPage } from './app.po';
 
 describe('task App', () => {
   let appPage: AppPage;
   let loginForm;
 
-  beforeEach(() => {
+  beforeAll(() => {
     appPage = new AppPage();
     appPage.navigateTo();
     loginForm = appPage.getLoginForm();
@@ -15,5 +16,14 @@ describe('task App', () => {
 
   it('ID,PasswordがDBと符合する場合タスク一覧画面に遷移する', () => {
     expect(appPage.currentUrl).toBe(appPage.taskPageUrl);
+  });
+
+  it('タスク画面に一覧が表示される', () => {
+    expect($$('.m-title').count()).toEqual(25);
+  });
+
+  it('削除のボタンを押す', () => {
+    const deleteButton = $$('.m-delete').first().all(by.css('.button'));
+    deleteButton.click();
   });
 });

@@ -17,7 +17,7 @@ references:
 jobs:
   deploy:
     docker:
-      - image: circleci/ruby:2.6.0-node-browsers
+      - image: circleci/ruby:2.6.4-node-browsers
     environment:
       - RAILS_ENV: production
     steps:
@@ -31,7 +31,7 @@ jobs:
 
   server_test:
     docker:
-      - image: circleci/ruby:2.6.0-node-browsers
+      - image: circleci/ruby:2.6.4-node-browsers
         environment:
           MYSQL_USER: 'root'
           MYSQL_PASSWORD: 'root'

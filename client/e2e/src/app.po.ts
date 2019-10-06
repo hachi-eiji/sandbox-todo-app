@@ -24,7 +24,8 @@ export class AppPage {
       loginButton: element(by.css('button'))
     };
   }
-  getErrorMessage(){
+
+  getErrorMessage() {
     return element(by.css('.message'));
   }
 

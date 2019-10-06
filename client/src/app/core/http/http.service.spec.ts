@@ -1,9 +1,9 @@
-import {inject, TestBed} from '@angular/core/testing';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { inject, TestBed } from '@angular/core/testing';
+import { environment } from '../../../environments/environment';
 
-import {HttpService} from './http.service';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
+import { HttpService } from './http.service';
 
 describe('HttpService', () => {
   let httpClient: HttpClient;
@@ -102,4 +102,20 @@ describe('HttpService', () => {
     const e = new ErrorEvent('Network Error', {message});
     req.error(e);
   }));
+
+  describe('delete', () => {
+    it('should call http client', inject([HttpService], (service: HttpService) => {
+      service.delete<{ status: number }>('/test/1')
+      .subscribe(d => {
+        expect(d).toEqual({ status: 200 });
+      });
+
+      const req = httpTestingController.expectOne(`${url}/test/1`);
+      expect(req.request.method).toEqual('DELETE');
+      expect(req.request.headers.get('Accept')).toEqual('application/json');
+      expect(req.request.withCredentials).toBeTruthy();
+
+      req.flush({ status: 200 });
+    }));
+  });
 });

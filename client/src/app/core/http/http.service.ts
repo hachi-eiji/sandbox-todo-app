@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { environment } from '../../../environments/environment';
 
@@ -42,5 +42,13 @@ export class HttpService {
       withCredentials: true
     };
     return this.httpClient.post<T>(environment.api.url + path, params, options);
+  }
+
+  delete<T>(path: string): Observable<T> {
+    const options = {
+      headers: HttpService.getHeaders(),
+      withCredentials: true
+    };
+    return this.httpClient.delete<T>(environment.api.url + path, options);
   }
 }

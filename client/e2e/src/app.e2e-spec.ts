@@ -43,12 +43,4 @@ describe('client App', () => {
     browser.get(page.taskPageUrl);
     expect(page.currentUrl).toBe(page.loginPageUrl);
   });
-
-  it('ID,PasswordがDBと符合する場合タスク一覧画面に遷移する', () => {
-    loginForm.loginId.sendKeys('test0@example.com');
-    loginForm.password.sendKeys('test');
-    loginForm.loginButton.click();
-
-    expect(page.currentUrl).toBe(page.taskPageUrl);
-  });
 });

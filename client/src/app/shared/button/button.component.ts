@@ -13,13 +13,13 @@ export class ButtonComponent {
   @Input()
   buttonSize: 'small';
   @Output()
-  click = new EventEmitter<any>();
+  clickEvent = new EventEmitter<any>();
   @Input()
   disabled = false;
 
   constructor() {}
 
   handleClick() {
-    this.click.emit();
+    this.clickEvent.emit();
   }
 }

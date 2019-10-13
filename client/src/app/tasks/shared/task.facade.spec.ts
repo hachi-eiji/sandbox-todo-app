@@ -70,9 +70,24 @@ describe('TaskFacade', () => {
     tester.deleteTask(1);
     tester.tasks$.subscribe(actual => {
       expect(actual.status).toEqual(tasks.status);
-      expect(actual.data).toEqual([
+      expect(actual.data).toEqual([{ id: 2, title: 'test title', description: 'description', due_date: null }]);
+    });
+  });
+
+  it('should get tasks when task can not delete', () => {
+    const tasks: Tasks = {
+      data: [
+        { id: 1, title: 'test title', description: 'description', due_date: '2018/01/01' },
         { id: 2, title: 'test title', description: 'description', due_date: null }
-      ]);
+      ], status: 200
+    };
+    store.dispatch(TasksActions.taskFetchSuccess({ tasks }));
+
+    taskDeleteServiceSpyObj.call.and.throwError('some error');
+    tester.deleteTask(1);
+    tester.tasks$.subscribe(actual => {
+      expect(actual.status).toEqual(tasks.status);
+      expect(actual.data).toEqual(tasks.data);
     });
   });
 });

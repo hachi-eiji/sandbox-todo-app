@@ -30,8 +30,11 @@ export class TaskFacade {
   }
 
   deleteTask(taskId: number) {
-    this.taskDeleteService.call(taskId).subscribe(status => {
+    try {
+      const result = this.taskDeleteService.call(taskId).toPromise();
       this.store.dispatch(TasksActions.taskDelete(taskId));
-    });
+    } catch {
+
+    }
   }
 }

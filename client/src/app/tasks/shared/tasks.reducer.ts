@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { TaskActions, taskFetchSuccess, taskFetch } from './tasks.actions';
+import { TaskActions, taskFetchSuccess, taskFetch, taskDelete } from './tasks.actions';
 import { Tasks } from './tasks.model';
 
 export interface TaskState {
@@ -22,6 +22,17 @@ export function tasksReducer(state = initialState, action: TaskActions): TaskSta
       return action.payload;
     case taskFetch.type:
       return state;
+    case taskDelete.type:
+      const tasks = state.tasks.data.filter(task => {
+        return task.id !== action.payload;
+      });
+      return {
+        tasks: {
+          data: tasks,
+          status: state.tasks.status
+        }
+      };
+
     default:
       return state;
   }

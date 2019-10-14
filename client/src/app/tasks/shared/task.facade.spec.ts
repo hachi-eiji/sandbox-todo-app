@@ -1,8 +1,8 @@
 import { async, TestBed } from '@angular/core/testing';
 import { StoreModule, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { taskMessageReducer } from '../message/taskMessage.reducer';
 import { TaskFacade } from './task.facade';
-import { Task } from './task.model';
 import { TaskService } from './task.service';
 import { TaskDeleteService } from './taskDelete.service';
 import * as TasksActions from './tasks.actions';
@@ -10,7 +10,7 @@ import { Tasks } from './tasks.model';
 import { tasksReducer } from './tasks.reducer';
 
 describe('TaskFacade', () => {
-  let store: Store<Task>;
+  let store: Store<{}>;
   let tester: TaskFacade;
   const taskServiceSpyObj = jasmine.createSpyObj('TaskService', ['getList']);
   const taskDeleteServiceSpyObj = jasmine.createSpyObj('TaskDeleteService', ['call']);
@@ -19,7 +19,8 @@ describe('TaskFacade', () => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
-        StoreModule.forFeature('tasks', tasksReducer)
+        StoreModule.forFeature('tasks', tasksReducer),
+        StoreModule.forFeature('taskMessage', taskMessageReducer)
       ],
       providers: [
         { provide: TaskService, userValue: taskServiceSpyObj },
@@ -27,8 +28,7 @@ describe('TaskFacade', () => {
       ]
     })
     .compileComponents();
-    store = TestBed.get(Store);
-    spyOn(store, 'dispatch').and.callThrough();
+    store = TestBed.get<Store<{}>>(Store);
     tester = new TaskFacade(store, taskServiceSpyObj, taskDeleteServiceSpyObj);
   }));
 
@@ -82,8 +82,10 @@ describe('TaskFacade', () => {
       ], status: 200
     };
     store.dispatch(TasksActions.taskFetchSuccess({ tasks }));
+    taskDeleteServiceSpyObj.call.and.callFake(() => {
+      return throwError({ message: 'task not found' });
+    });
 
-    taskDeleteServiceSpyObj.call.and.throwError('some error');
     tester.deleteTask(1);
     tester.tasks$.subscribe(actual => {
       expect(actual.status).toEqual(tasks.status);

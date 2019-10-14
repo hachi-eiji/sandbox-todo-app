@@ -1,4 +1,6 @@
-<div class="message" *ngIf="(message$ | async) as message" [ngClass]="message.status">{{message.message}}</div>
+<ng-container *ngIf="(message$ | async ) as message">
+  <div [ngClass]="message.status" class="message" *ngIf="message.message">{{message.message}}</div>
+</ng-container>
 <table class="l-tasks">
   <thead>
   <tr>

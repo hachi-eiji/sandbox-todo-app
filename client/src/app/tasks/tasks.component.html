@@ -1,3 +1,4 @@
+<div class="message" *ngIf="(message$ | async) as message" [ngClass]="message.status">{{message.message}}</div>
 <table class="l-tasks">
   <thead>
   <tr>
@@ -17,7 +18,7 @@
         <td class="m-description">{{task.description}}</td>
         <td class="m-due_date">{{task.due_date}}</td>
         <td class="m-delete">
-          <app-button text="削除" (clickEvent)="delete(task)" buttonSize="small" buttonType="danger"></app-button>
+          <app-button text="削除" (clickEvent)="delete(task.id)" buttonSize="small" buttonType="danger"></app-button>
         </td>
       </tr>
     </ng-container>

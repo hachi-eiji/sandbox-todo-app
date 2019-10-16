@@ -1,5 +1,6 @@
 <ng-container *ngIf="(message$ | async ) as message">
-  <div [ngClass]="message.status" class="message" *ngIf="message.message">{{message.message}}</div>
+  <div class="message success" *ngIf="message.status === 'success'">delete_success</div>
+  <div class="message error" *ngIf="message.status === 'failed'">delete_failed</div>
 </ng-container>
 <table class="l-tasks">
   <thead>

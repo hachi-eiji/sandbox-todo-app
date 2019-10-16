@@ -40,10 +40,10 @@ export class TaskFacade {
       {
         next: () => {
           this.store.dispatch(TasksActions.taskDelete(taskId));
-          this.store.dispatch(TaskMessageActions.taskDeleteMessage({ message: 'delete success', status: 'success' }));
+          this.store.dispatch(TaskMessageActions.taskDeleteMessage({ status: 'success' }));
         },
         error: () => {
-          this.store.dispatch(TaskMessageActions.taskDeleteMessage({ message: 'delete error', status: 'error' }));
+          this.store.dispatch(TaskMessageActions.taskDeleteMessage({ status: 'failed' }));
         }
       }
     );

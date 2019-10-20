@@ -1,3 +1,6 @@
 redis:
   host: <%= ENV['REDIS_HOST'] || '127.0.0.1' %>
   db: 0
+cors_origins:
+  - localhost:4200
+  - 127.0.0.1:4200

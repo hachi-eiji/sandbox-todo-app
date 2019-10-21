@@ -36,3 +36,7 @@ RUN source /etc/profile
 RUN bash -l -c 'bundle install -j 4 --path vendor/bundle'
 
 RUN bash -l -c 'ln -sf /dev/stdout log/production.log'
+
+EXPOSE 3000
+
+CMD ["sh", "./entrypoint.sh"]

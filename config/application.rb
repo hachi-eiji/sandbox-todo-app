@@ -38,18 +38,8 @@ module SandboxTodoApp
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
 
-    # session for redis
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::RedisStore
-    config.session_store :redis_store, {
-      key:          'session',
-      servers:      {
-        host: Settings.redis.host,
-        port: 6379,
-        db:   0
-      },
-      expire_after: 60.minutes
-    }
+    config.cache_store = :redis_cache_store, { url: "redis://#{Settings.redis.host}:6379/0/cache" }
+    config.session_store :cache_store
 
     config.generators do |g|
       g.test_framework :rspec,

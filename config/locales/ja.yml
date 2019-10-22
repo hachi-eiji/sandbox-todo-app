@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: can't be blank
+            email:
+              blank: can't be blank

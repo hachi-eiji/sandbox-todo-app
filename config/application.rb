@@ -32,20 +32,14 @@ module SandboxTodoApp
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
-    config.api_only = true
+    config.api_only = false
 
-    # session for redis
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::RedisStore
-    config.session_store :redis_store, {
-      key:          'session',
-      servers:      {
-        host: Settings.redis.host,
-        port: 6379,
-        db:   0
-      },
-      expire_after: 60.minutes
-    }
+    config.i18n.default_locale = :ja
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
+
+    config.cache_store = :redis_cache_store, { url: "redis://#{Settings.redis.host}:6379/0/cache" }
+    config.session_store :cache_store
 
     config.generators do |g|
       g.test_framework :rspec,

@@ -50,5 +50,3 @@ test:
 production:
   <<: *default
   database: sandbox-todo-app_production
-  username: sandbox-todo-app
-  password: <%= ENV['SANDBOX-TODO-APP_DATABASE_PASSWORD'] %>

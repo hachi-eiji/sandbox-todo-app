@@ -98,7 +98,7 @@ RSpec.describe 'Api::Tasks', type: :request do
         post api_tasks_path, params: params, headers: header
         task = Task.first
         expect(task.title).to eq('テスト')
-        expect(task.due_date).to eq('2017-01-12 12:34:56')
+        expect(task.due_date.strftime('%Y-%m-%d %H:%M:%S')).to eq('2017-01-12 12:34:56')
         expect(task.creator_id).to eq(user.id)
         expect(task.updater_id).to eq(user.id)
         expect(response).to have_http_status 200

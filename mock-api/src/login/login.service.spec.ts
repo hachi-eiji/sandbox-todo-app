@@ -12,7 +12,11 @@ describe('LoginService', () => {
     service = module.get<LoginService>(LoginService);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
+  it('should be truthy', () => {
+    expect(service.login('test', 'test')).toBeTruthy();
+  });
+
+  it('should be falsy', () => {
+    expect(service.login('test', 'not password')).toBeFalsy();
   });
 });

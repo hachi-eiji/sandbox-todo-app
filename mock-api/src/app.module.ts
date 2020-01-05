@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { SessionController } from './me/session.controller';
 import { TokenController } from './token.controller';
 import { LoginModule } from './login/login.module';
+import { TasksModule } from './tasks/tasks.module';
 
 @Module({
-  imports: [LoginModule],
+  imports: [LoginModule, TasksModule],
   controllers: [
     AppController,
     SessionController,

@@ -28,7 +28,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'redis-rails'
 
 # configure
-gem 'config'
+gem 'config', github: 'railsconfig/config'
 
 gem 'ridgepole', '0.8.5', github: 'winebarrel/ridgepole', branch: '0.8'
 

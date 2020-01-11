@@ -33,4 +33,10 @@ describe('TasksService', () => {
       expect(service.findAll()).toEqual(result);
     });
   });
+
+  describe('create', () => {
+    it('should post successes', () => {
+      expect(service.create()).toEqual({status: '201', message: 'ok'});
+    });
+  });
 });

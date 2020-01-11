@@ -21,4 +21,8 @@ export class TasksService {
     });
     return result;
   }
+
+  create() {
+    return { status: '201', message: 'ok' };
+  }
 }

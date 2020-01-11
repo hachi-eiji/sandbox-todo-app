@@ -11,7 +11,7 @@ export class TasksService {
         id: i * 100,
         title: `タイトル${i}`,
         description: `めっちゃ長い説明なんだけど...そうだね説明${i}`,
-        due_date: `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`,
+        due_date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
       });
     }
     result.push({

@@ -3,7 +3,6 @@
 Sandbox of the following middlewares
 
 * Ruby on Rails
-* middleman
 * React
 * Docker
 
@@ -11,7 +10,7 @@ Sandbox of the following middlewares
 
 * client - front-end
 * docker - docker
-* mockapi - mock API server
+* mock-api - mock API server
 * others - Rails
 
 ## setup

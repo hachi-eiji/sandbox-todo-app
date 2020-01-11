@@ -7,6 +7,6 @@ export const environment = {
   production: false,
   // api server
   api: {
-    url: 'http://127.0.0.1:4567/api'
+    url: 'http://127.0.0.1:3000/api'
   }
 };

@@ -1,5 +1,4 @@
 import { Controller, Get, Post, Put, Delete } from '@nestjs/common';
-import { Task } from './task';
 import { TasksService } from './tasks.service';
 
 @Controller('tasks')
@@ -8,8 +7,11 @@ export class TasksController {
   }
 
   @Get()
-  find(): Task[] {
-    return this.tasksService.findAll();
+  find() {
+    return {
+      status: 200,
+      data: this.tasksService.findAll(),
+    };
   }
 
   @Post()

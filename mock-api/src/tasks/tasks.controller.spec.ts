@@ -36,7 +36,10 @@ describe('Tasks Controller', () => {
       jest.spyOn(service, 'findAll').mockImplementation(() => {
         return tasks;
       });
-      expect(controller.find()).toEqual(tasks);
+      expect(controller.find()).toEqual({
+        status: 200,
+        data: tasks,
+      });
     });
   });
 

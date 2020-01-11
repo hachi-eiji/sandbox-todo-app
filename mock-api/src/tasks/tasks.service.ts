@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { Task } from './Task';
 
 @Injectable()
 export class TasksService {
-  findAll() {
+  findAll(): Task[] {
     const result = [];
     const date = new Date(2020, 0, 1);
     for (let i = 0; i < 9; i++) {

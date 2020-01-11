@@ -39,4 +39,22 @@ describe('Tasks Controller', () => {
       expect(controller.find()).toEqual(tasks);
     });
   });
+
+  describe('create', () => {
+    it('should be defined', () => {
+      expect(controller.create()).toEqual({ status: '201', message: 'ok' });
+    });
+  });
+
+  describe('update', () => {
+    it('should be defined', () => {
+      expect(controller.update()).toEqual({ status: 200, message: 'ok' });
+    });
+  });
+
+  describe('delete', () => {
+    it('should be defined', () => {
+      expect(controller.delete()).toEqual({ status: 200 });
+    });
+  });
 });

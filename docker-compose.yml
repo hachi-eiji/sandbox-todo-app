@@ -1,14 +1,5 @@
 version: "3"
 services:
-  mock_api:
-    build: ./mockapi
-    command: sh start_api_mock.sh
-    ports:
-      - "4567:4567"
-    volumes:
-      - ./mockapi:/var/lib/mockapi
-      - mock_api_bundle:/var/lib/mockapi/.bundle
-      - mock_api_bundle_install:/var/lib/mockapi/vendor/bundle
   mysql:
     build: ./docker/mysql
     environment:
@@ -30,8 +21,4 @@ volumes:
   mysql_data:
     driver: local
   redis_data:
-    driver: local
-  mock_api_bundle:
-    driver: local
-  mock_api_bundle_install:
     driver: local

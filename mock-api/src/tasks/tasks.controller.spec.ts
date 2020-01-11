@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Task } from './Task';
+import { Task } from './task';
 import { TasksController } from './tasks.controller';
 import { TasksService } from './tasks.service';
 

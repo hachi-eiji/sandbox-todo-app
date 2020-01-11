@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Task } from './Task';
+import { Task } from './task';
 
 @Injectable()
 export class TasksService {

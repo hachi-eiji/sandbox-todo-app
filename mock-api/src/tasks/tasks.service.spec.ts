@@ -36,7 +36,19 @@ describe('TasksService', () => {
 
   describe('create', () => {
     it('should post successes', () => {
-      expect(service.create()).toEqual({status: '201', message: 'ok'});
+      expect(service.create()).toEqual({ status: '201', message: 'ok' });
+    });
+  });
+
+  describe('update', () => {
+    it('should put successes', () => {
+      expect(service.update()).toEqual({ status: 200, message: 'ok' });
+    });
+  });
+
+  describe('delete', () => {
+    it('should delete successes', () => {
+      expect(service.delete()).toEqual({ status: 200 });
     });
   });
 });

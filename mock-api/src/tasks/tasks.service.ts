@@ -25,4 +25,17 @@ export class TasksService {
   create() {
     return { status: '201', message: 'ok' };
   }
+
+  update() {
+    return {
+      status: 200,
+      message: 'ok',
+    };
+  }
+
+  delete() {
+    return {
+      status: 200,
+    };
+  }
 }

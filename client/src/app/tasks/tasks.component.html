@@ -15,7 +15,7 @@
   <tbody>
   <ng-container *ngIf="(tasks$ | async) as t">
     <ng-container *ngIf="t.data.length; else notFound">
-      <tr *ngFor="let task of t.data">
+      <tr *ngFor="let task of t.data; trackBy: trackById">
         <td class="m-done"><input type="radio"></td>
         <td class="m-title">{{task.title}}</td>
         <td class="m-description">{{task.description}}</td>

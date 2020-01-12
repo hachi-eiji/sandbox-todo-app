@@ -25,4 +25,8 @@ export class TasksComponent implements OnInit {
   delete(id: number) {
     this.taskFacade.deleteTask(id);
   }
+
+  trackById(index, task): number {
+    return task.id;
+  }
 }

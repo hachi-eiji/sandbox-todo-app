@@ -47,7 +47,7 @@ describe('ButtonComponent', () => {
 
   it('should call click event', () => {
     const spy = jasmine.createSpyObj('EventEmitter', ['emit']);
-    component.click = spy;
+    component.clickEvent = spy;
     fixture.debugElement.nativeElement.querySelector('button').click();
     expect(spy.emit.calls.count()).toBe(1);
   });

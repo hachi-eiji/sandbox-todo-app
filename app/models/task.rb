@@ -13,7 +13,7 @@ class Task < ApplicationRecord
   # @param [Integer] user_id ユーザID
   # @return [TrueClass|FalseClass]
   def modifiable?(user_id)
-    project.project_members.map(&:user_id).include?(user_id)
+    !project.project_members.select { |member| member.user_id == user_id }.empty?
   end
 
   def done

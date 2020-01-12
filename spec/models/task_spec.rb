@@ -61,4 +61,27 @@ RSpec.describe Task, type: :model do
       end
     end
   end
+
+  describe '#modifiable?' do
+    context 'プロジェクトメンバーの中に自分が含まれていない場合' do
+      let(:task) { create(:task) }
+      let(:user) { create(:user) }
+
+      it 'タスクは変更できない' do
+        expect(task.modifiable?(user.id)).to be_falsey
+      end
+    end
+
+    context 'プロジェクトメンバーの中に自分が含まれている場合' do
+      let(:task) { create(:task) }
+      let(:user) { create(:user) }
+      before do
+        create(:project_member, user: user, project: task.project)
+      end
+
+      it 'タスクは変更できる' do
+        expect(task.modifiable?(user.id)).to be_truthy
+      end
+    end
+  end
 end

@@ -118,4 +118,21 @@ describe('HttpService', () => {
       req.flush({ status: 200 });
     }));
   });
+
+  describe('put', () => {
+    it('should call http client', inject([HttpService], (service: HttpService) => {
+      const data = {
+        message: 'test',
+      };
+      service.put('/test/1', data).subscribe((d) => {
+        expect(d).toEqual({ status: 200 });
+      });
+      const req = httpTestingController.expectOne(`${url}/test/1`);
+      expect(req.request.method).toEqual('PUT');
+      expect(req.request.headers.get('Accept')).toEqual('application/json');
+      expect(req.request.withCredentials).toBeTruthy();
+
+      req.flush({ status: 200 });
+    }));
+  });
 });

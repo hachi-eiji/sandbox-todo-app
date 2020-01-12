@@ -3,7 +3,7 @@
 Sandbox of the following middlewares
 
 * Ruby on Rails
-* React
+* Angular
 * Docker
 
 ### directory

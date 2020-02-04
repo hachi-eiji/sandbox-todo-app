@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { TaskMessage } from './message/taskMessage.reducer';
 import { TaskFacade } from './shared/task.facade';
+import { Task } from './shared/task.model';
 import { Tasks } from './shared/tasks.model';
 
 @Component({
@@ -24,5 +25,17 @@ export class TasksComponent implements OnInit {
 
   delete(id: number) {
     this.taskFacade.deleteTask(id);
+  }
+
+  trackById(index, task): number {
+    return task.id;
+  }
+
+  edit(task: Task) {
+    this.taskFacade.edit(task);
+  }
+
+  update(task: Task) {
+    this.taskFacade.update(task);
   }
 }

@@ -51,4 +51,13 @@ export class HttpService {
     };
     return this.httpClient.delete<T>(environment.api.url + path, options);
   }
+
+  put<T>(path: string, data?: {}): Observable<T> {
+    const params = HttpService.createParams(data);
+    const options = {
+      headers: HttpService.getHeaders(),
+      withCredentials: true
+    };
+    return this.httpClient.put<T>(environment.api.url + path, params, options);
+  }
 }

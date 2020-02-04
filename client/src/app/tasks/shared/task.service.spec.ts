@@ -31,6 +31,7 @@ describe('TaskService', () => {
         due_date: i % 2 === 0 ? '2018/01/01 12:00:00' : null,
         title: `title ${i}`,
         description: i % 2 !== 0 ? `description ${i}` : null,
+        edit: false
       });
     }
     const mock: Tasks = { status: 200, data: array };

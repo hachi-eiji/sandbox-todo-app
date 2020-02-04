@@ -14,12 +14,12 @@ export class TasksController {
     };
   }
 
-  @Post()
+  @Post(':id')
   create() {
     return this.tasksService.create();
   }
 
-  @Put()
+  @Put(':id')
   update() {
     return this.tasksService.update();
   }

@@ -17,9 +17,18 @@
     <ng-container *ngIf="t.data.length; else notFound">
       <tr *ngFor="let task of t.data; trackBy: trackById">
         <td class="m-done"><input type="radio"></td>
-        <td class="m-title">{{task.title}}</td>
-        <td class="m-description">{{task.description}}</td>
-        <td class="m-due_date">{{task.due_date}}</td>
+        <td class="m-title">
+          <span *ngIf="!task.edit" (click)="edit(task)">{{task.title}}</span>
+          <input type="text" [(ngModel)]="task.title" (blur)="update(task)" *ngIf="task.edit">
+        </td>
+        <td class="m-description">
+          <span *ngIf="!task.edit" (click)="edit(task)">{{task.description}}</span>
+          <input type="text" [(ngModel)]="task.description" (blur)="update(task)" *ngIf="task.edit">
+        </td>
+        <td class="m-due_date">
+          <span *ngIf="!task.edit" (click)="edit(task)">{{task.due_date}}</span>
+          <input type="datetime-local" [(ngModel)]="task.due_date" (blur)="update(task)" *ngIf="task.edit">
+        </td>
         <td class="m-delete">
           <app-button text="削除" (clickEvent)="delete(task.id)" buttonSize="small" buttonType="danger"></app-button>
         </td>

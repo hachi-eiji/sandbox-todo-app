@@ -15,7 +15,7 @@ describe('TaskUpdateService', () => {
   it('should be update', () => {
     const mock: Task = {
       id: 1, title: 'title',
-      description: 'description', due_date: '2020-01-01',
+      description: 'description', due_date: '2020-01-01', edit: false,
     };
     httpServiceSpy.put.and.returnValue(of(mock));
     service.call(mock).subscribe((d) => {

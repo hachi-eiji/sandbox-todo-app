@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { SharedModule } from '../shared/shared.module';
@@ -16,7 +17,7 @@ describe('TasksComponent', () => {
     TestBed.configureTestingModule({
       declarations: [TasksComponent],
       imports: [
-        SharedModule,
+        SharedModule, FormsModule,
       ],
       providers: [{
         provide: TaskFacade, useValue: taskFacadeSpy
@@ -43,8 +44,8 @@ describe('TasksComponent', () => {
   it('should show data', () => {
     const tasks: Tasks = {
       data: [
-        { id: 1, title: 'test title', description: 'description', due_date: '2018/01/01' },
-        { id: 1, title: 'test title', description: 'description', due_date: null }
+        { id: 1, title: 'test title', description: 'description', due_date: '2018/01/01', edit: false },
+        { id: 1, title: 'test title', description: 'description', due_date: null, edit: false },
       ], status: 200
     };
 

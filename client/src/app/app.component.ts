@@ -21,7 +21,7 @@ export class AppComponent {
         mergeMap(route => route.data)
       )
       .subscribe((data: Data) => this.handleSubscribe(data));
-    store.dispatch(AuthActions.auth);
+    store.dispatch(AuthActions.auth());
   }
 
   private getCurrentActivatedRoute(): ActivatedRoute {

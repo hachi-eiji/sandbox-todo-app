@@ -30,7 +30,7 @@ describe('TaskFacade', () => {
         { provide: TaskUpdateService, userValue: taskUpdateServiceSpyObj }
       ]
     }).compileComponents();
-    store = TestBed.get<Store<{}>>(Store);
+    store = TestBed.inject<Store<{}>>(Store);
     tester = new TaskFacade(store, taskServiceSpyObj, taskDeleteServiceSpyObj, taskUpdateServiceSpyObj);
   }));
 

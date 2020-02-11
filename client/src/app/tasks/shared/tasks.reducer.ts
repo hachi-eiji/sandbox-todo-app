@@ -35,26 +35,34 @@ export function tasksReducer(state = initialState, action: TaskActions): TaskSta
     case taskUpdate.type:
       const updateTask = action.payload.task;
       const findIndex = state.tasks.data.findIndex(value => value.id === updateTask.id);
-      state.tasks.data[findIndex] = updateTask;
-      state.tasks.data[findIndex].edit = false;
+      const updateTodoList = state.tasks.data.map((value, i) => {
+        if (findIndex === i) {
+          return {
+            ...updateTask, edit: false
+          };
+        } else {
+          return value;
+        }
+      });
       return {
         tasks: {
-          data: state.tasks.data,
-          status: state.tasks.status,
-        },
+          data: updateTodoList,
+          status: state.tasks.status
+        }
       };
     case taskEdit.type:
       const editTask = action.payload.task;
       const index = state.tasks.data.findIndex(value => value.id === editTask.id);
-      state.tasks.data.forEach(value => {
-        value.edit = false;
+      const editTodoList = state.tasks.data.map((value, i) => {
+        return {
+          ...value, edit: i === index
+        };
       });
-      state.tasks.data[index].edit = true;
       return {
         tasks: {
-          data: state.tasks.data,
-          status: state.tasks.status,
-        },
+          data: editTodoList,
+          status: state.tasks.status
+        }
       };
     default:
       return state;

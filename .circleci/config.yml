@@ -62,14 +62,14 @@ jobs:
 
   client_test:
     docker:
-      - image: circleci/node:10.12-browsers
+      - image: circleci/node:12.14-browsers
     steps:
       - checkout
       - *restore_npm_cache
       - run:
           working_directory: client
           command: |
-            npx -p @angular/cli@8.0.0 ng config --global cli.analytics false
+            npx -p @angular/cli@9.0.0 ng config --global cli.analytics false
             npm install
       - save_cache:
           key: *cached_npm_name
@@ -84,7 +84,7 @@ jobs:
             - client
   client_build:
     docker:
-      - image: circleci/node:10.12-browsers
+      - image: circleci/node:12.14-browsers
     steps:
       - attach_workspace:
           at: .

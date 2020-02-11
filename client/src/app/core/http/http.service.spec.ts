@@ -20,8 +20,8 @@ describe('HttpService', () => {
       providers: [HttpService],
       imports: [HttpClientTestingModule]
     });
-    httpClient = TestBed.get(HttpClient);
-    httpTestingController = TestBed.get(HttpTestingController);
+    httpClient = TestBed.inject(HttpClient);
+    httpTestingController = TestBed.inject(HttpTestingController);
   });
   afterEach(() => {
     httpTestingController.verify();

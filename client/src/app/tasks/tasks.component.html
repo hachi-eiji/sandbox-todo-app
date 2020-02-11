@@ -19,15 +19,15 @@
         <td class="m-done"><input type="radio"></td>
         <td class="m-title">
           <span *ngIf="!task.edit" (click)="edit(task)">{{task.title}}</span>
-          <input type="text" [(ngModel)]="task.title" (blur)="update(task)" *ngIf="task.edit">
+          <input type="text" [(ngModel)]="editTask.title" (blur)="update(editTask)" *ngIf="task.edit">
         </td>
         <td class="m-description">
           <span *ngIf="!task.edit" (click)="edit(task)">{{task.description}}</span>
-          <input type="text" [(ngModel)]="task.description" (blur)="update(task)" *ngIf="task.edit">
+          <input type="text" [(ngModel)]="editTask.description" (blur)="update(editTask)" *ngIf="task.edit">
         </td>
         <td class="m-due_date">
           <span *ngIf="!task.edit" (click)="edit(task)">{{task.due_date}}</span>
-          <input type="datetime-local" [(ngModel)]="task.due_date" (blur)="update(task)" *ngIf="task.edit">
+          <input type="datetime-local" [(ngModel)]="editTask.due_date" (blur)="update(editTask)" *ngIf="task.edit">
         </td>
         <td class="m-delete">
           <app-button text="削除" (clickEvent)="delete(task.id)" buttonSize="small" buttonType="danger"></app-button>

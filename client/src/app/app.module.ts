@@ -39,7 +39,15 @@ const httpInterceptor = [
     HttpClientModule,
     FormsModule,
     LoginModule,
-    StoreModule.forRoot({ user: userReducer }, { metaReducers }),
+    StoreModule.forRoot({ user: userReducer }, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictStateSerializability: true,
+        strictActionSerializability: true
+      }
+    }),
     EffectsModule.forRoot([AuthEffect]),
     RouterModule.forRoot(appRoutes)
   ],

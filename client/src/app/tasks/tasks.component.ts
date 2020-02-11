@@ -13,6 +13,7 @@ import { Tasks } from './shared/tasks.model';
 export class TasksComponent implements OnInit {
   tasks$: Observable<Tasks>;
   message$: Observable<TaskMessage> | null; // ちゃんとnullを入れるべきか?
+  editTask: Task;
 
   constructor(private taskFacade: TaskFacade) {
     this.tasks$ = taskFacade.tasks$;
@@ -32,6 +33,7 @@ export class TasksComponent implements OnInit {
   }
 
   edit(task: Task) {
+    this.editTask = { ...task };
     this.taskFacade.edit(task);
   }
 

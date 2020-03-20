@@ -2,6 +2,7 @@ import { async, TestBed } from '@angular/core/testing';
 import { StoreModule, Store } from '@ngrx/store';
 import { Observable, throwError } from 'rxjs';
 import { taskMessageReducer } from '../message/taskMessage.reducer';
+import { TaskRegisterService } from './task-register.service';
 import { TaskUpdateService } from './task-update.service';
 import { TaskFacade } from './task.facade';
 import { TaskService } from './task.service';
@@ -16,6 +17,7 @@ describe('TaskFacade', () => {
   const taskServiceSpyObj = jasmine.createSpyObj('TaskService', ['getList']);
   const taskDeleteServiceSpyObj = jasmine.createSpyObj('TaskDeleteService', ['call']);
   const taskUpdateServiceSpyObj = jasmine.createSpyObj('TaskUpdateService', ['call']);
+  const taskRegisterServiceSpyObj = jasmine.createSpyObj('TaskRegisterService', ['call']);
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,11 +29,12 @@ describe('TaskFacade', () => {
       providers: [
         { provide: TaskService, userValue: taskServiceSpyObj },
         { provide: TaskDeleteService, userValue: taskDeleteServiceSpyObj },
-        { provide: TaskUpdateService, userValue: taskUpdateServiceSpyObj }
+        { provide: TaskUpdateService, userValue: taskUpdateServiceSpyObj },
+        { provide: TaskRegisterService, userValue: taskRegisterServiceSpyObj }
       ]
     }).compileComponents();
     store = TestBed.inject<Store<{}>>(Store);
-    tester = new TaskFacade(store, taskServiceSpyObj, taskDeleteServiceSpyObj, taskUpdateServiceSpyObj);
+    tester = new TaskFacade(store, taskServiceSpyObj, taskDeleteServiceSpyObj, taskUpdateServiceSpyObj, taskRegisterServiceSpyObj);
   }));
 
   it('should empty ', () => {

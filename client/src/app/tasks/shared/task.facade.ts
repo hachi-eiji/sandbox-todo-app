@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as TaskMessageActions from '../message/taskMessage.action';
 import * as TaskMessageReducer from '../message/taskMessage.reducer';
+import { TaskRegisterService } from './task-register.service';
 import { TaskUpdateService } from './task-update.service';
 import { Task } from './task.model';
 import { TaskService } from './task.service';
@@ -10,7 +11,7 @@ import * as TasksActions from './tasks.actions';
 import * as TasksReducer from './tasks.reducer';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class TaskFacade {
   private tasks = this.store.pipe(select(TasksReducer.getTasks));
@@ -21,6 +22,7 @@ export class TaskFacade {
     private taskService: TaskService,
     private taskDeleteService: TaskDeleteService,
     private taskUpdateService: TaskUpdateService,
+    private taskRegisterService: TaskRegisterService
   ) {
   }
 
@@ -59,6 +61,12 @@ export class TaskFacade {
   update(task: Task) {
     this.taskUpdateService.call(task).subscribe(() => {
       this.store.dispatch(TasksActions.taskUpdate({ task }));
+    });
+  }
+
+  create(task: Task) {
+    this.taskRegisterService.call(task).subscribe(() => {
+      this.store.dispatch(TasksActions.taskCreate({ task }));
     });
   }
 }

@@ -23,8 +23,8 @@
           <input type="text" [(ngModel)]="editTask.title" (blur)="update(editTask)" *ngIf="task.edit">
         </td>
         <td class="m-description">
-          <span *ngIf="!task.edit" (click)="edit(task)">{{task.description}}</span>
-          <input type="text" [(ngModel)]="editTask.description" (blur)="update(editTask)" *ngIf="task.edit">
+          <span *ngIf="!task.edit" (click)="edit(task)" class="pre-wrap">{{task.description}}</span>
+          <div (blur)="editTask.description = $event.target.innerText; update(editTask)" *ngIf="task.edit" contenteditable="true" class="pre-wrap">{{editTask.description}}</div>
         </td>
         <td class="m-due_date">
           <span *ngIf="!task.edit" (click)="edit(task)">{{task.due_date}}</span>

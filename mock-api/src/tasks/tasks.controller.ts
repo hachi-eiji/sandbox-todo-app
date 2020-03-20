@@ -14,7 +14,7 @@ export class TasksController {
     };
   }
 
-  @Post(':id')
+  @Post()
   create() {
     return this.tasksService.create();
   }

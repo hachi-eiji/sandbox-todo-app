@@ -2,6 +2,7 @@
   <div class="message success" *ngIf="message.status === 'success'">delete_success</div>
   <div class="message error" *ngIf="message.status === 'failed'">delete_failed</div>
 </ng-container>
+<a [routerLink]="'/tasks/new'">新規作成</a><br>
 <table class="l-tasks">
   <thead>
   <tr>
@@ -27,7 +28,7 @@
         </td>
         <td class="m-due_date">
           <span *ngIf="!task.edit" (click)="edit(task)">{{task.due_date}}</span>
-          <input type="datetime-local" [(ngModel)]="editTask.due_date" (blur)="update(editTask)" *ngIf="task.edit">
+          <input type="date" [(ngModel)]="editTask.due_date" (blur)="update(editTask)" *ngIf="task.edit">
         </td>
         <td class="m-delete">
           <app-button text="削除" (clickEvent)="delete(task.id)" buttonSize="small" buttonType="danger"></app-button>

@@ -9,6 +9,7 @@ import { tasksReducer } from './shared/tasks.reducer';
 
 import { TasksRoutingModule } from './tasks-routing.module';
 import { TasksComponent } from './tasks.component';
+import { TaskCreateComponent } from './task-create/task-create.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { TasksComponent } from './tasks.component';
     StoreModule.forFeature('taskMessage', taskMessageReducer, { metaReducers }),
     FormsModule,
   ],
-  declarations: [TasksComponent]
+  declarations: [TasksComponent, TaskCreateComponent]
 })
 export class TasksModule {}

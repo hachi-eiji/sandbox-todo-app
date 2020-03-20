@@ -9,7 +9,7 @@ class Api::TasksController < Api::ApiController
   end
 
   def create
-    param   = task_params
+    param = task_create_params
     user    = current_user
     project = Project.personal(user.id)
     Task.create!(param.merge({ creator_id: user.id, updater_id: user.id, project_id: project.id }))
@@ -36,6 +36,10 @@ class Api::TasksController < Api::ApiController
   private
 
   def task_params
-    params.permit(:title, :due_date, :done, :id)
+    params.permit(:title, :due_date, :done, :id, :description)
+  end
+
+  def task_create_params
+    params.permit(:title, :due_date, :description)
   end
 end

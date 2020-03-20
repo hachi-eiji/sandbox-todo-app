@@ -12,11 +12,14 @@ export const taskUpdate = createAction('[Task API] Update', (payload: { task: Ta
 
 export const taskEdit = createAction('[Task Page] Edit', (payload: { task: Task }) => ({ payload }));
 
+export const taskCreate = createAction('[Task API] Create', (payload: { task: Task }) => ({ payload }));
+
 const actions = union({
   taskFetch,
   taskFetchSuccess,
   taskDelete,
   taskUpdate,
   taskEdit,
+  taskCreate,
 });
 export type TaskActions = typeof actions;

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { TaskActions, taskFetchSuccess, taskFetch, taskDelete, taskUpdate, taskEdit } from './tasks.actions';
+import { TaskActions, taskFetchSuccess, taskFetch, taskDelete, taskUpdate, taskEdit, taskCreate } from './tasks.actions';
 import { Tasks } from './tasks.model';
 
 export interface TaskState {
@@ -64,6 +64,8 @@ export function tasksReducer(state = initialState, action: TaskActions): TaskSta
           status: state.tasks.status
         }
       };
+    case taskCreate.type:
+      return state;
     default:
       return state;
   }

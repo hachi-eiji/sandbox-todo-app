@@ -1,5 +1,3 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
 create_table "done_tasks", id: :integer, default: 0, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
   t.bigint "project_id", null: false
   t.string "title", null: false

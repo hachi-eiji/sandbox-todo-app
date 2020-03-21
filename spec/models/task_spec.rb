@@ -23,7 +23,7 @@ RSpec.describe Task, type: :model do
         task              = build(:task)
         task.task_notes   = [build(:task_note), build(:task_note)]
         task.task_assigns = [build(:task_assign), build(:task_assign)]
-        task.project      = create(:project)
+        task.project      = create(:project, user: create(:user))
         task.save!
 
         id      = task.id
@@ -44,7 +44,7 @@ RSpec.describe Task, type: :model do
         task              = build(:task)
         task.task_notes   = [build(:task_note), build(:task_note)]
         task.task_assigns = [build(:task_assign), build(:task_assign)]
-        task.project      = create(:project)
+        task.project      = create(:project, user: create(:user))
         task.save!
 
         id      = task.id

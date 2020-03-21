@@ -4,5 +4,9 @@ class Project < ApplicationRecord
   has_many :done_tasks, dependent: :destroy
   belongs_to :user
 
-  scope :personal, -> (user_id) { find_by(user_id: user_id) }
+  class << self
+    def personal(user_id)
+      find_by(user_id: user_id)
+    end
+  end
 end

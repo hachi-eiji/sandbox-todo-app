@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/winebarrel/ridgepole.git
-  revision: d71ea0d6fae5ed8b1e6fff97c500e391ef7b7732
+  revision: 4ec9f081ad3b2aef4eba99e1a7af619f71dacc12
   branch: 0.8
   specs:
-    ridgepole (0.8.3)
+    ridgepole (0.8.7)
       activerecord (>= 5.0.1, < 6.1)
       diffy
 
@@ -288,7 +288,7 @@ DEPENDENCIES
   rack-cors
   rails (= 6.0.0)
   redis-rails
-  ridgepole (= 0.8.3)!
+  ridgepole (= 0.8.7)!
   rspec-rails (= 3.5)
   sdoc (~> 0.4.0)
   spring

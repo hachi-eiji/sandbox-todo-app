@@ -3,8 +3,7 @@ import { TasksService } from './tasks.service';
 
 @Controller('tasks')
 export class TasksController {
-  constructor(private tasksService: TasksService) {
-  }
+  constructor(private tasksService: TasksService) {}
 
   @Get()
   find() {
@@ -24,7 +23,7 @@ export class TasksController {
     return this.tasksService.update();
   }
 
-  @Delete()
+  @Delete(':id')
   delete() {
     return this.tasksService.delete();
   }

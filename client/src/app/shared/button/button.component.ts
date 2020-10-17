@@ -6,6 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent {
+  /** @deprecated use content protection */
   @Input()
   text: string;
   @Input()

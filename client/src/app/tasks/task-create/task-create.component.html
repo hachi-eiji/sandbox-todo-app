@@ -1,14 +1,9 @@
 <div class="container">
-  <div class="title">
-    title <input type="text" [(ngModel)]="task.title">
-  </div>
-  <div class="date">
-    date <input type="date" [(ngModel)]="task.due_date">
-  </div>
+  <div class="title">title <input type="text" [(ngModel)]="task.title" /></div>
+  <div class="date">date <input type="date" [(ngModel)]="task.due_date" /></div>
   <div class="description">
     説明
-    <div class="description-area" contenteditable="true" (input)="task.description = $event.target.innerText"> </div>
-    <div class="register-button">
-      <app-button text="登録" buttonType="submit" (clickEvent)="register()"></app-button>
-    </div>
+    <div class="description-area" contenteditable="true" (input)="task.description = $event.target.innerText"></div>
+    <div class="register-button"><app-button buttonType="submit" (clickEvent)="register()">登録</app-button></div>
+  </div>
 </div>

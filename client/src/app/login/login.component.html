@@ -1,12 +1,24 @@
 <div class="login">
-  <div class="message error login-message" *ngIf="(message$ | async) as message">{{message}}</div>
+  <div class="message error login-message" *ngIf="(message$ | async) as message">{{ message }}</div>
   <form [formGroup]="loginForm">
     <div class="login-input">
-      <input type="text" class="login-user_name" placeholder="ログインID" name="loginId" required
-             formControlName="loginId"/>
-      <input type="password" class="login-user_password" placeholder="パスワード" name="password" required
-             formControlName="password"/>
-      <app-button text="ログイン" buttonType="submit" (clickEvent)="login()"></app-button>
+      <input
+        type="text"
+        class="login-user_name"
+        placeholder="ログインID"
+        name="loginId"
+        required
+        formControlName="loginId"
+      />
+      <input
+        type="password"
+        class="login-user_password"
+        placeholder="パスワード"
+        name="password"
+        required
+        formControlName="password"
+      />
+      <app-button [buttonType]="'submit'" (clickEvent)="login()">ログイン</app-button>
     </div>
   </form>
 </div>

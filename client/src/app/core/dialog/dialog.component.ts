@@ -1,6 +1,6 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { CdkPortal } from '@angular/cdk/portal';
-import { Component, OnInit, ViewChild, ContentChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-dialog',
@@ -8,7 +8,8 @@ import { Component, OnInit, ViewChild, ContentChild } from '@angular/core';
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent {
-  @ViewChild(CdkPortal) portal: CdkPortal;
+  // static: trueにしているのはngOnInitのときに初期化したいため
+  @ViewChild(CdkPortal, { static: true }) portal: CdkPortal;
 
   constructor(private overlay: Overlay) {}
 

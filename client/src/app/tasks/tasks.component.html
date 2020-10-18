@@ -41,18 +41,7 @@
             <app-button (clickEvent)="dialog.open()" buttonSize="small" buttonType="danger">削除</app-button>
             <app-dialog #dialog>
               <div dialog-title>確認</div>
-              <div dialog-body>
-                削除しますか？ 削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？
-                <br />
-                削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？ <br />
-                削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？ <br />
-                削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？ <br />
-                削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？ <br />
-                削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？ <br />
-                削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？ <br />
-                削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？削除しますか？ <br />
-                削除しますか？
-              </div>
+              <div dialog-body>削除しますか？</div>
               <div primary-button>
                 <app-button [buttonType]="'submit'" (clickEvent)="delete(task.id); dialog.close()">削除</app-button>
               </div>

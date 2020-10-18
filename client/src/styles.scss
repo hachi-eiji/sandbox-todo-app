@@ -1,5 +1,6 @@
 @import 'assets/variables';
 @import 'assets/common/main';
+@import '~@angular/cdk/overlay-prebuilt.css';
 
 @media screen and (min-width: $tablet_size) {
   @import 'assets/pc/layout';

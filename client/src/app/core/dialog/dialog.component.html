@@ -1,1 +1,10 @@
-<p>dialog works!</p>
+<ng-template cdkPortal>
+  <div class="dialog">
+    <div class="dialog-title"><ng-content select="[dialog-title]"></ng-content></div>
+    <div class="dialog-content"><ng-content select="[dialog-body]"></ng-content></div>
+    <div class="dialog-footer">
+      <app-button (clickEvent)="close()">閉じる</app-button>
+      <ng-content select="[primary-button]"></ng-content>
+    </div>
+  </div>
+</ng-template>

@@ -38,7 +38,14 @@
             <input type="date" [(ngModel)]="editTask.due_date" (blur)="update(editTask)" *ngIf="task.edit" />
           </td>
           <td class="m-delete">
-            <app-button (clickEvent)="delete(task.id)" buttonSize="small" buttonType="danger">削除</app-button>
+            <app-button (clickEvent)="dialog.open()" buttonSize="small" buttonType="danger">削除</app-button>
+            <app-dialog #dialog>
+              <div dialog-title>確認</div>
+              <div dialog-body>削除しますか？</div>
+              <div primary-button>
+                <app-button [buttonType]="'submit'" (clickEvent)="delete(task.id); dialog.close()">削除</app-button>
+              </div>
+            </app-dialog>
           </td>
         </tr>
       </ng-container>

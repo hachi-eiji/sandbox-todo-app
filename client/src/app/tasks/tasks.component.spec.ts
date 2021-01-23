@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
@@ -13,7 +13,7 @@ describe('TasksComponent', () => {
   let fixture: ComponentFixture<TasksComponent>;
   const taskFacadeSpy = jasmine.createSpyObj('TaskFacade', ['fetchList']);
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TasksComponent],
       imports: [

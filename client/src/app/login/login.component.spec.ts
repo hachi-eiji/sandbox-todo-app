@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
@@ -13,7 +13,7 @@ describe('LoginComponent', () => {
   const router = jasmine.createSpyObj<Router>('Router', ['navigate']);
   const loginFacadeSpyObj = jasmine.createSpyObj<LoginFacade>('LoginFacade', ['login']);
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [LoginComponent],
       imports: [

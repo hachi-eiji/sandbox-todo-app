@@ -1,4 +1,4 @@
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, waitForAsync } from '@angular/core/testing';
 import { StoreModule, Store } from '@ngrx/store';
 import { Observable, throwError } from 'rxjs';
 import { taskMessageReducer } from '../message/taskMessage.reducer';
@@ -19,7 +19,7 @@ describe('TaskFacade', () => {
   const taskUpdateServiceSpyObj = jasmine.createSpyObj('TaskUpdateService', ['call']);
   const taskRegisterServiceSpyObj = jasmine.createSpyObj('TaskRegisterService', ['call']);
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),

@@ -49,7 +49,7 @@ const httpInterceptor = [
       }
     }),
     EffectsModule.forRoot([AuthEffect]),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' })
   ],
   providers: [
     httpInterceptor

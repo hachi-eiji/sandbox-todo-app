@@ -1,5 +1,5 @@
 import { EventEmitter } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { ConfirmModalComponent } from './confirm-modal.component';
@@ -9,7 +9,7 @@ describe('ConfirmModalComponent', () => {
   let component: ConfirmModalComponent;
   let fixture: ComponentFixture<ConfirmModalComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ConfirmModalComponent ]
     })
@@ -52,7 +52,7 @@ describe('ConfirmModalComponent', () => {
     expect(el.textContent).toEqual('cancel');
   });
 
-  it('should return test value when ok button is clicked', async(() => {
+  it('should return test value when ok button is clicked', waitForAsync(() => {
     const okSpy = jasmine.createSpyObj('EventEmitter', ['emit']);
     const cancelSpy = jasmine.createSpyObj('EventEmitter', ['emit']);
     component.modal = new Modal('test_message');
@@ -71,7 +71,7 @@ describe('ConfirmModalComponent', () => {
     });
   }));
 
-  it('should return test value when cancel button is clicked', async(() => {
+  it('should return test value when cancel button is clicked', waitForAsync(() => {
     const okSpy = jasmine.createSpyObj('EventEmitter', ['emit']);
     const cancelSpy = jasmine.createSpyObj('EventEmitter', ['emit']);
     component.modal = new Modal('test_message');

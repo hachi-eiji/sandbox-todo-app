@@ -44,7 +44,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'lograge'
 
 group :development, :test do
-  gem 'rspec-rails', '3.5'
+  gem 'rspec-rails', '4.0.2'
   gem 'factory_bot_rails'
   gem 'factory_bot'
   gem 'faker'

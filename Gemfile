@@ -30,7 +30,7 @@ gem 'redis-rails'
 # configure
 gem 'config'
 
-gem 'ridgepole', '0.8.7', github: 'winebarrel/ridgepole', branch: '0.8'
+gem 'ridgepole', '0.9.1', github: 'winebarrel/ridgepole', branch: '0.9'
 
 # bulk insert
 gem 'active_record_bulk_insert', '~> 1.2'

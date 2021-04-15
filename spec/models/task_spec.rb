@@ -39,7 +39,7 @@ RSpec.describe Task, type: :model do
 
       it 'DoneTaskAssign実行時に例外が発生する' do
         expect(DoneTaskAssign).to \
-          receive(:bulk_insert).with(any_args).and_raise('error')
+          receive(:insert_all!).with(any_args).and_raise('error')
 
         task              = build(:task)
         task.task_notes   = [build(:task_note), build(:task_note)]

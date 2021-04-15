@@ -31,22 +31,26 @@ class Task < ApplicationRecord
 
       done_task_notes = task_notes.map { |task_note|
         {
-          id:      task_note.id,
+          id: task_note.id,
           task_id: task_note.task_id,
           user_id: task_note.user_id,
-          note:    task_note.note
+          note: task_note.note,
+          created_at: Time.now,
+          updated_at: Time.now
         }
       }
-      DoneTaskNote.bulk_insert(done_task_notes, { validate: true, use_provided_primary_key: true })
+      DoneTaskNote.insert_all!(done_task_notes) unless done_task_notes.empty?
 
       done_task_assigns = task_assigns.map { |task_assign|
         {
-          id:      task_assign.id,
+          id: task_assign.id,
           task_id: task_assign.task_id,
-          user_id: task_assign.user_id
+          user_id: task_assign.user_id,
+          created_at: Time.now,
+          updated_at: Time.now
         }
       }
-      DoneTaskAssign.bulk_insert(done_task_assigns, { validate: true, use_provided_primary_key: true })
+      DoneTaskAssign.insert_all!(done_task_assigns) unless done_task_assigns.empty?
 
       # まとめて削除する
       destroy!

@@ -32,9 +32,6 @@ gem 'config'
 
 gem 'ridgepole', '0.9.1', github: 'winebarrel/ridgepole', branch: '0.9'
 
-# bulk insert
-gem 'active_record_bulk_insert', '~> 1.2'
-
 gem 'rack-cors'
 
 # Reduces boot times through caching; required in config/boot.rb

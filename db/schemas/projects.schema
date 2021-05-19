@@ -1,4 +1,6 @@
-create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "projects", charset: "utf8mb4", force: :cascade do |t|
   t.bigint "user_id", null: false
   t.string "name", null: false
   t.datetime "created_at", null: false

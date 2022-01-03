@@ -30,7 +30,6 @@ gem 'redis-rails'
 # configure
 gem 'config'
 
-gem 'ridgepole', github: 'winebarrel/ridgepole', branch: '0.9'
 
 gem 'rack-cors'
 
@@ -56,4 +55,3 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'listen'
 end
-

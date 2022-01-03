@@ -29,9 +29,3 @@ run docker
 ```
 docker-compose up -d
 ```
-
-run ridgepole
-
-```
-ridgepole --env production --apply -c config/database.yml -f db/schemas/Schemafile
-```

@@ -22,6 +22,10 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: 'root'
           MYSQL_DATABASE: sandbox-todo-app_test
+      datastore:
+        image: redis
+        ports:
+          - "6379:6379"
     env:
       RAILS_ENV: test
     steps:

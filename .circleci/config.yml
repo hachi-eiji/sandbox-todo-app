@@ -21,10 +21,13 @@ jobs:
 #      - image: minio/mc
 #        entrypoint: sh
 #        command: -c 'sleep 100 && mc alias set test http://minio:9000 root password && mc mb test/test-bucket && mb version enable test/test-bucket'
-      - image: cimg/mysql:8.0
+      # Service container image
+      - image: cimg/postgres:14.0
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_ROOT_PASSWORD: ''
+          POSTGRES_USER: postgres
+        auth:
+          username: mydockerhub-user
+          password: test
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:

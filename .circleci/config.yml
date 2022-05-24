@@ -27,7 +27,7 @@ jobs:
         command: -c 'mkdir -p /data/data{1..4} && minio server /data/data{1...4} --console-address=":9001"'
       - image: minio/mc
         entrypoint: sh
-        command: -c 'sleep 100 && mc alias set test http://minio:9000 root password && mc mb test/test-bucket && mb version enable test/test-bucket'
+        command: -c 'sleep 10 && mc alias set test http://minio:9000 root password && mc mb test/test-bucket && mb version enable test/test-bucket'
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
@@ -35,7 +35,7 @@ jobs:
       - install_minio_client
       - run:
           name: "Say hello"
-          command: "sleep 10 && mc alias set test http://minio:9000 root password && mc mb test/hoge && mc ls test"
+          command: "sleep 10 && mc alias set test http://minio:9000 root password && mc mb test/hoge && mb version enable test/hoge && mc ls test"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

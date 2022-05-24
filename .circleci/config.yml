@@ -14,8 +14,8 @@ jobs:
         name: minio
         entrypoint: sh
         environment:
-          MINIO_ROOT_USER: root
-          MINIO_ROOT_PASSWORD: password
+          MINIO_ACCESS_KEY: root
+          MINIO_SECRET_KEY: password
         command: -c 'mkdir -p ./data{1..4} && minio server ./data{1...4}'
       - image: minio/mc
         entrypoint: sh

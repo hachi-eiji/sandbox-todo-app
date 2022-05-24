@@ -10,17 +10,17 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       - image: cimg/base:stable
-      - image: minio/minio
-        name: minio
-        environment:
-          MINIO_ROOT_USER: root
-          MINIO_ROOT_PASSWORD: password
-        entrypoint: sh
-        command:  -c 'mkdir -p /data/test && minio server /data/test --console-address=":9001"'
-#        command: -c 'mkdir -p /data/data{1..4} && minio server /data/data{1...4} --console-address=":9001"'
-      - image: minio/mc
-        entrypoint: sh
-        command: -c 'sleep 100 && mc alias set test http://minio:9000 root password && mc mb test/test-bucket && mb version enable test/test-bucket'
+#      - image: minio/minio
+#        name: minio
+#        environment:
+#          MINIO_ROOT_USER: root
+#          MINIO_ROOT_PASSWORD: password
+#        entrypoint: sh
+#        command:  -c 'mkdir -p /data/test && minio server /data/test --console-address=":9001"'
+##        command: -c 'mkdir -p /data/data{1..4} && minio server /data/data{1...4} --console-address=":9001"'
+#      - image: minio/mc
+#        entrypoint: sh
+#        command: -c 'sleep 100 && mc alias set test http://minio:9000 root password && mc mb test/test-bucket && mb version enable test/test-bucket'
       - image: cimg/mysql:8.0
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps

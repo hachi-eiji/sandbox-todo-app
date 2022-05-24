@@ -13,10 +13,13 @@ jobs:
       - image: minio/minio
         name: minio
         entrypoint: sh
+        environment:
+          MINIO_ROOT_USER: root
+          MINIO_ROOT_PASSWORD: password
         command: -c 'minio server /data{1...4}'
       - image: minio/mc
         entrypoint: sh
-        command: -c 'mc alias test http://minio:9001 && mc mb test/test-bucket && mb version enable test/test-bucket'
+        command: -c 'mc alias set test http://minio:9001 root password && mc mb test/test-bucket && mb version enable test/test-bucket'
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:

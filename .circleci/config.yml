@@ -17,7 +17,7 @@ jobs:
           MINIO_ROOT_USER: root
           MINIO_ROOT_PASSWORD: password
 #        command: -c 'mkdir -p /data/data{1..4} && minio server /data/data{1...4} --console-address=":9001"'
-          command: -c 'mkdir -p /data/test minio server /data/test --console-address=":9001"'
+          command: -c 'mkdir -p /data/test && minio server /data/test --console-address=":9001"'
       - image: minio/mc
         entrypoint: sh
         command: -c 'sleep 100 && mc alias set test http://minio:9000 root password && mc mb test/test-bucket && mb version enable test/test-bucket'

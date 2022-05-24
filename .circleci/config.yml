@@ -35,7 +35,7 @@ jobs:
       - install_minio_client
       - run:
           name: "Say hello"
-          command: "sleep 10 && mc alias set test http://minio:9000 root password && mc ls test"
+          command: "sleep 10 && mc alias set test http://minio:9000 root password && mc mb test/hoge && mc ls test"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows

@@ -16,7 +16,7 @@ jobs:
         environment:
           MINIO_ACCESS_KEY: root
           MINIO_SECRET_KEY: password
-        command: -c 'mkdir -p ./data{1..4} && minio server ./data{1...4}'
+        command: -c 'mkdir -p /data/data{1..4} && minio server /data/data{1...4}'
       - image: minio/mc
         entrypoint: sh
         command: -c 'mc alias set test http://minio:9001 root password && mc mb test/test-bucket && mb version enable test/test-bucket'
